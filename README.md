@@ -1,14 +1,8 @@
-## Getting Started
+#GDoc
+GDoc is a software which helps to manage the document entering, storeage, removing and consult. This allows users to have a better document management.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+#Project status
+Currently the software is in the first developing stage. Here, it will create the basic functionalities like as date creating, searching, uploading, and deleting.
 
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-## Dependency Management
-
-The `JAVA DEPENDENCIES` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-pack/blob/master/release-notes/v0.9.0.md#work-with-jar-files-directly).
+#Environment requirements
+The software is developing in Java language.
