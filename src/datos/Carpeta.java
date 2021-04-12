@@ -10,40 +10,70 @@ public class Carpeta {
     private String ubicacion;
     private int id;
     private String nombre;
-
+    
+    /**
+     *Construye una carpeta con una ubicación, id y nombre especificados
+     * @param ubicacion
+     * @param id
+     * @param nombre
+     */
     public Carpeta(String ubicacion, int id, String nombre) {
         this.ubicacion = ubicacion;
         this.id = id;
         this.nombre = nombre;
     }
 
+    /**
+     * Retorna la ubicación de la carpeta.
+     * @return la ubicación de la carpeta.
+     */
     public String getUbicacion() {
         return ubicacion;
     }
 
+    /**
+     *Establece la ubicación de la carpeta con una especificada.
+     * @param ubicacion
+     */
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
     }
 
+    /**
+     *Retorna el identificador de la carpeta.
+     * @return el identificador de la carpeta.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     *Establece el identificadaor de la carpeta.
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     *Retorna el nombre de la carpeta.
+     * @return el nombre de la carpeta.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *Establece el nombre de la carpeta con uno especificado.
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    
     @Override
     public String toString() {
-        return "Carpeta: " + "Nombre = " + nombre  + ", Ubicacion = " + ubicacion;
+        return "Carpeta "+id+": " + "Nombre = " + nombre  + ", Ubicacion = " + ubicacion;
     }
     
     
