@@ -1,4 +1,4 @@
-package logica;
+package ListasEncadenadas;
 /**
  * Esta clase hereda la clase ListaEncadenada, encadena todos sus nodos con un doble enlace
  * usando los atributos anterior y siguiente de la clase Nodo,
@@ -10,12 +10,22 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
     private Nodo ultimo;
     
     /**
-     * Construye una clase vacía.
+     * Construye una lista encadenada doble vacía.
      */
     public ListaEncadenadaDoble() {
         super();
         this.ultimo = null;
     }
+    
+    /** 
+     * Construye una lista encadenada doble insertando el pirmer elemento especificado
+     * @param dato elemento a insertar al crear la lista.
+     */
+    public ListaEncadenadaDoble(T dato){
+        super();
+        this.insertarAlInicio(dato);
+    }
+    
     /**
      * Construye una lista y se insertan todos los elementos que contenga el arreglo especificado.
      * @param arreglo arreglo de elementos que serán insertados en la nueva lista.
@@ -26,11 +36,19 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
         }
     }
     
-    public Nodo getUltimo() {
+    /**
+     * Retorna el último nodo de la lista
+     * @return el último nodo de la lista.
+     */
+    protected Nodo getUltimo() {
         return ultimo;
     }
-
-    public void setUltimo(Nodo ultimo) {
+    
+    /**
+     * Reemplaza el últmo nodo de la lista por el nodo especificado.
+     * @param ultimo Nodo que reemplazará el últmo de la lista.
+     */
+    protected void setUltimo(Nodo ultimo) {
         this.ultimo = ultimo;
         this.ultimo.setSiguiente(null);
     }
@@ -40,15 +58,15 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
         Nodo<T> nuevoNodo = new Nodo<T>(dato);
         
         if(this.estaVacia()){
-            this.setPrimero(nuevoNodo);
+            this.primero = nuevoNodo;
             this.ultimo = nuevoNodo;
             this.aumentarContador();
             return;
         }
         
-        this.getPrimero().setAnterior(nuevoNodo);
-        nuevoNodo.setSiguiente(this.getPrimero());
-        this.setPrimero(nuevoNodo);
+        this.primero.setAnterior(nuevoNodo);
+        nuevoNodo.setSiguiente(this.primero);
+        this.primero = nuevoNodo;
         this.aumentarContador();
     }
     
@@ -67,26 +85,26 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
     }
     
     @Override
-    public void insertar(int k, T dato){
-        if(k < 0 || k > this.getContador()){
+    public void insertar(int indice, T dato){
+        if(indice < 0 || indice > this.contador){
             System.out.println("ERROR, No se puede insertar un elemento en esa posición");
             return;
         }
         
-        if(k == 0){
+        if(indice == 0){
             this.insertarAlInicio(dato);
             return;
         }
         
-        if(k == this.getContador()){
+        if(indice == this.contador){
             this.insertarAlFinal(dato);
             return;
         }
         
         Nodo<T> nuevoNodo = new Nodo<T>(dato);
         
-        Nodo nodoAntes = leer(k-1);
-        Nodo nodoDespues = leer(k);
+        Nodo nodoAntes = leer(indice-1);
+        Nodo nodoDespues = leer(indice);
         nuevoNodo.setSiguiente(nodoDespues);
         nuevoNodo.setAnterior(nodoAntes);
         nodoAntes.setSiguiente(nuevoNodo);
@@ -101,7 +119,7 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
             System.out.print("ERROR, no puede eliminar el elemento");
             return;
         }
-        this.setPrimero(this.getPrimero().getSiguiente());
+        this.primero = this.primero.getSiguiente();
         this.decrementarContador();
     }
     
@@ -112,29 +130,29 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
             System.out.println("ERROR, no puede eliminar el elemento");
             return;
         }
-        this.setUltimo(this.ultimo.getAnterior());
+        this.ultimo = this.ultimo.getAnterior();
         this.decrementarContador();
     }
     
     @Override
-    public void eliminar(int k){
-        if(k < 0  || k >= this.getContador()){
+    public void eliminar(int indice){
+        if(indice < 0  || indice >= this.contador){
             System.out.println("ERROR, no se puede eliminar el elemento de esa posición");
             return;
         }
         
-        if(k == 0){
+        if(indice == 0){
             this.eliminarAlInicio();
             return;
         }
         
-        if(k == this.getContador() -1){
+        if(indice == this.contador -1){
             this.eliminarAlFinal();
             return;
         }
         
-        Nodo nodoAntes = leer(k-1);
-        Nodo nodoDespues = leer(k+1);
+        Nodo nodoAntes = leer(indice-1);
+        Nodo nodoDespues = leer(indice+1);
         nodoAntes.setSiguiente(nodoDespues);
         nodoDespues.setAnterior(nodoAntes);
         this.decrementarContador();
@@ -147,10 +165,10 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
         }
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        Nodo<T> aux = this.getPrimero();
+        Nodo<T> aux = this.primero;
                 
         while(aux != null){
-            sb.append(aux.getDato());
+            sb.append(aux.getDato().toString());
             sb.append(", ");
             aux = aux.getSiguiente();
         }
@@ -159,16 +177,17 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
     }
     
     @Override
-    public void buscar(T dato){
+    public int[] buscar(T dato){
+        int[] toReturn = new int[this.contador];
         if(this.estaVacia()){
             System.out.println("ERROR, La lista doble está vacía");
-            return;
+            return toReturn;
         }
         
         ListaEncadenadaDoble<Integer> indices = new ListaEncadenadaDoble<Integer>();
         Integer indice = 0;
         
-        Nodo<T> aux = this.getPrimero();
+        Nodo<T> aux = this.primero;
         
         while(aux != null){
             if(aux.getDato().equals(dato)){
@@ -179,31 +198,35 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
         }
         if(indices.estaVacia()){
             System.out.println("No se encontró el elemento");
-            return;
+            return toReturn;
         }
-            
-        System.out.println("Se encontró el elemento en las siguientes posiciones de la lista doble: " + indices.toString());
+        
+        for(int i = 0; i < indices.getContador();i++){
+            toReturn[i] = indices.leerDato(i);
+        }
+        
+        return toReturn;
     }
 
     @Override
-    public T leerDato(int k){
-        if(estaVacia() || k < 0 || k>=this.getContador())
+    public T leerDato(int indice){
+        if(estaVacia() || indice < 0 || indice>=this.contador)
             return null;
-        T dato = (T) this.leer(k).getDato();
+        T dato = (T) this.leer(indice).getDato();
         
         return dato;
     }
     
-    private Nodo leer(int k){
-        if(k < 0 || k>= this.getContador()){
+    private Nodo leer(int indice){
+        if(indice < 0 || indice>= this.getContador()){
             System.out.println("ERROR, No se puede leer un elemento en esta posición");
             return null;
         }
         
-        if(k <= this.getContador()/2){
+        if(indice <= this.getContador()/2){
             Nodo aux = this.getPrimero();
         
-            for (int i = 0; i < k; i++) {
+            for (int i = 0; i < indice; i++) {
                 aux = aux.getSiguiente();
             }
             return aux;
@@ -211,7 +234,7 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
         Nodo aux = this.ultimo;
         Integer i = this.getContador() - 1;
         
-        while(i > k){
+        while(i > indice){
             aux = aux.getAnterior();
             i--;
         }
@@ -221,9 +244,9 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
     
     @Override
     public void vaciar(){
-        this.setPrimero(null);
+        this.primero = null;
         this.ultimo = null;
-        this.setContador(0);
+        this.contador = 0;
     }
 
     @Override
@@ -233,6 +256,8 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
 
     @Override
     public T ultimoElemento(){
-        return this.leerDato(this.getContador()-1);
+        return this.leerDato(this.contador-1);
     }
+    
+    
 }

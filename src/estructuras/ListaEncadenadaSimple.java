@@ -1,57 +1,74 @@
-package logica;
+package ListasEncadenadas;
+
 /**
- * Esta clase hereda la clase ListaEncadenada, encadena todos sus nodos con un solo enlace,
- * usando el atributo siguiente de la clase Nodo,
- * contiene una especificación al primer elemento.
+ * Esta clase hereda la clase ListaEncadenada, encadena todos sus nodos con un
+ * solo enlace, usando el atributo siguiente de la clase Nodo, contiene una
+ * especificación al primer elemento.
+ *
  * @author Anderson Vargas - anvargasa
  * @param <T> Tipo de elementos que va a contener la lista
  */
 public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
-    
+ 
     /**
-     * Consruye una lista vacía.
+     *Construye una lista encadenada simple vacía.
      */
-    public ListaEncadenadaSimple(){}
+    public ListaEncadenadaSimple() {
+       super();
+    }
     
-    /**
-     * Construye una lista y se insertan todos los elementos que contenga el arreglo especificado.
-     * @param arreglo arreglo de elementos que serán insertados en la nueva lista.
+    /** 
+     * Construye una lista encadenada simple insertando el pirmer elemento especificado
+     * @param dato elemento a insertar al crear la lista.
      */
-    public ListaEncadenadaSimple(T[] arreglo){
-        for(int i = 0; i < arreglo.length; i++){
+    public ListaEncadenadaSimple(T dato){
+        super();
+        this.insertarAlInicio(dato);
+    }
+    /**
+     * Construye una lista y se insertan todos los elementos que contenga el
+     * arreglo especificado.
+     *
+     * @param arreglo arreglo de elementos que serán insertados en la nueva
+     * lista.
+     */
+    public ListaEncadenadaSimple(T[] arreglo) {
+        this.primero = super.primero;
+        for (int i = 0; i < arreglo.length; i++) {
             this.insertar(i, arreglo[i]);
         }
     }
+
     @Override
     public void insertarAlInicio(T dato) {
         Nodo<T> nuevoNodo = new Nodo<T>(dato);
-        nuevoNodo.setSiguiente(this.getPrimero());
-        this.setPrimero(nuevoNodo);
+        nuevoNodo.setSiguiente(this.primero);
+        this.primero = nuevoNodo;
         this.aumentarContador();
     }
-    
+
     @Override
-    public void insertarAlFinal(T dato){
-        Integer cont = this.getContador();
+    public void insertarAlFinal(T dato) {
+        Integer cont = this.contador;
         this.insertar(cont, dato);
     }
-    
+
     @Override
-    public void insertar(int k, T dato) {
-        if (k < 0 || k > this.getContador()) {
+    public void insertar(int indice, T dato) {
+        if (indice < 0 || indice > this.contador) {
             System.out.println("ERROR,No es posible hacer la inserción en este índice");
             return;
         }
 
         Nodo<T> nuevoNodo = new Nodo<T>(dato);
-        if (k == 0) {
+        if (indice == 0) {
             insertarAlInicio(dato);
             return;
         }
-        
-        Nodo atras = leer(k-1);
-        nuevoNodo.setSiguiente(atras.getSiguiente()); //Se asigna la referencia "siguiente" del nuevo nodo hacia el "siguiente" del nodo en la posición k-1
-        atras.setSiguiente(nuevoNodo);  //se cambia la referencia "siguiente" del nodo en la posición k-1 hacia nuevo nodo
+
+        Nodo atras = leer(indice - 1);
+        nuevoNodo.setSiguiente(atras.getSiguiente()); //Se asigna la referencia "siguiente" del nuevo nodo hacia el "siguiente" del nodo en la posición indice-1
+        atras.setSiguiente(nuevoNodo);  //se cambia la referencia "siguiente" del nodo en la posición indice-1 hacia nuevo nodo
         this.aumentarContador();
     }
 
@@ -61,42 +78,42 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
             System.out.print("ERROR, no puede eliminar el elemento");
             return;
         }
-        this.setPrimero(this.getPrimero().getSiguiente());
+        this.primero = this.getPrimero().getSiguiente();
         this.decrementarContador();
     }
-    
+
     @Override
-    public void eliminarAlFinal(){
-        Integer cont = this.getContador() -1;
+    public void eliminarAlFinal() {
+        Integer cont = this.contador - 1;
         this.eliminar(cont);
     }
-    
+
     @Override
-    public void eliminar(int k) {
-        if (k < 0 || k >= this.getContador()) {
+    public void eliminar(int indice) {
+        if (indice < 0 || indice >= this.contador) {
             System.out.println("ERROR, No es posible realizar la eliminación de esa posición");
             return;
         }
 
-        if (k == 0) {
+        if (indice == 0) {
             this.eliminarAlInicio();
             return;
         }
-        
-        Nodo antes = leer(k-1);
-        antes.setSiguiente(antes.getSiguiente().getSiguiente()); //se asigna la referencia "siguiente" del nodo en la posición k-1 hacia el nodo "siguiente" del de la posición k
+
+        Nodo antes = leer(indice - 1);
+        antes.setSiguiente(antes.getSiguiente().getSiguiente()); //se asigna la referencia "siguiente" del nodo en la posición indice-1 hacia el nodo "siguiente" del de la posición indice
         this.decrementarContador();
         return;
     }
-    
+
     @Override
     public String toString() {
-        if(this.estaVacia()){
+        if (this.estaVacia()) {
             return "La lista simple está vacía";
         }
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        Nodo<T> aux = this.getPrimero();
+        Nodo<T> aux = this.primero;
 
         while (aux != null) {
             sb.append(aux.getDato());
@@ -109,64 +126,77 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
     }
 
     @Override
-    public void buscar(T dato) {
+    public int[] buscar(T dato) {
+        
         if (this.estaVacia()) {
             System.out.print("ERROR, la lista simple está vacía");
-            return;
+            return null;
         }
 
-        Nodo<T> aux = this.getPrimero();
+        Nodo<T> aux = this.primero;
         ListaEncadenadaSimple<Integer> indices = new ListaEncadenadaSimple<Integer>();
         Integer indice = 0;
 
         while (aux != null) {
             if (dato.equals(aux.getDato())) {
-                Integer cont = indices.getContador();
-                indices.insertar(cont,indice);
+                Integer cont = indices.contador;
+                indices.insertar(cont, indice);
             }
             indice++;
             aux = aux.getSiguiente();
         }
         if (indices.estaVacia()) {
             System.out.println("No se encontró el elemento");
-            return;
-        }
-
-        System.out.println("Se encontró el elemento en las siguientes posiciones de la lista simple: " + indices.toString());
-    }
-    
-    @Override
-    public T leerDato(int k){
-        if(estaVacia() || k < 0 || k>=this.getContador())
             return null;
-        T dato = (T) this.leer(k).getDato();
+        }
+        int[] toReturn = new int[indices.cantidadDeElementos()];
+        for(int i = 0; i < indices.cantidadDeElementos(); i++){
+            toReturn[i] = indices.leerDato(i);
+        }
+        
+        return toReturn;
+    }
+
+    @Override
+    public T leerDato(int indice) {
+        if (estaVacia() || indice < 0 || indice >= this.contador) {
+            return null;
+        }
+        T dato = (T) this.leer(indice).getDato();
         return dato;
     }
-    
-    private Nodo leer(int k) {
-        if (k < 0 || k > this.getContador()) {
+
+    private Nodo leer(int indice) {
+        if (indice < 0 || indice > this.contador) {
             System.out.println("ERROR, No es posible realizar la búsqueda");
             return null;
         }
-        Nodo<T> aux = this.getPrimero();
+        Nodo<T> aux = this.primero;
 
-        for (int i = 0; i < k; i++) {
+        for (int i = 0; i < indice; i++) {
             aux = aux.getSiguiente();
         }
 
         return aux;
     }
-    
+
     @Override
     public void vaciar() {
-        this.setContador(0);
-        this.setPrimero(null);
+        this.contador = 0;
+        this.primero = null;
     }
     
-    public Nodo eliminarDuplicados(Nodo primero) {
+    /**
+     *Elimina los elementos duplicados dentro de la lista.
+     */
+    public void eliminarDuplicados(){
+        this.primero = this.eliminarDuplicados(this.primero);
+    }
+    
+    private Nodo eliminarDuplicados(Nodo primero) {
         Nodo aux = primero.getSiguiente();
         while (aux != null) {
-            if (primero.getDato() == aux.getDato()) {
+            if (primero.getDato().equals(aux.getDato())) {
                 primero = primero.getSiguiente();
                 aux = primero.getSiguiente();
                 continue;
@@ -178,14 +208,16 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
         }
         return primero;
     }
-        
+
     @Override
-    public T primerElemento(){
+    public T primerElemento() {
         return this.leerDato(0);
     }
     
     @Override
-    public T ultimoElemento(){
-        return this.leerDato(this.getContador()-1);
+    public T ultimoElemento() {
+        return this.leerDato(this.contador - 1);
     }
+    
+    
 }
