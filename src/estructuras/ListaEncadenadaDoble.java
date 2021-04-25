@@ -1,4 +1,4 @@
-package ListasEncadenadas;
+package estructuras;
 /**
  * Esta clase hereda la clase ListaEncadenada, encadena todos sus nodos con un doble enlace
  * usando los atributos anterior y siguiente de la clase Nodo,
@@ -177,8 +177,8 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
     }
     
     @Override
-    public int[] buscar(T dato){
-        int[] toReturn = new int[this.contador];
+    public int buscar(T dato){
+        int toReturn = -1;
         if(this.estaVacia()){
             System.out.println("ERROR, La lista doble está vacía");
             return toReturn;
@@ -192,6 +192,7 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
         while(aux != null){
             if(aux.getDato().equals(dato)){
                 indices.insertarAlFinal(indice);
+                toReturn = indice;
             }
             indice++;
             aux = aux.getSiguiente();
@@ -201,9 +202,7 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
             return toReturn;
         }
         
-        for(int i = 0; i < indices.getContador();i++){
-            toReturn[i] = indices.leerDato(i);
-        }
+        
         
         return toReturn;
     }

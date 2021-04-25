@@ -1,4 +1,4 @@
-package ListasEncadenadas;
+package estructuras;
 /**
  * Esta clase provee un nodo para ser utilizado en una estructura de datos.
  * @author Anderson Vargas - anvargasa

@@ -1,4 +1,4 @@
-package ListasEncadenadas;
+package estructuras;
 
 /**
  * Esta clase hereda la clase ListaEncadenada, encadena todos sus nodos con un
@@ -126,11 +126,11 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
     }
 
     @Override
-    public int[] buscar(T dato) {
-        
+    public int buscar(T dato) {
+        int toReturn = -1;
         if (this.estaVacia()) {
             System.out.print("ERROR, la lista simple está vacía");
-            return null;
+            return toReturn;
         }
 
         Nodo<T> aux = this.primero;
@@ -141,18 +141,16 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
             if (dato.equals(aux.getDato())) {
                 Integer cont = indices.contador;
                 indices.insertar(cont, indice);
+                toReturn = indice;
             }
             indice++;
             aux = aux.getSiguiente();
         }
         if (indices.estaVacia()) {
             System.out.println("No se encontró el elemento");
-            return null;
+            return toReturn;
         }
-        int[] toReturn = new int[indices.cantidadDeElementos()];
-        for(int i = 0; i < indices.cantidadDeElementos(); i++){
-            toReturn[i] = indices.leerDato(i);
-        }
+        
         
         return toReturn;
     }

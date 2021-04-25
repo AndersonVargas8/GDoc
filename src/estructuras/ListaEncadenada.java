@@ -1,4 +1,4 @@
-package ListasEncadenadas;
+package estructuras;
 /**
  * Esta clase provee la estrucutura para los diferentes tipos de listas encadenadas.
  * @author Anderson Vargas - anvargasa
@@ -20,7 +20,7 @@ public abstract class ListaEncadenada<T>{
      * Retorna el primer nodo de la lista.
      * @return El primer nodo de la lista.
      */
-    protected Nodo getPrimero(){
+    public Nodo getPrimero(){
         return primero;
     }
     
@@ -113,7 +113,7 @@ public abstract class ListaEncadenada<T>{
      * @param dato elemento a ser buscado.
      * @return arreglo con las posiciones donde se he encontrado un elemento igual al especificado.
      */
-    public abstract int[] buscar(T dato);
+    public abstract int buscar(T dato);
     
     /**
      * Busca el elemento en la posición dada y retorna su dato asociado.
