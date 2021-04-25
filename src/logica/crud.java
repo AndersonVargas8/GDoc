@@ -1,6 +1,5 @@
 package logica;
 
-import datos.Historial;
 import datos.*;
 import java.io.BufferedReader;
 import java.io.IOException;
