@@ -1,12 +1,13 @@
 package datos;
 
+import java.io.Serializable;
 import static logica.Controlador.Cpline;
 
 /**
  *
  * @author andres
  */
-public class Historial {
+public class Historial implements Serializable{
     private String usuario;
     private String fecha;
     private String accion;

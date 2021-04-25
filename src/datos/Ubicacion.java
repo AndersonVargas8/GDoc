@@ -2,13 +2,14 @@ package datos;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Serializable;
 import static logica.Controlador.Cpline;
 
 /**
  * La clase Ubicación contiene las caracteristicas de una ubicación para las carpetas.
  * @author Anderson
  */
-public class Ubicacion {
+public class Ubicacion implements Serializable{
     private String seccion;
     private String estante;
     

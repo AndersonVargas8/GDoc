@@ -4,13 +4,15 @@ import java.time.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import estructuras.*;
+import java.io.Serializable;
+import java.util.Objects;
 import static logica.Controlador.Cpline;
 
 /**
  *
  * @author andres
  */
-public class Documento {
+public class Documento implements Serializable{
     private Integer id;
     private String nombre;
     private Ubicacion ubicacion;
@@ -68,5 +70,11 @@ public class Documento {
           nodo_buscador = nodo_buscador.getSiguiente();
         }
         System.out.println("**********************************************************************");
+    }
+    
+    @Override
+    public boolean equals(Object dato){
+        Documento comparar = (Documento) dato;
+        return Objects.equals(this.id, comparar.getId());
     }
 }

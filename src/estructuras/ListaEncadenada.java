@@ -1,10 +1,13 @@
 package estructuras;
+
+import java.io.Serializable;
+
 /**
  * Esta clase provee la estrucutura para los diferentes tipos de listas encadenadas.
  * @author Anderson Vargas - anvargasa
  * @param <T> Tipo de elementos que va a contener la lista
  */
-public abstract class ListaEncadenada<T>{
+public abstract class ListaEncadenada<T> implements Serializable{
     protected Nodo<T> primero;
     protected Integer contador;
     

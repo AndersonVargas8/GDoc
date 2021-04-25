@@ -4,16 +4,27 @@ import java.io.*;
 import static logica.crud.*;
 import estructuras.*;
 import datos.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *La clase Controlador permite gestionar las funcionalidades correspondientes a las carpetas y sus documentos.
  * @author Anderson
  */
-public class Controlador {
+public class Controlador{
     
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    static ListaEncadenadaDoble<Documento> lista_documentos = new ListaEncadenadaDoble<>();
+    
+    static ListaEncadenadaDoble<Documento> lista_documentos;
+    
     
     public static void main(String[] args) throws IOException {
+        
+        try {
+            lista_documentos = Archivo.cargarDocumentos();
+        } catch (IOException ex) {
+            System.out.println(ex);;
+        }
+    
         String usuario = IngresarUsuario();
         int menu_opcion = 0;
         while (menu_opcion != 5) {
@@ -31,7 +42,7 @@ public class Controlador {
                 case 4:
                     Lista(lista_documentos);
                     break;
-                default: escribirArchivo();
+                default: Archivo.ExportarTXT(lista_documentos);
             }
         }
     }
@@ -53,7 +64,7 @@ public class Controlador {
     }
     
     static void escribirArchivo(){
-        
+        ListaEncadenada<String> hola = new ListaEncadenadaSimple<String>();
     }
     static int Menu () throws IOException {
         System.out.println("******************************** MENU ********************************");
