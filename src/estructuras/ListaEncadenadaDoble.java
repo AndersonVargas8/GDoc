@@ -131,6 +131,7 @@ public class ListaEncadenadaDoble<T> extends ListaEncadenada<T>{
             return;
         }
         this.ultimo = this.ultimo.getAnterior();
+        this.ultimo.setSiguiente(null);
         this.decrementarContador();
     }
     
