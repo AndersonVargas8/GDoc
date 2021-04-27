@@ -175,11 +175,14 @@ public abstract class ListaEncadenada<T> implements Serializable{
     }
     
     private Nodo eliminarDuplicados(Nodo primero) {
+        if(this.estaVacia())
+            return primero;
         Nodo aux = primero.getSiguiente();
         while (aux != null) {
             if (primero.getDato().equals(aux.getDato())) {
                 primero = primero.getSiguiente();
                 aux = primero.getSiguiente();
+                this.decrementarContador();
                 continue;
             }
             aux = aux.getSiguiente();

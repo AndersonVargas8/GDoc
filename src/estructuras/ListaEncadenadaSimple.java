@@ -184,28 +184,6 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
         this.primero = null;
     }
     
-    /**
-     *Elimina los elementos duplicados dentro de la lista.
-     */
-    public void eliminarDuplicados(){
-        this.primero = this.eliminarDuplicados(this.primero);
-    }
-    
-    private Nodo eliminarDuplicados(Nodo primero) {
-        Nodo aux = primero.getSiguiente();
-        while (aux != null) {
-            if (primero.getDato().equals(aux.getDato())) {
-                primero = primero.getSiguiente();
-                aux = primero.getSiguiente();
-                continue;
-            }
-            aux = aux.getSiguiente();
-        }
-        if (primero.getSiguiente() != null) {
-            primero.setSiguiente(eliminarDuplicados(primero.getSiguiente()));
-        }
-        return primero;
-    }
 
     @Override
     public T primerElemento() {

@@ -3,6 +3,7 @@ package logica;
 
 import datos.*;
 import estructuras.ListaEncadenadaDoble;
+import estructuras.Cola;
 import java.io.*;
 import java.time.ZonedDateTime;
 /**
@@ -51,43 +52,43 @@ public class Archivo{
         }
         return publicaciones;
     }
-    
     public static ListaEncadenadaDoble<Documento> cargarDocumentos()throws IOException{
-       ListaEncadenadaDoble<Documento> documentos = ImportarTXT();
-       String SEPARATOR=";";
-       String QUOTE="\"";
+        return  cargarDocumentos("src/logica/docs.csv");
+    }
 
-      BufferedReader br = null;
+    private static ListaEncadenadaDoble<Documento> cargarDocumentos(String ruta)throws IOException{
+        ListaEncadenadaDoble<Documento> documentos = new ListaEncadenadaDoble<>();
+        String SEPARATOR=";";
+        String QUOTE="\"";
+        Cola<String> nom = new Cola<>();
+        BufferedReader br = null;
+        try {
+            br =new BufferedReader(new FileReader(ruta));
+            String line = br.readLine();
+             while (null!=line) {
+                String [] fields = line.split(SEPARATOR);
+                Ubicacion ub = new Ubicacion(fields[3], fields[4]);
+                Historial hi = new Historial(fields[0], fields[6],fields[7]);
+                Integer id = Integer.parseInt(fields[1]);
+                String nomdoc = fields[2];
+                ZonedDateTime fecha_ingreso = ZonedDateTime.now();
+                ZonedDateTime fecha_expiracion = fecha_ingreso.plusYears(Integer.parseInt(fields[5]));
 
-      try {
+                Documento doc = new Documento(id, nomdoc, ub, fecha_ingreso, fecha_expiracion, new ListaEncadenadaDoble<Historial>(hi));
+                documentos.insertarAlFinal(doc);
 
-         br =new BufferedReader(new FileReader("src/logica/docs.csv"));
-         String line = br.readLine();
-         while (null!=line) {
-            String [] fields = line.split(SEPARATOR);
-            Ubicacion ub = new Ubicacion(fields[3], fields[4]);
-            Historial hi = new Historial(fields[0], fields[6],fields[7]);
-            Integer id = Integer.parseInt(fields[1]);
-            String nombre = fields[2];
-            ZonedDateTime fecha_ingreso = ZonedDateTime.now();
-            ZonedDateTime fecha_expiracion = fecha_ingreso.plusYears(Integer.parseInt(fields[5]));
-            
-            Documento doc = new Documento(id, nombre, ub, fecha_ingreso, fecha_expiracion, new ListaEncadenadaDoble<Historial>(hi));
-            documentos.insertarAlFinal(doc);
-            line = br.readLine();
-         }
+                line = br.readLine();
+             }
 
-      } catch (Exception e) {
-
-      } finally {
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
          if (null!=br) {
             br.close();
          }
-      }
-        System.out.println(documentos.cantidadDeElementos());
+        }
+
         documentos.eliminarDuplicados();
-        
-        System.out.println(documentos.cantidadDeElementos());
       return documentos;
     }
 }

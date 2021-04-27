@@ -19,13 +19,13 @@ public class Ubicacion implements Serializable{
     }
     
     public void setSeccion (BufferedReader reader) throws IOException {
-        System.out.print("* Nuevo nombre:  ");
+        System.out.print("* Nueva sección:  ");
         String nueva_seccion = reader.readLine();
         this.seccion = nueva_seccion;
     }
     
     public void setEstante (BufferedReader reader) throws IOException {
-        System.out.print("* Nuevo nombre:  ");
+        System.out.print("* Nuevo estante:  ");
         String nuevo_estante = reader.readLine();
         this.estante = nuevo_estante;
     }

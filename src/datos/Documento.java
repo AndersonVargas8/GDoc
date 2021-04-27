@@ -77,4 +77,8 @@ public class Documento implements Serializable{
         Documento comparar = (Documento) dato;
         return Objects.equals(this.id, comparar.getId());
     }
+
+    public String toString(){
+        return String.valueOf(this.id);
+    }
 }
