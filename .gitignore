@@ -1,6 +1,12 @@
-/GDoc/nbproject/private/
+/nbproject/
 /build/
 /nbproject/
 /.idea/
+<<<<<<< HEAD
 GDoc.iml
 /out/
+=======
+docuVision.iml
+/out/
+
+>>>>>>> master
