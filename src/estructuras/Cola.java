@@ -13,13 +13,15 @@ public class Cola<T> extends ListaEncadenadaDoble{
         super();
     }
     
+    /**
+     * Construye una cola con un dato de entrada
+     */
     public Cola(T dato){
         super.insertarAlFinal(dato);
     }
     
     /**
      * Inserta el dato indicado en la última posición de la cola.
-     * @param dato 
      */
     public void enqueue(T dato){
         super.insertarAlFinal(dato);

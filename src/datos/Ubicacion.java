@@ -13,25 +13,25 @@ public class Ubicacion implements Serializable{
     private String seccion;
     private String estante;
     
-    public Ubicacion (String seccion, String estante) {
+    public Ubicacion (String seccion, String estante) {                     //Costructor
         this.seccion = seccion;
         this.estante = estante;
     }
     
-    public void setSeccion (BufferedReader reader) throws IOException {
+    public void setSeccion (BufferedReader reader) throws IOException {     //Guarda en que sección está guardado un documento
         System.out.print("* Nueva sección:  ");
         String nueva_seccion = reader.readLine();
         this.seccion = nueva_seccion;
     }
     
-    public void setEstante (BufferedReader reader) throws IOException {
+    public void setEstante (BufferedReader reader) throws IOException {     //Guarda en que estante está guardado un documento
         System.out.print("* Nuevo estante:  ");
         String nuevo_estante = reader.readLine();
         this.estante = nuevo_estante;
     }
     
     public void print () {
-        System.out.println(Cpline("* -- SECCION: " + this.seccion));
+        System.out.println(Cpline("* -- SECCION: " + this.seccion));        //Imprime la sección y el estando donde se encuentra el documentro seleccionado
         System.out.println(Cpline("* -- ESTANTE: " + this.estante));
     }
 }
