@@ -17,7 +17,7 @@ public class Carpeta {
      * @param id
      * @param nombre
      */
-    public Carpeta(String ubicacion, int id, String nombre) {
+    public Carpeta(String ubicacion, int id, String nombre) {           //Constructor
         this.ubicacion = ubicacion;
         this.id = id;
         this.nombre = nombre;
@@ -72,7 +72,7 @@ public class Carpeta {
     }
     
     @Override
-    public String toString() {
+    public String toString() {                      //Convierte en String las diferentes variables de la clase
         return "Carpeta "+id+": " + "Nombre = " + nombre  + ", Ubicacion = " + ubicacion;
     }
     

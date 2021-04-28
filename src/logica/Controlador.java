@@ -18,7 +18,10 @@ public class Controlador{
     
     static ListaEncadenadaDoble<Documento> lista_documentos = new ListaEncadenadaDoble<>();
     
-
+    /**
+     * Main Method
+     * Interactúa con el menú
+     */
     public static void main(String[] args) throws IOException {
         ListaEncadenadaDoble<String> hola = new ListaEncadenadaDoble<>();
         //lista_documentos = Archivo.cargarDocumentos();
@@ -49,6 +52,11 @@ public class Controlador{
         }
     }
     
+    /**
+     * Verifica la longitud de un String y a continuacion le agrega un espacio, al final le pone un *
+     * @param line
+     * @return
+     */
     public static String Cpline(String line){
         while (line.length()<69){
             line += " ";
@@ -56,6 +64,11 @@ public class Controlador{
         return line + "*";
     }
     
+    /**
+     * Maneja el manú para el ingreso de del usuario 
+     * @return
+     * @throws IOException
+     */
     static String IngresarUsuario() throws IOException {
         System.out.println("**********************************************************************");
         System.out.println(Cpline("* Ingrese su nombre de usuario: "));
@@ -65,9 +78,18 @@ public class Controlador{
         return usuario;
     }
     
+    /**
+     * Crea un Objeto String de una lista enlasada
+     */
     static void escribirArchivo(){
         ListaEncadenada<String> hola = new ListaEncadenadaSimple<String>();
     }
+
+    /**
+     * Maneja el menú y retorna la opción escojida
+     * @return
+     * @throws IOException
+     */
     static int Menu () throws IOException {
         System.out.println("******************************** MENU ********************************");
         System.out.println(Cpline("* 1. Archivar un nuevo documento "));

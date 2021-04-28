@@ -11,6 +11,10 @@ import java.time.ZonedDateTime;
  * @author Anderson
  */
 public class Archivo{
+    /**
+     * Eporta elementos de Documento guardados como una lista doblemente encadenada
+     * @param publicaciones
+     */
     public static void ExportarTXT(ListaEncadenadaDoble<Documento> publicaciones){
         File archivo = new File("src/logica/documentos.txt").getAbsoluteFile();
         FileOutputStream escritor = null;
@@ -36,6 +40,11 @@ public class Archivo{
             }
         }
     }
+
+    /**
+     * Retorna los elementos de Documento gurdados en una lista
+     * @return
+     */
     public static ListaEncadenadaDoble<Documento> ImportarTXT(){
         File archivo = new File ("src/logica/documentos.txt").getAbsoluteFile();
         FileInputStream lector = null;
@@ -52,10 +61,22 @@ public class Archivo{
         }
         return publicaciones;
     }
+
+    /**
+     * Inicializa el docuemento docs.cvs
+     * @return
+     * @throws IOException
+     */
     public static ListaEncadenadaDoble<Documento> cargarDocumentos()throws IOException{
         return  cargarDocumentos("src/logica/docs.csv");
     }
 
+    /**
+     * Inicializa y ordena la información respectiva a cada elemento subido por Ubicacón, Historial, Id, Fecha, etc y lo guarda en documento
+     * @param ruta
+     * @return
+     * @throws IOException
+     */
     private static ListaEncadenadaDoble<Documento> cargarDocumentos(String ruta)throws IOException{
         ListaEncadenadaDoble<Documento> documentos = new ListaEncadenadaDoble<>();
         String SEPARATOR=";";

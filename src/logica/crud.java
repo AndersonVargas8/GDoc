@@ -14,7 +14,15 @@ import estructuras.*;
  * @author andres
  */
 public class crud {
-
+    /**
+     * Maneja el menú del ingreso de datos en un documento en el cual se ingresa el id, nombre, sección, estante, fecha de ingreso y expiración,
+     * guarda el historia en una lista doblemente enlasada e inizializa el documento
+     * @param lista
+     * @param reader
+     * @param usuario
+     * @return
+     * @throws IOException
+     */
     static ListaEncadenadaDoble<Documento> InsertarDocumento (ListaEncadenadaDoble<Documento> lista, BufferedReader reader, String usuario) throws IOException {
 
         System.out.println ("************************ INGRESO DE DOCUMENTO ************************");
@@ -50,6 +58,14 @@ public class crud {
         return lista;
     }
 
+    /**
+     * Maneja el menú para eliminar un documento en específico a partir del id del documento, guarda los elementos a eliminar en una pila,
+     * elimina tambien los documentos duplicados
+     * @param lista
+     * @param reader
+     * @param usuario
+     * @throws IOException
+     */
     static void EliminarDocumento (ListaEncadenadaDoble<Documento> lista, BufferedReader reader, String usuario) throws IOException {
         Pila<Documento> eliminacion = new Pila<>();
         boolean check = true;
@@ -90,6 +106,13 @@ public class crud {
         System.out.println("**********************************************************************\n\n");
     }
     
+    /**
+     * Maneja el manú para modificar el nombre, la ubicación del estante y la sección de los documentos
+     * @param lista
+     * @param reader
+     * @param usuario
+     * @throws IOException
+     */
     static void ModificarDocumento (ListaEncadenadaDoble<Documento> lista, BufferedReader reader, String usuario) throws IOException {
         System.out.println("********************** MODIFICACION DE DOCUMENTO *********************");
         System.out.println(Cpline("* Ingresa el ID del documento a modificar: "));
@@ -130,6 +153,9 @@ public class crud {
         System.out.println("**********************************************************************\n\n");
     }
 
+    /**
+     * Maneja el Menú para la busqueda de varios docuemntos a partir de su id manejado todo por una cola
+     */
     static void buscaDocumentos(ListaEncadenadaDoble<Documento> lista) throws IOException {
         Cola<Documento> busqueda = new Cola<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -160,6 +186,11 @@ public class crud {
             busqueda.dequeue().print();
         System.out.println("**********************************************************************\n\n");
     }
+
+    /**
+     * Imprime todos los elementos de un documento
+     * @param lista
+     */
     static void Lista (ListaEncadenadaDoble<Documento> lista) {
         System.out.println("************************* LISTA DE DOCUMENTO *************************");
         Nodo<Documento> nodo_buscador = lista.getPrimero();
@@ -171,6 +202,12 @@ public class crud {
         System.out.println("**********************************************************************\n\n");
     }
     
+    /**
+     * Busca y compara un documento por medio de su id
+     * @param lista
+     * @param id
+     * @return
+     */
     static Documento BuscarDocumentoPorId (ListaEncadenadaDoble<Documento> lista, Integer id) {
         Documento doc = null;
         Nodo<Documento> nodo_buscador = lista.getPrimero();
