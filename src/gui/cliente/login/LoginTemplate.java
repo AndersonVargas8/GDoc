@@ -1,11 +1,11 @@
 package gui.cliente.login;
 
 import gui.servicios.ObjGraficosService;
+import gui.servicios.RecursosService;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.Image;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -24,42 +24,42 @@ public class LoginTemplate extends JFrame{
     private JButton bEntrar,bCerrar;
     
     //Objetos decoradores
-    private ImageIcon iFondo,iLogo,iFavicon,iDimAux,iCerrar;
-    private Border border;
+    private ImageIcon iFondo,iLogo,iFavicon,iDimAux;
     
     //Servicios
     ObjGraficosService sObjGraficos;
+    RecursosService sRecursos;
     
     
     public LoginTemplate(){
-        
+
+        //Obtención de servicios
         sObjGraficos = ObjGraficosService.getServicio();
-        
+        sRecursos = RecursosService.getServicio();
+
+        //Creación de objetos gráficos
         this.crearObjetosDecoradores();
         this.crearJPanels();
         this.crearJLabels();
         this.crearJTextFields();
         this.crearJButtons();
-        
+
+        //Configuración de la pantalla
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(870,500);
         setLocationRelativeTo(this);
         setUndecorated(true);
         setVisible(true);
-        
-        
     }
     
-    public void crearObjetosDecoradores(){
+    private void crearObjetosDecoradores(){
         iFondo = new ImageIcon("recursos/imagenes/fondo.jpg");
         iLogo = new ImageIcon("recursos/imagenes/logo.png");
         iFavicon = new ImageIcon("recursos/imagenes/favicon.png");
-        iCerrar = new ImageIcon("recursos/imagenes/cerrar.png");
-        border = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY);
     }
     
-    public void crearJPanels(){
+    private void crearJPanels(){
         pIzquierda = sObjGraficos.construirJPanel(0, 0, 550, 500, Color.WHITE, null);
         this.add(pIzquierda);
         
@@ -67,7 +67,7 @@ public class LoginTemplate extends JFrame{
         this.add(pDerecha);
     }
     
-    public void crearJLabels(){
+    private void crearJLabels(){
         
         lNombreEmpresa = sObjGraficos.construirJLabel(
                 "Gestión Documental",
@@ -145,7 +145,7 @@ public class LoginTemplate extends JFrame{
                 50,200, 90,20,
                 null,
                 null,
-                new Font("Roboto light",Font.BOLD,14),
+                sRecursos.getFuenteMediana(),
                 null,
                 Color.BLACK
                 ,null,
@@ -157,7 +157,7 @@ public class LoginTemplate extends JFrame{
                 50,280, 100,20,
                 null,
                 null,
-                new Font("Roboto light",Font.BOLD,14),
+                sRecursos.getFuenteMediana(),
                 null,
                 Color.BLACK
                 ,null,
@@ -165,39 +165,39 @@ public class LoginTemplate extends JFrame{
         pIzquierda.add(lClave);
     }
     
-    public void crearJTextFields(){
+    private void crearJTextFields(){
         
         tNombreUsuario = sObjGraficos.construirJTextField(
                 "Ingrese su nombre de usuario",
                 50,230,400,40,
-                new Font("Roboto",Font.PLAIN,12),
+                sRecursos.getFuenteTextFields(),
                 Color.WHITE,
-                new Color(80,80,80),
+                sRecursos.getColorGrisOscuro(),
                 Color.black,
-                border,
+                sRecursos.getBordeTextField(),
                 "l");
         pIzquierda.add(tNombreUsuario);
         
         tClaveUsuario = sObjGraficos.construirJPasswordField(
                 "Contraseña",
                 50,310,400,40,
-                new Font("Roboto",Font.PLAIN,12),
+                sRecursos.getFuenteTextFields(),
                 Color.WHITE,
-                new Color(80,80,80),
+                sRecursos.getColorGrisOscuro(),
                 Color.BLACK,
-                border,
+                sRecursos.getBordeTextField(),
                 "l");
         
         pIzquierda.add(tClaveUsuario);
     }
     
-    public void crearJButtons(){
+    private void crearJButtons(){
         bEntrar = sObjGraficos.construirJButton(
                 "ENTRAR",
                 50,380,140,40,
-                new Cursor(Cursor.HAND_CURSOR),
+                sRecursos.getcMano(),
                 null,
-                new Font("Roboto condensed",Font.BOLD,14),
+                sRecursos.getFuenteBotones(),
                 new Color(0,134,190),
                 Color.white,
                 null,
@@ -205,19 +205,19 @@ public class LoginTemplate extends JFrame{
                 true);
         
         pIzquierda.add(bEntrar);
-        
-        iDimAux = new ImageIcon(
-            iCerrar.getImage().getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING));
+
         
         bCerrar = sObjGraficos.construirJButton(
                 "X",
                 0, 5, 45, 30,
-                new Cursor(Cursor.HAND_CURSOR),
+                sRecursos.getcMano(),
                 null,
-                new Font("Roboto condensed",Font.PLAIN,20), null, null, null,
+                sRecursos.getFuenteCerrar(), null, null, null,
                 "c",
                 false
               );
               pIzquierda.add(bCerrar);
     }
+    
+
 }
