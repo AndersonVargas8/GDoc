@@ -1,7 +1,6 @@
 package gui;
 
-import gui.cliente.login.LoginTemplate;
-import gui.vistaPrincipal.VistaPrincipalTemplate;
+import gui.cliente.login.LoginComponent;
 import javax.swing.SwingUtilities;
 
 /**
@@ -13,7 +12,7 @@ public class App{
         Runnable iniciarAplicacion = new Runnable() {
             @Override
             public void run() {
-                LoginTemplate login = new LoginTemplate();
+                LoginComponent login = new LoginComponent();
                 login.getClass();
             }
         };

@@ -29,11 +29,12 @@ public class LoginTemplate extends JFrame{
     //Servicios
     ObjGraficosService sObjGraficos;
     RecursosService sRecursos;
+    LoginComponent loginComponent;
     
-    
-    public LoginTemplate(){
+    public LoginTemplate(LoginComponent loginComponent){
 
         //Obtención de servicios
+        this.loginComponent = loginComponent;
         sObjGraficos = ObjGraficosService.getServicio();
         sRecursos = RecursosService.getServicio();
 
@@ -203,7 +204,8 @@ public class LoginTemplate extends JFrame{
                 null,
                 "c",
                 true);
-        
+
+        bEntrar.addActionListener(loginComponent);
         pIzquierda.add(bEntrar);
 
         
@@ -216,8 +218,24 @@ public class LoginTemplate extends JFrame{
                 "c",
                 false
               );
+              bCerrar.addActionListener(loginComponent);
               pIzquierda.add(bCerrar);
     }
-    
 
+
+    public JTextField gettNombreUsuario() {
+        return tNombreUsuario;
+    }
+
+    public JPasswordField gettClaveUsuario() {
+        return tClaveUsuario;
+    }
+
+    public JButton getbEntrar() {
+        return bEntrar;
+    }
+
+    public JButton getbCerrar() {
+        return bCerrar;
+    }
 }
