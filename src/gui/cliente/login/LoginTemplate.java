@@ -24,7 +24,7 @@ public class LoginTemplate extends JFrame{
     private JButton bEntrar,bCerrar;
     
     //Objetos decoradores
-    private ImageIcon iFondo,iLogo,iFavicon,iDimAux;
+    private ImageIcon iFondo,iLogo,iDimAux;
     
     //Servicios
     ObjGraficosService sObjGraficos;
@@ -57,7 +57,6 @@ public class LoginTemplate extends JFrame{
     private void crearObjetosDecoradores(){
         iFondo = new ImageIcon("recursos/imagenes/fondo.jpg");
         iLogo = new ImageIcon("recursos/imagenes/logo.png");
-        iFavicon = new ImageIcon("recursos/imagenes/favicon.png");
     }
     
     private void crearJPanels(){
@@ -106,7 +105,7 @@ public class LoginTemplate extends JFrame{
                 "c");
         pDerecha.add(lFondo);
         
-        iDimAux = new ImageIcon(iFavicon.getImage().getScaledInstance(50,50,Image.SCALE_AREA_AVERAGING));
+        iDimAux = new ImageIcon(sRecursos.getiFavicon().getImage().getScaledInstance(50,50,Image.SCALE_AREA_AVERAGING));
         
         lFavicon = sObjGraficos.construirJLabel(
                 null,
@@ -122,7 +121,7 @@ public class LoginTemplate extends JFrame{
                 105, 65, 70,20,
                 null,
                 null,
-                new Font("Roboto",Font.BOLD,24),
+                sRecursos.getFuenteNombre(),
                 null,
                 Color.BLACK
                 ,null,

@@ -1,10 +1,7 @@
 package gui.cliente.vistaPrincipal;
 
 import gui.servicios.ObjGraficosService;
-import gui.servicios.RecursosService;
-
 import javax.swing.*;
-import java.awt.*;
 
 /**
  *
@@ -15,7 +12,6 @@ public class VistaPrincipalTemplate extends JFrame{
     private JPanel pNavegacion, pBarra, pPrincipal;
     //Servicios
     private ObjGraficosService sObjGraficos;
-    private RecursosService sRecursos;
     private VistaPrincipalComponent vistaPrincipalComponent;
 
     public VistaPrincipalTemplate(VistaPrincipalComponent vistaPrincipalComponent){
@@ -23,7 +19,6 @@ public class VistaPrincipalTemplate extends JFrame{
 
         //Obtención de servicios
         sObjGraficos = ObjGraficosService.getServicio();
-        sRecursos = RecursosService.getServicio();
 
         //Creación de objetos gráficos
         this.crearJPanels();
@@ -38,13 +33,13 @@ public class VistaPrincipalTemplate extends JFrame{
     }
 
     private void crearJPanels(){
-        pNavegacion = sObjGraficos.construirJPanel(0,0, 250, 700, sRecursos.getColorPrincipal(),null);
+        pNavegacion = sObjGraficos.construirJPanel(0,0, 250, 700,null,null);
         this.add(pNavegacion);
 
-        pBarra = sObjGraficos.construirJPanel(250,0,950,50,sRecursos.getColorSecundario(),null);
+        pBarra = sObjGraficos.construirJPanel(250,0,950,50,null,null);
         this.add(pBarra);
 
-        pPrincipal = sObjGraficos.construirJPanel(250,50,950,700, Color.WHITE,null);
+        pPrincipal = sObjGraficos.construirJPanel(250,50,950,700, null,null);
         this.add(pPrincipal);
 
     }

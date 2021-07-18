@@ -8,9 +8,11 @@ import java.io.IOException;
 
 public class RecursosService {
     private Color colorPrincipal, colorSecundario, colorGrisOscuro;
-    private Font fuentePrincipal, fuenteCerrar, fuenteBotones, fuenteMediana, fuenteTextFields;
+    private Font fuentePrincipal, fuenteCerrar, fuenteBotones, fuenteMediana,
+            fuenteTextFields,fuenteNombre, fuenteTitulo;
     private Cursor cMano;
     private Border bordeTextField;
+    private ImageIcon iFavicon;
     static private RecursosService servicio;
 
     private RecursosService(){
@@ -19,6 +21,7 @@ public class RecursosService {
         this.crearColores();
         this.crearCursores();
         this.crearFuentes();
+        this.crearImagenes();
     }
 
     public static RecursosService getServicio(){
@@ -61,12 +64,24 @@ public class RecursosService {
         return fuenteMediana;
     }
 
+    public Font getFuenteNombre() {
+        return fuenteNombre;
+    }
+
+    public Font getFuenteTitulo() {
+        return fuenteTitulo;
+    }
+
     public Cursor getcMano() {
         return cMano;
     }
 
     public Border getBordeTextField() {
         return bordeTextField;
+    }
+
+    public ImageIcon getiFavicon() {
+        return iFavicon;
     }
 
     private void crearColores(){
@@ -81,6 +96,8 @@ public class RecursosService {
         fuenteBotones = new Font("Roboto condensed",Font.BOLD,14);
         fuenteMediana = new Font("Roboto light",Font.BOLD,14);
         fuenteTextFields = new Font("Roboto",Font.PLAIN,12);
+        fuenteNombre = new Font("Roboto",Font.BOLD,24);
+        fuenteTitulo = new Font("Roboto light", Font.BOLD, 17);
     }
 
     private void crearCursores(){
@@ -156,6 +173,10 @@ public class RecursosService {
         }catch(IOException | FontFormatException e){
             System.out.println(e);
         }
+    }
+
+    private void crearImagenes(){
+        iFavicon = new ImageIcon("recursos/imagenes/favicon.png");
     }
 
 
