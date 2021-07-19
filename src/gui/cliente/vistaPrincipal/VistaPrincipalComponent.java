@@ -30,6 +30,12 @@ public class VistaPrincipalComponent implements ActionListener {
         navegacionUsuarioComponent = new NavegacionUsuarioComponent(this);
         this.loginComponent = loginComponent;
 
+        //Hace que el componente revisión se muestre de inicio
+        this.revisionComponent = new RevisionComponent();
+        vistaPrincipalTemplate.getpPrincipal().add(
+                revisionComponent.getRevisionTemplate()
+        );
+
         //adición de la barra superior y el panel de navegación
         vistaPrincipalTemplate.getpBarra().add(
                 barraTituloComponent.getBarraTituloTemplate()
@@ -56,8 +62,6 @@ public class VistaPrincipalComponent implements ActionListener {
         vistaPrincipalTemplate.getpPrincipal().removeAll();
         switch (comando){
             case "Revisión":
-                if(revisionComponent == null)
-                    this.revisionComponent = new RevisionComponent();
                 vistaPrincipalTemplate.getpPrincipal().add(
                         revisionComponent.getRevisionTemplate()
                 );

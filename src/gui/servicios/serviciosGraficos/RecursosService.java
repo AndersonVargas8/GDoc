@@ -1,4 +1,4 @@
-package gui.servicios;
+package gui.servicios.serviciosGraficos;
 
 import javax.swing.*;
 import javax.swing.border.Border;

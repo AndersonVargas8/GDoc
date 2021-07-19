@@ -1,11 +1,14 @@
-package estructuras;
+package estructuras.pilas;
+
+import estructuras.listas.ListaEncadenadaSimple;
+import estructuras.listas.Nodo;
 
 /**
  *La clase Pila hereda de la clase ListaEncadenadaSimple e implementa la funcionalidad LIFO. 
  * @author Anderson
  * @param <T> Tipo de elementos que va a contener la Pila
  */
-public class Pila<T> extends ListaEncadenadaSimple{
+public class Pila<T> extends ListaEncadenadaSimple {
     /**
      * Construye una pila vacía.
      */

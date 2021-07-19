@@ -1,6 +1,6 @@
 package gui.cliente.vistaPrincipal;
 
-import gui.servicios.ObjGraficosService;
+import gui.servicios.serviciosGraficos.ObjGraficosService;
 import javax.swing.*;
 
 /**
