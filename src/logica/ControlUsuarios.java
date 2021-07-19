@@ -52,7 +52,6 @@ public class ControlUsuarios {
                 if(aux.getClaveUsuario().equals(claveUsuario))
                     return true;
         }
-
         return false;
     }
 }
