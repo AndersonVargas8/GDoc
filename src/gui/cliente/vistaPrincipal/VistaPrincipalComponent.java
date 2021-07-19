@@ -81,6 +81,7 @@ public class VistaPrincipalComponent implements ActionListener {
                 );
                 break;
             case "Cerrar Sesión":
+                this.loginComponent.restaurarValores();
                 this.vistaPrincipalTemplate.setVisible(false);
                 this.loginComponent.getLoginTemplate().setVisible(true);
                 break;
@@ -90,5 +91,10 @@ public class VistaPrincipalComponent implements ActionListener {
 
     public VistaPrincipalTemplate getVistaPrincipalTemplate() {
         return vistaPrincipalTemplate;
+    }
+
+    public void restaurarValores(){
+        this.vistaPrincipalTemplate.getpPrincipal().add(revisionComponent.getRevisionTemplate());
+        this.navegacionUsuarioComponent.actualizarValores();
     }
 }

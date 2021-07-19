@@ -95,7 +95,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
         pSuperior.add(lIconoUsuario);
 
         lUsuario = sObjGraficos.construirJLabel(
-                "Nombre de Usuario",
+                navegacionUsuarioComponent.getUsuarioConectado().getNombreUsuario(),
                 ((this.pSuperior.getWidth() - 200) / 2) + 10, 20, 200, 40,
                 null, null,
                 sRecursos.getFuenteTitulo(),
@@ -131,7 +131,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
         pMedio.add(lCantidad);
 
         lNumCantidad = sObjGraficos.construirJLabel(
-            "10000",
+            this.navegacionUsuarioComponent.getUsuarioConectado().getClaveUsuario(),
                 190,40,50,30,
                 null,null,
                 sRecursos.getFuenteMediana(),
@@ -267,5 +267,13 @@ public class NavegacionUsuarioTemplate extends JPanel {
         );
         this.bCerrarSesion.addActionListener(navegacionUsuarioComponent);
         this.pInferior.add(bCerrarSesion);
+    }
+
+    public JPanel getpSuperior() {
+        return pSuperior;
+    }
+
+    public JPanel getpMedio() {
+        return pMedio;
     }
 }

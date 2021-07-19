@@ -40,7 +40,7 @@ public class LoginComponent implements ActionListener {
             if(sUsuario.verificarDatosUsuario(nombreUsuario,claveUsuario))
                 entrar();
             else
-                JOptionPane.showMessageDialog(null,"Usuario o contraseña incorrecta", "Error", 2);
+                JOptionPane.showMessageDialog(null,"Usuario o contraseña inválidos", "Error", 2);
         }else{
             JOptionPane.showMessageDialog(null,"Ingrese todos los datos", "Error", 2);
         }
@@ -50,7 +50,13 @@ public class LoginComponent implements ActionListener {
         if(vistaPrincipal == null)
             this.vistaPrincipal = new VistaPrincipalComponent(this);
         else
+            this.vistaPrincipal.restaurarValores();
             this.vistaPrincipal.getVistaPrincipalTemplate().setVisible(true);
 
+    }
+
+    public void restaurarValores(){
+        this.getLoginTemplate().gettNombreUsuario().setText("Ingrese su nombre de usuario");
+        this.getLoginTemplate().gettClaveUsuario().setText("Contraseña");
     }
 }

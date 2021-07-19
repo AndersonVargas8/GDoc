@@ -38,7 +38,7 @@ public class ControlUsuarios {
 
     public Usuario devolverUsuario(String nombreUsuario){
         for(int i = 0; i < usuarios.cantidadDeElementos(); i++){
-            Usuario aux = usuarios.leerDato(i++);
+            Usuario aux = usuarios.leerDato(i);
             if(aux.getNombreUsuario().equals(nombreUsuario))
                 return aux;
         }

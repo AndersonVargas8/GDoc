@@ -55,4 +55,6 @@ public class VistaPrincipalTemplate extends JFrame{
     public JPanel getpPrincipal() {
         return pPrincipal;
     }
+
+
 }
