@@ -38,6 +38,10 @@ public class LoginComponent implements ActionListener {
     }
     public void entrar(){
         loginTemplate.setVisible(false);
-        this.vistaPrincipal = new VistaPrincipalComponent();
+        if(vistaPrincipal == null)
+            this.vistaPrincipal = new VistaPrincipalComponent(this);
+        else
+            this.vistaPrincipal.getVistaPrincipalTemplate().setVisible(true);
+
     }
 }

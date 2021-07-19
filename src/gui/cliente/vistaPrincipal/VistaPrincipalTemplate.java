@@ -39,7 +39,7 @@ public class VistaPrincipalTemplate extends JFrame{
         pBarra = sObjGraficos.construirJPanel(250,0,950,50,null,null);
         this.add(pBarra);
 
-        pPrincipal = sObjGraficos.construirJPanel(250,50,950,700, null,null);
+        pPrincipal = sObjGraficos.construirJPanel(250,50,950,650, null,null);
         this.add(pPrincipal);
 
     }

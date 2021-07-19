@@ -131,8 +131,8 @@ public class NavegacionUsuarioTemplate extends JPanel {
         pMedio.add(lCantidad);
 
         lNumCantidad = sObjGraficos.construirJLabel(
-            "0",
-                200,40,50,30,
+            "10000",
+                190,40,50,30,
                 null,null,
                 sRecursos.getFuenteMediana(),
                 null,
@@ -155,8 +155,8 @@ public class NavegacionUsuarioTemplate extends JPanel {
         pMedio.add(lVencidos);
 
         lNumVencidos = sObjGraficos.construirJLabel(
-                "0",
-                200,80,50,30,
+                "2000",
+                190,80,50,30,
                 null,null,
                 sRecursos.getFuenteMediana(),
                 null,
@@ -179,8 +179,8 @@ public class NavegacionUsuarioTemplate extends JPanel {
         pMedio.add(lPendientes);
 
         lNumPendientes = sObjGraficos.construirJLabel(
-                "0",
-                200,120,50,30,
+                "9999",
+                190,120,50,30,
                 null,null,
                 sRecursos.getFuenteMediana(),
                 null,
