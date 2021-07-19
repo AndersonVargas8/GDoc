@@ -1,4 +1,4 @@
-package gui.servicios;
+package gui.servicios.serviciosGraficos;
 
 import java.awt.Color;
 import java.awt.Cursor;

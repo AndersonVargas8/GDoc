@@ -2,12 +2,12 @@ package logica;
 
 import java.io.*;
 import static logica.crud.*;
-import estructuras.*;
-import datos.*;
 
-import java.time.ZonedDateTime;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import datos.*;
+import estructuras.listas.ListaEncadenada;
+import estructuras.listas.ListaEncadenadaDoble;
+import estructuras.listas.ListaEncadenadaSimple;
+
 /**
  *La clase Controlador permite gestionar las funcionalidades correspondientes a las carpetas y sus documentos.
  * @author Anderson

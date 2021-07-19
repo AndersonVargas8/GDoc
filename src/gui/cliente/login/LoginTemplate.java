@@ -1,13 +1,10 @@
 package gui.cliente.login;
 
-import gui.servicios.ObjGraficosService;
-import gui.servicios.RecursosService;
+import gui.servicios.serviciosGraficos.ObjGraficosService;
+import gui.servicios.serviciosGraficos.RecursosService;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import javax.swing.*;
-import javax.swing.border.Border;
 
 /**
  *

@@ -1,4 +1,4 @@
-package estructuras;
+package estructuras.listas;
 
 import java.io.Serializable;
 

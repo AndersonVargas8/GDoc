@@ -3,7 +3,10 @@ package datos;
 import java.time.*;
 import java.io.BufferedReader;
 import java.io.IOException;
-import estructuras.*;
+
+import estructuras.listas.ListaEncadenadaDoble;
+import estructuras.listas.Nodo;
+
 import java.io.Serializable;
 import java.util.Objects;
 import static logica.Controlador.Cpline;

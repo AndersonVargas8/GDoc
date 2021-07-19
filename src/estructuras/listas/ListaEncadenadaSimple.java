@@ -1,4 +1,4 @@
-package estructuras;
+package estructuras.listas;
 
 /**
  * Esta clase hereda la clase ListaEncadenada, encadena todos sus nodos con un

@@ -1,7 +1,7 @@
 package gui.cliente.componentes.barraTitulo;
 
-import gui.servicios.ObjGraficosService;
-import gui.servicios.RecursosService;
+import gui.servicios.serviciosGraficos.ObjGraficosService;
+import gui.servicios.serviciosGraficos.RecursosService;
 
 import javax.swing.*;
 import java.awt.*;

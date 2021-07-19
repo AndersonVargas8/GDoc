@@ -1,10 +1,13 @@
-package estructuras;
+package estructuras.colas;
+
+import estructuras.listas.ListaEncadenadaDoble;
+import estructuras.listas.Nodo;
 
 /**
  * Esta lista implementa una lista encadenada simple para realizar las funciones FIFO.
  * @author Anderson
  */
-public class Cola<T> extends ListaEncadenadaDoble{
+public class Cola<T> extends ListaEncadenadaDoble {
     
     /**
      * Constuye una cola vacía.

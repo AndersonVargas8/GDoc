@@ -2,8 +2,8 @@
 package logica;
 
 import datos.*;
-import estructuras.ListaEncadenadaDoble;
-import estructuras.Cola;
+import estructuras.listas.ListaEncadenadaDoble;
+import estructuras.colas.Cola;
 import java.io.*;
 import java.time.ZonedDateTime;
 /**
