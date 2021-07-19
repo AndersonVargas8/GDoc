@@ -40,7 +40,7 @@ public class LoginComponent implements ActionListener {
             if(sUsuario.verificarDatosUsuario(nombreUsuario,claveUsuario))
                 entrar();
             else
-                JOptionPane.showMessageDialog(null,"Usuario o contraseña incorrecta", "Error", 2);
+                JOptionPane.showMessageDialog(null,"Usuario o contraseña inválidos", "Error", 2);
         }else{
             JOptionPane.showMessageDialog(null,"Ingrese todos los datos", "Error", 2);
         }
