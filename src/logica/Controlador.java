@@ -16,7 +16,7 @@ public class Controlador{
     
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     
-    static ListaEncadenadaDoble<Documento> lista_documentos = new ListaEncadenadaDoble<>();
+    static ListaEncadenadaDoble<Documento1> lista_documentos = new ListaEncadenadaDoble<>();
     
     /**
      * Main Method

@@ -15,7 +15,7 @@ import static logica.Controlador.Cpline;
  *
  * @author andres
  */
-public class Documento implements Serializable{
+public class Documento1 implements Serializable{
     private Integer id;
     private String nombre;
     private Ubicacion ubicacion;
@@ -23,7 +23,7 @@ public class Documento implements Serializable{
     private ZonedDateTime fecha_expiracion;
     private ListaEncadenadaDoble<Historial> historia;
     
-    public Documento(Integer id, String nombre, Ubicacion ubicacion, ZonedDateTime fecha_ingreso, ZonedDateTime fecha_expiracion, ListaEncadenadaDoble<Historial> historia) {
+    public Documento1(Integer id, String nombre, Ubicacion ubicacion, ZonedDateTime fecha_ingreso, ZonedDateTime fecha_expiracion, ListaEncadenadaDoble<Historial> historia) {
         this.id = id;
         this.nombre = nombre;                                                           //Constructor
         this.ubicacion = ubicacion;
@@ -77,7 +77,7 @@ public class Documento implements Serializable{
     
     @Override
     public boolean equals(Object dato){                                                 //Comprueba que el id ingresado sea el mismo que el de un id ya existente
-        Documento comparar = (Documento) dato;
+        Documento1 comparar = (Documento1) dato;
         return Objects.equals(this.id, comparar.getId());
     }
 

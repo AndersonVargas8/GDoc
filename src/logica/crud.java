@@ -27,7 +27,7 @@ public class crud {
      * @return
      * @throws IOException
      */
-    static ListaEncadenadaDoble<Documento> InsertarDocumento (ListaEncadenadaDoble<Documento> lista, BufferedReader reader, String usuario) throws IOException {
+    static ListaEncadenadaDoble<Documento1> InsertarDocumento (ListaEncadenadaDoble<Documento1> lista, BufferedReader reader, String usuario) throws IOException {
 
         System.out.println ("************************ INGRESO DE DOCUMENTO ************************");
         System.out.println(Cpline("* Ingresa el ID del documento: "));
@@ -51,7 +51,7 @@ public class crud {
         Historial hist = new Historial(usuario, ""+fecha_ingreso, "Creación del documento");
         ListaEncadenadaDoble<Historial> historia = new ListaEncadenadaDoble<>();
         historia.insertarAlFinal(hist);
-        Documento doc = new Documento (id, nombre, ubicacion, fecha_ingreso, fecha_expiracion, historia);
+        Documento1 doc = new Documento1(id, nombre, ubicacion, fecha_ingreso, fecha_expiracion, historia);
         lista.insertarAlFinal(doc);
 
         int cont = lista.cantidadDeElementos();
@@ -70,15 +70,15 @@ public class crud {
      * @param usuario
      * @throws IOException
      */
-    static void EliminarDocumento (ListaEncadenadaDoble<Documento> lista, BufferedReader reader, String usuario) throws IOException {
-        Pila<Documento> eliminacion = new Pila<>();
+    static void EliminarDocumento (ListaEncadenadaDoble<Documento1> lista, BufferedReader reader, String usuario) throws IOException {
+        Pila<Documento1> eliminacion = new Pila<>();
         boolean check = true;
         System.out.println("********************** ELIMINACION DE DOCUMENTO **********************");
         while(check) {
             System.out.println(Cpline("* Ingresa el ID del documento a eliminar: "));
             System.out.print("* ");
             Integer id = Integer.parseInt(reader.readLine());
-            Documento doc = BuscarDocumentoPorId(lista, id);
+            Documento1 doc = BuscarDocumentoPorId(lista, id);
             if (doc != null) {
                 eliminacion.push(doc);
             }else {
@@ -95,7 +95,7 @@ public class crud {
         }
         eliminacion.eliminarDuplicados();
         while (eliminacion.peek() != null){
-            Documento doc = eliminacion.pop();
+            Documento1 doc = eliminacion.pop();
             System.out.println("ELIMINANDO EL DOCUMENTO " + doc.getId() + "...Ok");
             lista.eliminar(lista.buscar(doc));
             ListaEncadenadaDoble<Historial> historia = doc.getHistoria();
@@ -117,12 +117,12 @@ public class crud {
      * @param usuario
      * @throws IOException
      */
-    static void ModificarDocumento (ListaEncadenadaDoble<Documento> lista, BufferedReader reader, String usuario) throws IOException {
+    static void ModificarDocumento (ListaEncadenadaDoble<Documento1> lista, BufferedReader reader, String usuario) throws IOException {
         System.out.println("********************** MODIFICACION DE DOCUMENTO *********************");
         System.out.println(Cpline("* Ingresa el ID del documento a modificar: "));
         System.out.print("* ");
         Integer id = Integer.parseInt(reader.readLine());
-        Documento doc = BuscarDocumentoPorId(lista, id);
+        Documento1 doc = BuscarDocumentoPorId(lista, id);
         if (doc != null) {
             ListaEncadenadaDoble<Historial> historia = doc.getHistoria();
             ZonedDateTime fecha_ingreso = ZonedDateTime.now();
@@ -160,8 +160,8 @@ public class crud {
     /**
      * Maneja el Menú para la busqueda de varios docuemntos a partir de su id manejado todo por una cola
      */
-    static void buscaDocumentos(ListaEncadenadaDoble<Documento> lista) throws IOException {
-        Cola<Documento> busqueda = new Cola<>();
+    static void buscaDocumentos(ListaEncadenadaDoble<Documento1> lista) throws IOException {
+        Cola<Documento1> busqueda = new Cola<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         boolean check = true;
 
@@ -171,7 +171,7 @@ public class crud {
             System.out.println(Cpline("* Ingrese el id del documento que desea buscar: "));
             System.out.print("* ");
             Integer opc = Integer.parseInt(reader.readLine());
-            Documento bus = BuscarDocumentoPorId(lista,opc);
+            Documento1 bus = BuscarDocumentoPorId(lista,opc);
             if(bus != null) {
                 busqueda.enqueue(bus);
             }else{
@@ -195,9 +195,9 @@ public class crud {
      * Imprime todos los elementos de un documento
      * @param lista
      */
-    static void Lista (ListaEncadenadaDoble<Documento> lista) {
+    static void Lista (ListaEncadenadaDoble<Documento1> lista) {
         System.out.println("************************* LISTA DE DOCUMENTO *************************");
-        Nodo<Documento> nodo_buscador = lista.getPrimero();
+        Nodo<Documento1> nodo_buscador = lista.getPrimero();
         int i =0;
         while(nodo_buscador != null) {
             nodo_buscador.getDato().print();
@@ -212,11 +212,11 @@ public class crud {
      * @param id
      * @return
      */
-    static Documento BuscarDocumentoPorId (ListaEncadenadaDoble<Documento> lista, Integer id) {
-        Documento doc = null;
-        Nodo<Documento> nodo_buscador = lista.getPrimero();
+    static Documento1 BuscarDocumentoPorId (ListaEncadenadaDoble<Documento1> lista, Integer id) {
+        Documento1 doc = null;
+        Nodo<Documento1> nodo_buscador = lista.getPrimero();
         for(int i = 0; i < lista.cantidadDeElementos(); i++){
-            Documento aux = lista.leerDato(i);
+            Documento1 aux = lista.leerDato(i);
             if (aux.getId().equals(id)) {
                 doc = aux;
                 break;

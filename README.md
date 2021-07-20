@@ -1,5 +1,5 @@
 #Users
-To sign in, Mr Daniel Escobar has a user called "Daniel" and its password is "helloWorld"
+To sign in, Mr Daniel Escobar has a username called "Daniel" and his password is "helloWorld"
 
 #docuVision
 docuVision is a software which helps to manage the document entering, storeage, removing and consult. This allows users to have a better document management.

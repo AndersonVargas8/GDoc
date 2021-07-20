@@ -54,7 +54,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
 
         pMedio = sObjGraficos.construirJPanel(
                 5,100,240,160,
-                sRecursos.getColorPrincipal(),
+                sRecursos.getColorPrincipalOscuro(),
                 bDifuminado
         );
         pSuperior.add(pMedio);
