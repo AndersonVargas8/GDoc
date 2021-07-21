@@ -141,7 +141,9 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
     public void insertarRegistroTabla(){
         documento = new Documento();
         int cantidadDocumentos = sDocumentos.devolverCantidadDocumentos();
-        int idUltimoDoc = sDocumentos.devolverDocumento(cantidadDocumentos-1).getId();
+        int idUltimoDoc = 0;
+        if (cantidadDocumentos != 0)
+            idUltimoDoc = sDocumentos.devolverDocumento(cantidadDocumentos-1).getId();
         documento.setId(idUltimoDoc+1);
         documento.setTipo(registrosTemplate.gettTipo().getText());
         documento.setNombre(registrosTemplate.gettNombre().getText());
