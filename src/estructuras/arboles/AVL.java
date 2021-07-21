@@ -15,6 +15,8 @@ public class AVL <T extends Comparable<? super T>> extends ArbolBinarioBusqueda<
     }
 
     private int factorEquilibrio(NodoArbolBinario<T> raiz) {
+        if(raiz == null)
+            return 0;
         return altura(raiz.getHijoIzquierdo()) - altura(raiz.getHijoDerecho());
     }
     private boolean estaBalanceado(NodoArbolBinario<T> nodo){

@@ -29,6 +29,8 @@ public class BarraTituloTemplate extends JPanel {
         this.crearJButtons();
         this.crearJLabels();
 
+        this.addMouseListener(barraTituloComponent);
+        this.addMouseMotionListener(barraTituloComponent);
         //Configuración de la barra
         this.setSize(950, 50);
         this.setBackground(Color.WHITE);

@@ -17,6 +17,7 @@ public class ObjGraficosService {
     private JPasswordField passwordField;
     private JButton button;
     private JScrollPane panelScroll;
+    private JComboBox comboBox;
 
     private static ObjGraficosService servicio;
             
@@ -176,5 +177,30 @@ public class ObjGraficosService {
         }
         return button;
     }
-    
+
+    public JComboBox<String> construirJComboBox(
+            String cadena, int x, int y, int ancho, int alto, Font fuente,
+            Color colorFondo, Color colorFuente, String direccion
+    ) {
+        comboBox = new JComboBox<String>();
+        comboBox.setLocation(x, y);
+        comboBox.setSize(ancho, alto);
+        for (String item : cadena.split("_")) {
+            comboBox.addItem(item);
+        }
+        comboBox.setFont(fuente);
+        comboBox.setBackground(colorFondo);
+        comboBox.setForeground(colorFuente);
+        switch (direccion) {
+            case "c":
+                ((JLabel) comboBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+                break;
+            case "r":
+                ((JLabel) comboBox.getRenderer()).setHorizontalAlignment(SwingConstants.RIGHT);
+                break;
+            default:
+                break;
+        }
+        return comboBox;
+    }
 }

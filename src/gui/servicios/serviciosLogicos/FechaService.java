@@ -40,7 +40,11 @@ public class FechaService {
         return fecha;
     }
 
-    public String getFechaPlus(int i){
+    public String getFechaPlus(String fecha, int i){
+        String[] fechaAux = fecha.split("/");
+        String dia = fechaAux[0];
+        String mes = fechaAux[1];
+        String annio = fechaAux[2];
         return dia.concat("/" + mes + "/" + String.valueOf(Integer.parseInt(annio) + i));
     }
 }

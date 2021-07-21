@@ -1,6 +1,7 @@
 package logica;
 
 import datos.Documento;
+import datos.Fecha;
 import estructuras.arboles.AVL;
 
 import java.io.*;
@@ -32,8 +33,8 @@ public class ControlDocumentos {
                 documento.setNombre(atributos[2]);
                 documento.setEstante(atributos[3]);
                 documento.setCarpeta(atributos[4]);
-                documento.setIngreso(atributos[5]);
-                documento.setExpiración(atributos[6]);
+                documento.setIngreso(new Fecha(atributos[5].split("/")));
+                documento.setExpiracion(new Fecha(atributos[6].split("/")));
 
                 documentos.insertar(documento);
             }

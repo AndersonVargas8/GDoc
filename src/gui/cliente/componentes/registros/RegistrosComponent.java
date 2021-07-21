@@ -1,6 +1,7 @@
 package gui.cliente.componentes.registros;
 
 import datos.Documento;
+import datos.Fecha;
 import estructuras.arreglos.ArregloDinamico;
 import gui.cliente.componentes.navegacionUsuario.NavegacionUsuarioComponent;
 import gui.cliente.vistaPrincipal.VistaPrincipalComponent;
@@ -52,6 +53,11 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
             eliminarRegistroTabla();
         if(e.getSource() == registrosTemplate.getbFiltrar())
             filtrarRegistrosTabla();
+        if(e.getSource() == registrosTemplate.getbLimpiar())
+            restaurarValores();
+        if(e.getSource() == registrosTemplate.getCbTipo()){
+            registrosTemplate.getlExpiracionValor().setText(cambiarVencimiento());
+        }
     }
 
     //FocusListener
@@ -80,12 +86,12 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
             int fSeleccionada = registrosTemplate.getTabla().getSelectedRow();
             documento = sDocumentos.devolverDocumento(fSeleccionada);
             registrosTemplate.getlIdValor().setText(documento.getId()+"");
-            registrosTemplate.gettTipo().setText(documento.getTipo());
+            registrosTemplate.getCbTipo().setSelectedItem(documento.getTipo());
             registrosTemplate.gettNombre().setText(documento.getNombre());
             registrosTemplate.gettEstante().setText(documento.getEstante());
             registrosTemplate.gettCarpeta().setText(documento.getCarpeta());
-            registrosTemplate.getlIngresoValor().setText(documento.getIngreso());
-            registrosTemplate.getlExpiracionValor().setText(documento.getExpiración());
+            registrosTemplate.getlIngresoValor().setText(documento.getIngreso().toString());
+            registrosTemplate.getlExpiracionValor().setText(documento.getExpiracion().toString());
         }
     }
 
@@ -120,11 +126,12 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         int cantidadDocumentos = sDocumentos.devolverCantidadDocumentos();
         int idUltimoDocumento = sDocumentos.devolverDocumento(cantidadDocumentos-1).getId();
         registrosTemplate.getlIdValor().setText((idUltimoDocumento + 1)+"");
-        registrosTemplate.gettTipo().setText(placeholders[0]);
+        registrosTemplate.getCbTipo().setSelectedIndex(0);
         registrosTemplate.gettNombre().setText(placeholders[1]);
         registrosTemplate.gettEstante().setText(placeholders[2]);
         registrosTemplate.gettCarpeta().setText(placeholders[3]);
         registrosTemplate.getlIngresoValor().setText(sFecha.getFecha());
+        registrosTemplate.getlExpiracionValor().setText(cambiarVencimiento());
     }
 
     public void mostrarRegistrosTabla(){
@@ -141,14 +148,16 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
     public void insertarRegistroTabla(){
         documento = new Documento();
         int cantidadDocumentos = sDocumentos.devolverCantidadDocumentos();
-        int idUltimoDoc = sDocumentos.devolverDocumento(cantidadDocumentos-1).getId();
+        int idUltimoDoc = 0;
+        if (cantidadDocumentos != 0)
+            idUltimoDoc = sDocumentos.devolverDocumento(cantidadDocumentos-1).getId();
         documento.setId(idUltimoDoc+1);
-        documento.setTipo(registrosTemplate.gettTipo().getText());
+        documento.setTipo((String)registrosTemplate.getCbTipo().getSelectedItem());
         documento.setNombre(registrosTemplate.gettNombre().getText());
         documento.setEstante(registrosTemplate.gettEstante().getText());
         documento.setCarpeta(registrosTemplate.gettCarpeta().getText());
-        documento.setIngreso(sFecha.getFecha());
-        documento.setExpiración(sFecha.getFechaPlus(1));
+        documento.setIngreso(new Fecha(registrosTemplate.getlIngresoValor().getText().split("/")));
+        documento.setExpiracion(new Fecha(registrosTemplate.getlExpiracionValor().getText().split("/")));
 
         this.agregarRegistro(documento);
         sDocumentos.agregarDocumento(documento);
@@ -160,7 +169,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         int fSeleccionada = registrosTemplate.getTabla().getSelectedRow();
         if(fSeleccionada != -1){
             registrosTemplate.getModelo().setValueAt(
-                    registrosTemplate.gettTipo().getText(), fSeleccionada,1
+                    (String)registrosTemplate.getCbTipo().getSelectedItem(), fSeleccionada,1
             );
             registrosTemplate.getModelo().setValueAt(
                     registrosTemplate.gettNombre().getText(), fSeleccionada,2
@@ -170,11 +179,17 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
                             registrosTemplate.gettCarpeta().getText()
                     ), fSeleccionada,3
             );
+            registrosTemplate.getModelo().setValueAt(
+                    registrosTemplate.getlExpiracionValor().getText(),fSeleccionada,5
+            );
             documento = sDocumentos.devolverDocumento(fSeleccionada);
-            documento.setTipo(registrosTemplate.gettTipo().getText());
+            documento.setTipo((String)registrosTemplate.getCbTipo().getSelectedItem());
             documento.setNombre(registrosTemplate.gettNombre().getText());
             documento.setEstante(registrosTemplate.gettEstante().getText());
             documento.setCarpeta(registrosTemplate.gettCarpeta().getText());
+            int annioIngreso = documento.getIngreso().getAnnio();
+            int annioVencimiento = annioIngreso + registrosTemplate.getCbTipo().getSelectedIndex() + 1;
+            documento.getExpiracion().setAnnio(annioVencimiento);
             restaurarValores();
         }
         else{
@@ -208,8 +223,8 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
                         documento.getTipo(),
                         documento.getNombre(),
                         documento.getEstante().concat("-" + documento.getCarpeta()),
-                        documento.getIngreso(),
-                        documento.getExpiración()
+                        documento.getIngreso().toString(),
+                        documento.getExpiracion().toString()
                 }
         );
 
@@ -217,5 +232,10 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
 
     public void actualizarValores(){
         vistaPrincipalComponent.restaurarValores();
+    }
+
+    public String cambiarVencimiento(){
+        int anniosVencimiento = (registrosTemplate.getCbTipo().getSelectedIndex()) +1;
+        return sFecha.getFechaPlus(registrosTemplate.getlIngresoValor().getText(),anniosVencimiento);
     }
 }

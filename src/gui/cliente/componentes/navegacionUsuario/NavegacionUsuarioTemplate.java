@@ -1,5 +1,6 @@
 package gui.cliente.componentes.navegacionUsuario;
 
+import gui.servicios.serviciosGraficos.GraficosAvanzadosService;
 import gui.servicios.serviciosGraficos.ObjGraficosService;
 import gui.servicios.serviciosGraficos.RecursosService;
 import gui.servicios.serviciosLogicos.DocumentosService;
@@ -80,6 +81,9 @@ public class NavegacionUsuarioTemplate extends JPanel {
         bDifuminado = BorderFactory.createEtchedBorder(EtchedBorder.RAISED,
                 new Color(4, 28, 62),
                 new Color(28, 86, 139));
+        bDifuminado = GraficosAvanzadosService.getServicio().devolverBordeDifuminado(
+                new Color(4, 28, 62),2
+        );
     }
 
     public void crearJLabels(){

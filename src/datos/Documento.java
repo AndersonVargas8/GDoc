@@ -2,7 +2,8 @@ package datos;
 
 public class Documento implements Comparable<Documento>{
     private int id;
-    private String tipo, nombre, estante, carpeta, ingreso, expiración;
+    private String tipo, nombre, estante, carpeta;
+    private Fecha ingreso,expiracion;
 
     public int getId() {
         return id;
@@ -44,20 +45,20 @@ public class Documento implements Comparable<Documento>{
         this.carpeta = carpeta;
     }
 
-    public String getIngreso() {
+    public Fecha getIngreso() {
         return ingreso;
     }
 
-    public void setIngreso(String ingreso) {
+    public void setIngreso(Fecha ingreso) {
         this.ingreso = ingreso;
     }
 
-    public String getExpiración() {
-        return expiración;
+    public Fecha getExpiracion() {
+        return expiracion;
     }
 
-    public void setExpiración(String expiración) {
-        this.expiración = expiración;
+    public void setExpiracion(Fecha expiracion) {
+        this.expiracion = expiracion;
     }
 
     @Override

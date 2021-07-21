@@ -5,15 +5,13 @@ import gui.servicios.serviciosGraficos.RecursosService;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
-public class BarraTituloComponent implements ActionListener, MouseListener {
+public class BarraTituloComponent extends MouseAdapter implements ActionListener, MouseListener {
 
     private BarraTituloTemplate barraTituloTemplate;
     private VistaPrincipalComponent vistaPrincipalComponent;
+    private int posicionInicialX, posicionInicialY;
 
     public BarraTituloComponent(VistaPrincipalComponent vistaPrincipalComponent){
         this.barraTituloTemplate = new BarraTituloTemplate(this);
@@ -37,8 +35,9 @@ public class BarraTituloComponent implements ActionListener, MouseListener {
     }
 
     @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-
+    public void mousePressed(MouseEvent e) {
+        posicionInicialX = e.getX()+250;
+        posicionInicialY = e.getY();
     }
 
     @Override
@@ -46,6 +45,13 @@ public class BarraTituloComponent implements ActionListener, MouseListener {
 
     }
 
+    @Override
+    public void mouseDragged(MouseEvent e){
+        this.vistaPrincipalComponent.moverVentana(
+                e.getXOnScreen() - posicionInicialX,
+                e.getYOnScreen() - posicionInicialY
+        );
+    }
     @Override
     public void mouseEntered(MouseEvent e) {
         if(e.getSource() == barraTituloTemplate.getbCerrar()){
