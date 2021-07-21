@@ -7,7 +7,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class RecursosService {
-    private Color colorPrincipal, colorPrincipalOscuro, colorSecundario, colorGrisOscuro;
+    private Color colorPrincipal, colorPrincipalOscuro, colorSecundario,
+            colorGrisOscuro, colorGris, colorGrisClaro;
     private Font fuentePrincipal, fuenteCerrar, fuenteBotones, fuenteMediana,
             fuenteTextFields,fuenteNombre, fuenteTitulo;
     private Cursor cMano;
@@ -52,6 +53,14 @@ public class RecursosService {
         return colorPrincipalOscuro;
     }
 
+    public Color getColorGrisClaro() {
+        return colorGrisClaro;
+    }
+
+    public Color getColorGris() {
+        return colorGris;
+    }
+
     public Font getFuentePrincipal() {
         return fuentePrincipal;
     }
@@ -93,10 +102,12 @@ public class RecursosService {
         colorPrincipalOscuro = new Color(22, 74, 120);
         colorSecundario = new Color(215, 227, 232);
         colorGrisOscuro = new Color(80, 80, 80);
+        colorGrisClaro = new Color(249, 246, 249);
+        colorGris = new Color(235,235,235);
     }
 
     private void crearFuentes(){
-        fuentePrincipal = new Font("Roboto", Font.PLAIN,20);
+        fuentePrincipal = new Font("Roboto", Font.PLAIN,14);
         fuenteCerrar = new Font("Roboto condensed",Font.PLAIN,20);
         fuenteBotones = new Font("Roboto condensed",Font.BOLD,14);
         fuenteMediana = new Font("Roboto light",Font.BOLD,14);

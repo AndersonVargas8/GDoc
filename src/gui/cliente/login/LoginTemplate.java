@@ -173,6 +173,7 @@ public class LoginTemplate extends JFrame{
                 Color.black,
                 sRecursos.getBordeTextField(),
                 "l");
+        tNombreUsuario.addMouseListener(loginComponent);
         pIzquierda.add(tNombreUsuario);
         
         tClaveUsuario = sObjGraficos.construirJPasswordField(
@@ -184,7 +185,7 @@ public class LoginTemplate extends JFrame{
                 Color.BLACK,
                 sRecursos.getBordeTextField(),
                 "l");
-        
+        tClaveUsuario.addMouseListener(loginComponent);
         pIzquierda.add(tClaveUsuario);
     }
     
@@ -202,19 +203,21 @@ public class LoginTemplate extends JFrame{
                 true);
 
         bEntrar.addActionListener(loginComponent);
+        bEntrar.addMouseListener(loginComponent);
         pIzquierda.add(bEntrar);
 
         
         bCerrar = sObjGraficos.construirJButton(
                 "X",
-                0, 5, 45, 30,
+                0, 0, 45, 40,
                 sRecursos.getcMano(),
                 null,
                 sRecursos.getFuenteCerrar(), null, null, null,
                 "c",
-                false
+                true
               );
               bCerrar.addActionListener(loginComponent);
+              bCerrar.addMouseListener(loginComponent);
               pIzquierda.add(bCerrar);
     }
 

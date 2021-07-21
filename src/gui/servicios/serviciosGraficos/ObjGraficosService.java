@@ -1,16 +1,8 @@
 package gui.servicios.serviciosGraficos;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import java.awt.*;
+import javax.swing.*;
 
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 /**
@@ -24,7 +16,8 @@ public class ObjGraficosService {
     private JTextField textField;
     private JPasswordField passwordField;
     private JButton button;
-    
+    private JScrollPane panelScroll;
+
     private static ObjGraficosService servicio;
             
     private ObjGraficosService(){}
@@ -45,7 +38,16 @@ public class ObjGraficosService {
         panel.setBorder(borde);
         return panel;
     }
-    
+    public JScrollPane construirPanelBarra(
+            Component componente, int x, int y, int ancho, int alto, Color colorFondo, Border borde
+    ) {
+        panelScroll = new JScrollPane(componente);
+        panelScroll.setLocation(x, y);
+        panelScroll.setSize(ancho, alto);
+        panelScroll.getViewport().setBackground(colorFondo);
+        panelScroll.setBorder(borde);
+        return panelScroll;
+    }
     public JLabel construirJLabel(
         String texto, int x, int y, int ancho, int alto, Cursor cursor, ImageIcon imagen,
         Font fuente, Color colorFondo, Color colorFuente, Border borde, String direccion

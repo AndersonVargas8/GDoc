@@ -1,13 +1,10 @@
 package estructuras.listas;
-
-import java.io.Serializable;
-
 /**
  * Esta clase provee la estrucutura para los diferentes tipos de listas encadenadas.
  * @author Anderson Vargas - anvargasa
  * @param <T> Tipo de elementos que va a contener la lista
  */
-public abstract class ListaEncadenada<T> implements Serializable{
+public abstract class ListaEncadenada<T>{
     protected Nodo<T> primero;
     protected Integer contador;
     
@@ -116,7 +113,7 @@ public abstract class ListaEncadenada<T> implements Serializable{
      * @param dato elemento a ser buscado.
      * @return arreglo con las posiciones donde se he encontrado un elemento igual al especificado.
      */
-    public abstract int buscar(T dato);
+    public abstract int[] buscar(T dato);
     
     /**
      * Busca el elemento en la posición dada y retorna su dato asociado.
@@ -173,7 +170,7 @@ public abstract class ListaEncadenada<T> implements Serializable{
     public void eliminarDuplicados(){
         this.primero = this.eliminarDuplicados(this.primero);
     }
-    
+
     private Nodo eliminarDuplicados(Nodo primero) {
         if(this.estaVacia())
             return primero;
@@ -192,7 +189,7 @@ public abstract class ListaEncadenada<T> implements Serializable{
         }
         return primero;
     }
-    
+
     /**
      * Imprime los elementos de la lista
      */

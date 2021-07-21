@@ -1,14 +1,12 @@
 package estructuras.pilas;
-
 import estructuras.listas.ListaEncadenadaSimple;
-import estructuras.listas.Nodo;
 
 /**
- *La clase Pila hereda de la clase ListaEncadenadaSimple e implementa la funcionalidad LIFO. 
+ *La clase Pila hereda de la clase ListaEncadenadaSimple presentando el comportamiento LIFO.
  * @author Anderson
  * @param <T> Tipo de elementos que va a contener la Pila
  */
-public class Pila<T> extends ListaEncadenadaSimple {
+public class Pila<T> extends ListaEncadenadaSimple{
     /**
      * Construye una pila vacía.
      */
@@ -29,23 +27,39 @@ public class Pila<T> extends ListaEncadenadaSimple {
      * @return el primer elemento de la pila.
      */
     public T pop(){
-        Nodo aux = super.getPrimero();
-        if(aux == null)
+        if(super.estaVacia()){
+            System.out.println("La pila se encuentra vacía");
             return null;
+        }
         T toReturn = (T) this.primerElemento();
         super.eliminarAlInicio();
         return toReturn;
     }
     
     /**
-     * Retorna el primer elemento de la pila si eliminarlo de la pila.
+     * Retorna el primer elemento de la pila sin eliminarlo de la pila.
      * @return el primer elemento de la pila.
      */
     public T peek(){
-        if (this.getPrimero() == null)
+        if(super.estaVacia()){
+            System.out.println("La pila se encuentra vacía");
             return null;
-
-        return (T)this.getPrimero().getDato();
+        }
+        return (T)super.primerElemento();
     }
-    
+
+    /**
+     * Indica si la pila está vacía.
+     * @return true si la cola está vacía, false en otro caso.
+     */
+    public boolean estaVacia(){
+        return super.estaVacia();
+    }
+
+    /**
+     * Elimina todos los elementos de la pila.
+     */
+    public void vaciar(){
+        super.vaciar();
+    }
 }

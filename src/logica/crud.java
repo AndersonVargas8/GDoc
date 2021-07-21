@@ -97,7 +97,7 @@ public class crud {
         while (eliminacion.peek() != null){
             Documento1 doc = eliminacion.pop();
             System.out.println("ELIMINANDO EL DOCUMENTO " + doc.getId() + "...Ok");
-            lista.eliminar(lista.buscar(doc));
+            lista.eliminar(lista.buscar(doc)[0]);
             ListaEncadenadaDoble<Historial> historia = doc.getHistoria();
             ZonedDateTime fecha_ingreso = ZonedDateTime.now();
             Historial hist = new Historial(usuario, "" + fecha_ingreso, "Eliminacion del documento");

@@ -1,13 +1,11 @@
 package estructuras.colas;
-
 import estructuras.listas.ListaEncadenadaDoble;
-import estructuras.listas.Nodo;
 
 /**
  * Esta lista implementa una lista encadenada simple para realizar las funciones FIFO.
  * @author Anderson
  */
-public class Cola<T> extends ListaEncadenadaDoble {
+public class Cola<T> extends ListaEncadenadaDoble{
     
     /**
      * Constuye una cola vacía.
@@ -15,16 +13,18 @@ public class Cola<T> extends ListaEncadenadaDoble {
     public Cola(){
         super();
     }
-    
+
     /**
-     * Construye una cola con un dato de entrada
+     * Construye una cola e inserta el elemento indicado.
+     * @param dato
      */
     public Cola(T dato){
-        super.insertarAlFinal(dato);
+        this.enqueue(dato);
     }
     
     /**
      * Inserta el dato indicado en la última posición de la cola.
+     * @param dato 
      */
     public void enqueue(T dato){
         super.insertarAlFinal(dato);
@@ -35,24 +35,24 @@ public class Cola<T> extends ListaEncadenadaDoble {
      * @return el primer elemento de la cola.
      */
     public T dequeue(){
-        Nodo aux = super.getPrimero();
-        if (aux == null){
+        if (this.estaVacia()){
+            System.out.println("La cola se encuentra vacía");
             return null;
         }
-        T toReturn = (T) super.primerElemento();
+        T aux = (T)super.primerElemento();
         super.eliminarAlInicio();
-        return toReturn;
+        return aux;
     }
-    
-    
+
     /**
      * Retorna el primer elemento de la cola sin eliminarlo de la cola.
      * @return el primer elemento de la cola.
      */
     public T peek(){
-        Nodo toReturn = super.getPrimero();
-        if(toReturn == null)
+        if(super.estaVacia()) {
+            System.out.println("La Pila se encuentra vacía");
             return null;
+        }
         return (T)super.primerElemento();
     }
     

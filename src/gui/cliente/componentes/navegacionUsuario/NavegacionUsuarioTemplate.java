@@ -2,6 +2,7 @@ package gui.cliente.componentes.navegacionUsuario;
 
 import gui.servicios.serviciosGraficos.ObjGraficosService;
 import gui.servicios.serviciosGraficos.RecursosService;
+import gui.servicios.serviciosLogicos.DocumentosService;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -23,6 +24,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
     //Servicios
     ObjGraficosService sObjGraficos;
     RecursosService sRecursos;
+    DocumentosService sDocumentos;
     private NavegacionUsuarioComponent navegacionUsuarioComponent;
 
     public NavegacionUsuarioTemplate(NavegacionUsuarioComponent navegacionUsuarioComponent){
@@ -31,6 +33,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
         //Obtención de servicios
         sObjGraficos = ObjGraficosService.getServicio();
         sRecursos = RecursosService.getServicio();
+        sDocumentos = DocumentosService.getServicio();
 
         //Creación de objetos graficos
         this.crearObjetosDecoradores();
@@ -131,7 +134,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
         pMedio.add(lCantidad);
 
         lNumCantidad = sObjGraficos.construirJLabel(
-            this.navegacionUsuarioComponent.getUsuarioConectado().getClaveUsuario(),
+            String.valueOf(sDocumentos.devolverCantidadDocumentos()),
                 190,40,50,30,
                 null,null,
                 sRecursos.getFuenteMediana(),
@@ -206,9 +209,10 @@ public class NavegacionUsuarioTemplate extends JPanel {
                 Color.WHITE,
                 bVacio,
                 "l",
-                false
+                true
         );
         this.bRevision.addActionListener(navegacionUsuarioComponent);
+        this.bRevision.addMouseListener(navegacionUsuarioComponent);
         this.pInferior.add(bRevision);
 
         iDimAux = new ImageIcon(
@@ -225,9 +229,10 @@ public class NavegacionUsuarioTemplate extends JPanel {
                 Color.WHITE,
                 bVacio,
                 "l",
-                false
+                true
         );
         this.bRegistros.addActionListener(navegacionUsuarioComponent);
+        bRegistros.addMouseListener(navegacionUsuarioComponent);
         this.pInferior.add(bRegistros);
 
         iDimAux = new ImageIcon(
@@ -244,9 +249,10 @@ public class NavegacionUsuarioTemplate extends JPanel {
                 Color.WHITE,
                 bVacio,
                 "l",
-                false
+                true
         );
         this.bMovimientos.addActionListener(navegacionUsuarioComponent);
+        this.bMovimientos.addMouseListener(navegacionUsuarioComponent);
         this.pInferior.add(bMovimientos);
 
         iDimAux = new ImageIcon(
@@ -263,9 +269,10 @@ public class NavegacionUsuarioTemplate extends JPanel {
                 Color.WHITE,
                 bVacio,
                 "l",
-                false
+                true
         );
         this.bCerrarSesion.addActionListener(navegacionUsuarioComponent);
+        this.bCerrarSesion.addMouseListener(navegacionUsuarioComponent);
         this.pInferior.add(bCerrarSesion);
     }
 

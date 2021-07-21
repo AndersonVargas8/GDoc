@@ -38,10 +38,7 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
             this.insertar(i, arreglo[i]);
         }
     }
-    /**
-     * Inserta un dato al comienzo de la lista 
-     * @param dato
-     */
+
     @Override
     public void insertarAlInicio(T dato) {
         Nodo<T> nuevoNodo = new Nodo<T>(dato);
@@ -50,21 +47,12 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
         this.aumentarContador();
     }
 
-    /**
-     * Inserta un dato al final de la lista
-     * @param dato
-     */
     @Override
     public void insertarAlFinal(T dato) {
         Integer cont = this.contador;
         this.insertar(cont, dato);
     }
 
-    /**
-     * Inserta un dato en algun indice de la lista 
-     * @param indice
-     * @param dato
-     */
     @Override
     public void insertar(int indice, T dato) {
         if (indice < 0 || indice > this.contador) {
@@ -84,9 +72,6 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
         this.aumentarContador();
     }
 
-    /**
-     * Elimina el primer elemento de la lista
-     */
     @Override
     public void eliminarAlInicio() {
         if (this.estaVacia()) {
@@ -97,19 +82,12 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
         this.decrementarContador();
     }
 
-    /**
-     * Elimina el ultimo elemento de la lista
-     */
     @Override
     public void eliminarAlFinal() {
         Integer cont = this.contador - 1;
         this.eliminar(cont);
     }
 
-    /**
-     * Elimina un elemento de la lista en x indice
-     * @param indice
-     */
     @Override
     public void eliminar(int indice) {
         if (indice < 0 || indice >= this.contador) {
@@ -128,10 +106,6 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
         return;
     }
 
-    /**
-     * Retorna en consola todos los elementod de la lista de forma ordenada
-     * @return
-     */
     @Override
     public String toString() {
         if (this.estaVacia()) {
@@ -151,17 +125,12 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
         return toReturn;
     }
 
-    /**
-     * Retorna el indice de un elemento a partir del dato
-     * @param dato
-     * @return
-     */
     @Override
-    public int buscar(T dato) {
-        int toReturn = -1;
+    public int[] buscar(T dato) {
+        
         if (this.estaVacia()) {
             System.out.print("ERROR, la lista simple está vacía");
-            return toReturn;
+            return null;
         }
 
         Nodo<T> aux = this.primero;
@@ -172,25 +141,22 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
             if (dato.equals(aux.getDato())) {
                 Integer cont = indices.contador;
                 indices.insertar(cont, indice);
-                toReturn = indice;
             }
             indice++;
             aux = aux.getSiguiente();
         }
         if (indices.estaVacia()) {
             System.out.println("No se encontró el elemento");
-            return toReturn;
+            return null;
         }
-        
+        int[] toReturn = new int[indices.cantidadDeElementos()];
+        for(int i = 0; i < indices.cantidadDeElementos(); i++){
+            toReturn[i] = indices.leerDato(i);
+        }
         
         return toReturn;
     }
 
-    /**
-     * Retorna el dato de un elemento de la lista a partir de un indice especificado
-     * @param indice
-     * @return
-     */
     @Override
     public T leerDato(int indice) {
         if (estaVacia() || indice < 0 || indice >= this.contador) {
@@ -200,11 +166,6 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
         return dato;
     }
 
-    /**
-     * Retorna un elemento de la lista a partir de un indice dato
-     * @param indice
-     * @return
-     */
     private Nodo leer(int indice) {
         if (indice < 0 || indice > this.contador) {
             System.out.println("ERROR, No es posible realizar la búsqueda");
@@ -219,32 +180,25 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
         return aux;
     }
 
-    /**
-     * Vacia la lista resetenado el primer elemeto en null y el contador en 0
-     */
     @Override
     public void vaciar() {
         this.contador = 0;
         this.primero = null;
     }
-    
-    /**
-     * Retorna el dato del primer elemento de la lista
-     * @return
-     */
+
     @Override
     public T primerElemento() {
         return this.leerDato(0);
     }
     
-    /**
-     * Retorna el dato del ultimo elemento de la lista
-     * @return
-     */
     @Override
     public T ultimoElemento() {
         return this.leerDato(this.contador - 1);
     }
-    
+
+    public void reemplazar(T dato, int indice){
+        this.eliminar(indice);
+        this.insertar(indice,dato);
+    }
     
 }

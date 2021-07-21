@@ -1,16 +1,18 @@
 package gui.cliente.login;
 
 import gui.cliente.vistaPrincipal.VistaPrincipalComponent;
+import gui.servicios.serviciosGraficos.RecursosService;
 import gui.servicios.serviciosLogicos.UsuarioService;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 
-public class LoginComponent implements ActionListener {
+public class LoginComponent implements ActionListener, MouseListener{
     private LoginTemplate loginTemplate;
     private VistaPrincipalComponent vistaPrincipal;
     private UsuarioService sUsuario;
+    private String[] placeholders = { "Ingrese su nombre de usuario", "Contraseña" };
 
     public LoginComponent(){
         sUsuario = UsuarioService.getServicio();
@@ -33,9 +35,13 @@ public class LoginComponent implements ActionListener {
     }
 
     public void enviarDatos(){
-        String nombreUsuario = loginTemplate.gettNombreUsuario().getText();
-        String claveUsuario = new String(loginTemplate.gettClaveUsuario().getPassword());
+        //String nombreUsuario = loginTemplate.gettNombreUsuario().getText();
+        //String claveUsuario = new String(loginTemplate.gettClaveUsuario().getPassword());
 
+        //----------------------------------------
+        String nombreUsuario = "Anderson";
+        String claveUsuario = "1234";
+        // ----------------------
         if(!nombreUsuario.isEmpty() && !claveUsuario.isEmpty()){
             if(sUsuario.verificarDatosUsuario(nombreUsuario,claveUsuario))
                 entrar();
@@ -59,4 +65,52 @@ public class LoginComponent implements ActionListener {
         this.getLoginTemplate().gettNombreUsuario().setText("Ingrese su nombre de usuario");
         this.getLoginTemplate().gettClaveUsuario().setText("Contraseña");
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource() instanceof JTextField) {
+            JTextField textField = ((JTextField) e.getSource());
+
+            if (textField.getText().equals(placeholders[0]) || textField.getText().equals(placeholders[1]))
+                textField.setText("");
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if(e.getSource() == loginTemplate.getbEntrar()){
+            JButton boton = ((JButton) e.getSource());
+            boton.setBackground(new Color(6, 120, 172));
+        }
+        if(e.getSource() == loginTemplate.getbCerrar()){
+            JButton boton = ((JButton) e.getSource());
+            boton.setForeground(Color.white);
+            boton.setBackground(new Color(252, 34, 34));
+        }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if(e.getSource() == loginTemplate.getbEntrar()){
+            JButton boton = ((JButton) e.getSource());
+            boton.setBackground(new Color(0,134,190));
+        }
+        if(e.getSource() == loginTemplate.getbCerrar()){
+            JButton boton = ((JButton) e.getSource());
+            boton.setForeground(Color.black);
+            boton.setBackground(null);
+        }
+    }
+
+
 }

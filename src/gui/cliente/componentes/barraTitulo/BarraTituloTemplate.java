@@ -39,28 +39,30 @@ public class BarraTituloTemplate extends JPanel {
     private void crearJButtons(){
         bMinimizar = sObjGraficos.construirJButton(
                 "_",
-                850, 10, 45, 30,
+                860, 0, 45, 50,
                 sRecursos.getcMano(),
                 null,
                 sRecursos.getFuenteCerrar(), null, null, null,
                 "c",
-                false
+                true
         );
 
         bMinimizar.addActionListener(barraTituloComponent);
+        bMinimizar.addMouseListener(barraTituloComponent);
         this.add(bMinimizar);
 
 
         bCerrar = sObjGraficos.construirJButton(
                 "X",
-                900, 10, 45, 30,
+                905, 0, 45, 50,
                 sRecursos.getcMano(),
                 null,
                 sRecursos.getFuenteCerrar(), null, null, null,
                 "c",
-                false
+                true
         );
         bCerrar.addActionListener(barraTituloComponent);
+        bCerrar.addMouseListener(barraTituloComponent);
         this.add(bCerrar);
     }
 

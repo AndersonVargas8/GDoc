@@ -1,13 +1,10 @@
 package estructuras.listas;
-
-import java.io.Serializable;
-
 /**
  * Esta clase provee un nodo para ser utilizado en una estructura de datos.
  * @author Anderson Vargas - anvargasa
  * @param <T> Tipo de elemento del nodo.
  */
-public class Nodo<T> implements Serializable{
+public class Nodo<T>{
     private T dato;
     private Nodo anterior;
     private Nodo siguiente;

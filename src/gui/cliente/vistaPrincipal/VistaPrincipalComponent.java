@@ -68,7 +68,7 @@ public class VistaPrincipalComponent implements ActionListener {
                 break;
             case "Registros":
                 if(registrosComponent == null)
-                    this.registrosComponent = new RegistrosComponent();
+                    this.registrosComponent = new RegistrosComponent(this);
                 vistaPrincipalTemplate.getpPrincipal().add(
                         registrosComponent.getRegistrosTemplate()
                 );
