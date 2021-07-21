@@ -6,6 +6,7 @@ import gui.servicios.serviciosGraficos.RecursosService;
 import gui.servicios.serviciosLogicos.FechaService;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
@@ -15,12 +16,14 @@ public class RegistrosTemplate extends JPanel {
     private RegistrosComponent registrosComponent;
 
     //Componentes gráficos
-    private JPanel pOpciones, pDatos;
-    private JButton bMostrar, bInsertar, bFiltrar, bModificar, bEliminar;
+    private JPanel pOpciones, pDatos, pLimpiar;
+    private JButton bMostrar, bInsertar, bFiltrar, bModificar, bEliminar,bLimpiar;
     private JTextField tConsulta;
     private JLabel lTitulo, lDatos, lId,lIdValor, lTipo, lNombre, lEstante, lCarpeta,
             lIngreso, lIngresoValor, lExpiracion, lExpiracionValor;
-    private JTextField tTipo, tNombre, tEstante, tCarpeta, tIngreso, tExpiracion;
+    private JTextField tNombre, tEstante, tCarpeta;
+    private JComboBox cbTipo;
+    private ImageIcon iLimpiar,iDimAux;
     //servicios graficos
     private ObjGraficosService sObjGraficos;
     private RecursosService sRecursos;
@@ -46,6 +49,7 @@ public class RegistrosTemplate extends JPanel {
         this.crearContenidoPOpciones();
         this.crearContenidoPDatos();
         this.crearJTable();
+
         //Configuración del componente
         setSize(950,650);
         setBackground(sRecursos.getColorGrisClaro());
@@ -131,6 +135,32 @@ public class RegistrosTemplate extends JPanel {
 
         pDatos.add(lDatos);
 
+        //BOTÓN LIMPIAR
+        pLimpiar = sObjGraficos.construirJPanel(
+                180,80,40,40,sRecursos.getColorGris(),
+                sRecursos.getBordePlano()
+        );
+        iLimpiar = new ImageIcon("recursos/imagenes/limpiar.png");
+        iDimAux = new ImageIcon(
+                iLimpiar.getImage().getScaledInstance(30,30,Image.SCALE_AREA_AVERAGING)
+        );
+
+        bLimpiar = sObjGraficos.construirJButton(
+                null,
+                0,0,40,40,
+                sRecursos.getcMano(),
+                iDimAux,
+                null,
+                null,
+                null,
+                new EmptyBorder(2,2,2,2),
+                "c",
+                false
+        );
+        bLimpiar.addActionListener(registrosComponent);
+        pLimpiar.add(bLimpiar);
+        pDatos.add(pLimpiar);
+
         // LABEL ID ----------------------------------------------------------------
         lId = sObjGraficos.construirJLabel(
                 "Id Documento:", 20, 70, 160, 30, null, null,
@@ -149,15 +179,18 @@ public class RegistrosTemplate extends JPanel {
                 "Tipo documento:", 20, 115, 160, 30, null, null,
                 sRecursos.getFuentePrincipal(), null,sRecursos.getColorPrincipalOscuro() ,null, "l"
         );
+
         pDatos.add(lTipo);
 
-        // TEXTFIELD TIPO ----------------------------------------------------------------
-        tTipo = sObjGraficos.construirJTextField(
-                "Tipo", 30, 155, 190, 30,sRecursos.getFuenteTextFields(), sRecursos.getColorGris(),
-                sRecursos.getColorGrisOscuro(),  sRecursos.getColorGrisOscuro() , null, "c"
+        //COMBOBOX TIPO ------------------------------------------------------------------
+        cbTipo = sObjGraficos.construirJComboBox(
+          "Hoja de vida_Afiliación Salud_Afiliación Pensión_Memorando_Contrato_Incapacidad_Liquidación_Otro si",
+                30,155,190,30,
+                sRecursos.getFuenteTextFields(),
+                sRecursos.getColorGris(),sRecursos.getColorGrisOscuro(),"c"
         );
-        tTipo.addFocusListener(registrosComponent);
-        pDatos.add(tTipo);
+        cbTipo.addActionListener(registrosComponent);
+        pDatos.add(cbTipo);
 
         // LABEL NOMBRE ----------------------------------------------------------------
         lNombre = sObjGraficos.construirJLabel(
@@ -227,7 +260,8 @@ public class RegistrosTemplate extends JPanel {
 
         // LABEL VALOR EXPIRACION----------------------------------------------------------------
         lExpiracionValor = sObjGraficos.construirJLabel(
-                FechaService.getServicio().getFechaPlus(1), 30, 555, 160, 30, null, null,
+               FechaService.getServicio().getFechaPlus((cbTipo.getSelectedIndex())+1),
+                30, 555, 160, 30, null, null,
                 sRecursos.getFuentePrincipal(), null,sRecursos.getColorGrisOscuro() ,null, "l"
         );
         pDatos.add(lExpiracionValor);
@@ -296,8 +330,12 @@ public class RegistrosTemplate extends JPanel {
         return tConsulta;
     }
 
-    public JTextField gettTipo() {
-        return tTipo;
+    public JButton getbLimpiar() {
+        return bLimpiar;
+    }
+
+    public JPanel getpLimpiar() {
+        return pLimpiar;
     }
 
     public JTextField gettNombre() {
@@ -312,12 +350,8 @@ public class RegistrosTemplate extends JPanel {
         return tCarpeta;
     }
 
-    public JTextField gettIngreso() {
-        return tIngreso;
-    }
-
-    public JTextField gettExpiracion() {
-        return tExpiracion;
+    public JComboBox getCbTipo() {
+        return cbTipo;
     }
 
     public JLabel getlIdValor() {

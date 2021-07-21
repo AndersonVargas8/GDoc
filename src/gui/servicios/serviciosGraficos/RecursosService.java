@@ -12,7 +12,7 @@ public class RecursosService {
     private Font fuentePrincipal, fuenteCerrar, fuenteBotones, fuenteMediana,
             fuenteTextFields,fuenteNombre, fuenteTitulo;
     private Cursor cMano;
-    private Border bordeTextField;
+    private Border bordeTextField,bordePlano;
     private ImageIcon iFavicon;
     static private RecursosService servicio;
 
@@ -93,6 +93,10 @@ public class RecursosService {
         return bordeTextField;
     }
 
+    public Border getBordePlano() {
+        return bordePlano;
+    }
+
     public ImageIcon getiFavicon() {
         return iFavicon;
     }
@@ -122,6 +126,7 @@ public class RecursosService {
 
     private void crearBordes(){
         bordeTextField = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY);
+        bordePlano = BorderFactory.createLineBorder(Color.GRAY,1,true);
     }
     private void generarFuentes(){
         try{

@@ -97,4 +97,8 @@ public class VistaPrincipalComponent implements ActionListener {
         this.vistaPrincipalTemplate.getpPrincipal().add(revisionComponent.getRevisionTemplate());
         this.navegacionUsuarioComponent.actualizarValores();
     }
+
+    public void moverVentana(int posicionX, int posicionY){
+        this.vistaPrincipalTemplate.setLocation(posicionX,posicionY);
+    }
 }
