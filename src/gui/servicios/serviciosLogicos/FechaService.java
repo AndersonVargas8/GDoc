@@ -5,19 +5,28 @@ import java.util.Calendar;
 public class FechaService {
     private static FechaService servicio;
     private Calendar calendario;
-    private String dia;
-    private  String mes;
-    private String annio;
-    private String fecha;
+    private String dia,mes,annio,hora,minuto,segundo,fecha,fechaCompleta;
+
 
     public FechaService(){
         calendario = Calendar.getInstance();
-        dia = Integer.toString(calendario.get(Calendar.DATE));
-        mes = Integer.toString(calendario.get(Calendar.MONTH)+1);
+        dia = completar(Integer.toString(calendario.get(Calendar.DATE)));
+        mes = completar(Integer.toString(calendario.get(Calendar.MONTH)+1));
         annio = Integer.toString(calendario.get(Calendar.YEAR));
+        minuto = completar(Integer.toString(calendario.get(Calendar.MINUTE)));
+        segundo = completar(Integer.toString(calendario.get(Calendar.SECOND)));
         fecha = dia.concat("/" + mes + "/" + annio);
+        fechaCompleta = fecha.concat("/" + hora + ":" + minuto + ":" + segundo);
+
+
     }
 
+    private String completar(String dato){
+        if(dato.length() == 1)
+            dato = "0".concat(dato);
+
+        return dato;
+    }
     public static FechaService getServicio() {
         if(servicio == null)
             servicio = new FechaService();
@@ -38,6 +47,10 @@ public class FechaService {
 
     public String getFecha() {
         return fecha;
+    }
+
+    public String getFechaCompleta(){
+        return fechaCompleta;
     }
 
     public String getFechaPlus(String fecha, int i){

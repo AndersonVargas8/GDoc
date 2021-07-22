@@ -173,6 +173,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
             eliminarRegistros();
             agregarRegistros(sDocumentos.getImpresion());
             restaurarValores();
+            actualizarValores();
         }
         else{
             JOptionPane.showMessageDialog(null,"seleccione una fila", "Error" , JOptionPane.ERROR_MESSAGE);
@@ -299,7 +300,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
     }
 
     public void actualizarValores(){
-        vistaPrincipalComponent.restaurarValores();
+        vistaPrincipalComponent.actualizarValores();
     }
 
     public String cambiarVencimiento(){

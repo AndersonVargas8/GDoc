@@ -2,15 +2,15 @@ package gui.servicios.serviciosLogicos;
 
 import datos.Documento;
 import estructuras.arboles.AVL;
-import estructuras.listas.ListaEncadenadaSimple;
+import estructuras.listas.ListaEncadenadaDoble;
 import logica.ControlDocumentos;
 
 public class DocumentosService {
     private static DocumentosService servicio;
     private ControlDocumentos cDocumentos;
     private AVL<Documento> documentos;
-    private ListaEncadenadaSimple<Documento> elementos;
-    private ListaEncadenadaSimple<Documento> impresion;
+    private ListaEncadenadaDoble<Documento> elementos;
+    private ListaEncadenadaDoble<Documento> impresion;
     private Documento documento;
     public DocumentosService(){
         cDocumentos = new ControlDocumentos();
@@ -53,14 +53,14 @@ public class DocumentosService {
         this.documentos.eliminar(documento);
     }
 
-    public ListaEncadenadaSimple imprimirTodo(){
+    public ListaEncadenadaDoble imprimirTodo(){
         impresion = documentos.inOrden();
         return impresion;
     }
 
     public void nuevoFiltro(){
         if(this.impresion == null)
-            this.impresion = new ListaEncadenadaSimple<>();
+            this.impresion = new ListaEncadenadaDoble<>();
         elementos = documentos.inOrden();
         impresion.vaciar();
     }
@@ -69,7 +69,7 @@ public class DocumentosService {
         this.impresion.insertarAlFinal(documento);
     }
 
-    public ListaEncadenadaSimple<Documento> getImpresion(){
+    public ListaEncadenadaDoble<Documento> getImpresion(){
         return this.impresion;
     }
 }

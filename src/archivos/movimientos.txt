@@ -1,0 +1,2 @@
+1,Anderson,Inserción,21/07/2021/02:04:34
+2,Omar,Eliminación,22/07/2021/14:30:13

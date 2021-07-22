@@ -92,7 +92,7 @@ public class RegistrosTemplate extends JPanel {
 
         // BOTÓN MOSTRAR--------------------------------------------------------------------
         bMostrar = sObjGraficos.construirJButton(
-                "Mostrar", 50, 145, 120, 35, sRecursos.getcMano(), null, sRecursos.getFuenteBotones(),
+                "Mostrar todo", 50, 145, 120, 35, sRecursos.getcMano(), null, sRecursos.getFuenteBotones(),
                 sRecursos.getColorPrincipal(), Color.WHITE, null, "c", true
         );
         bMostrar.addMouseListener(registrosComponent);

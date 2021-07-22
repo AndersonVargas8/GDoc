@@ -75,6 +75,6 @@ public class Documento implements Comparable<Documento>{
         if(this.expiracion.getDia() - documento.expiracion.getDia() != 0)
             return this.expiracion.getDia() - documento.expiracion.getDia();*/
 
-        return this.id - documento.id;
+        return documento.id - this.id;
     }
 }

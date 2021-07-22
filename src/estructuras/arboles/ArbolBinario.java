@@ -2,6 +2,7 @@ package estructuras.arboles;
 import estructuras.arreglos.ArregloDinamico;
 import estructuras.colas.Queue;
 import estructuras.listas.ListaEncadenada;
+import estructuras.listas.ListaEncadenadaDoble;
 import estructuras.listas.ListaEncadenadaSimple;
 
 /**
@@ -107,12 +108,12 @@ public class ArbolBinario<T>{
 
     }
 
-    public ListaEncadenadaSimple<T> inOrden(){
-        ListaEncadenadaSimple<T> elementos = new ListaEncadenadaSimple<>();
+    public ListaEncadenadaDoble<T> inOrden(){
+        ListaEncadenadaDoble<T> elementos = new ListaEncadenadaDoble<>();
         return this.inOrden(this.raiz,elementos);
     }
 
-    private ListaEncadenadaSimple<T> inOrden(NodoArbolBinario raiz, ListaEncadenadaSimple<T> elementos){
+    private ListaEncadenadaDoble<T> inOrden(NodoArbolBinario raiz, ListaEncadenadaDoble<T> elementos){
         if(raiz == null)
             return elementos;
         if(raiz.getHijoIzquierdo() != null)
