@@ -2,6 +2,8 @@ package gui.cliente.componentes.movimientos;
 
 import datos.Documento;
 import datos.Movimiento;
+import estructuras.listas.ListaEncadenada;
+import estructuras.listas.ListaEncadenadaSimple;
 import gui.cliente.vistaPrincipal.VistaPrincipalComponent;
 import gui.servicios.serviciosGraficos.RecursosService;
 import gui.servicios.serviciosLogicos.DocumentosService;
@@ -9,6 +11,7 @@ import gui.servicios.serviciosLogicos.MovimientosService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.event.*;
 
 public class MovimientosComponent implements MouseListener, ActionListener, FocusListener {
@@ -53,8 +56,9 @@ public class MovimientosComponent implements MouseListener, ActionListener, Focu
 
     //MouseListener
     @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-
+    public void mouseClicked(MouseEvent e) {
+        if(e.getSource() == movimientosTemplate.getbFiltrar())
+            filtrarRegistrosTabla();
     }
 
     @Override
@@ -87,8 +91,6 @@ public class MovimientosComponent implements MouseListener, ActionListener, Focu
     public void mostrarRegistrosTabla(){
         eliminarRegistros();
         agregarRegistros(sMovimientos.imprimirTodo());
-        //restaurarValores();
-        //registrosTemplate.getbMostrar().setEnabled(false);
     }
 
     public void agregarRegistros(Iterable<Movimiento> datos){
@@ -104,7 +106,13 @@ public class MovimientosComponent implements MouseListener, ActionListener, Focu
     }
     public void agregarRegistro(Movimiento movimiento){
         int id = movimiento.getIdDocumento();
-        Documento doc = DocumentosService.getServicio().getDocumento(id);
+        Documento doc;
+        if(movimiento.getDocumentoEliminado() == null)
+            doc = DocumentosService.getServicio().getDocumento(id);
+        else{
+            doc = movimiento.getDocumentoEliminado();
+        }
+
         movimientosTemplate.getModelo().addRow(
                 new Object[]{
                         id,
@@ -121,5 +129,32 @@ public class MovimientosComponent implements MouseListener, ActionListener, Focu
 
     public void actualizarValores(){
         mostrarRegistrosTabla();
+    }
+
+    public void filtrarRegistrosTabla(){
+        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<>(movimientosTemplate.getModelo());
+        movimientosTemplate.getTabla().setRowSorter(trs);
+        ListaEncadenadaSimple<RowFilter<RowFilter,Integer>> lista = new ListaEncadenadaSimple<>();
+
+        if(movimientosTemplate.getCbUsuario().getSelectedIndex() != 0)
+            lista.insertarAlInicio(RowFilter.regexFilter(
+                    movimientosTemplate.getCbUsuario().getSelectedItem().toString(),3)
+            );
+
+        if(movimientosTemplate.getCbTipo().getSelectedIndex() != 0)
+            lista.insertarAlInicio(RowFilter.regexFilter(
+                    movimientosTemplate.getCbTipo().getSelectedItem().toString(),4
+            ));
+
+        if(!movimientosTemplate.gettFecha().getText().isEmpty() &&
+                !movimientosTemplate.gettFecha().getText().equals(placeholders[0]))
+            lista.insertarAlInicio(RowFilter.regexFilter(
+                    movimientosTemplate.gettFecha().getText(),5
+            ));
+
+        RowFilter filter = RowFilter.andFilter(lista);
+
+        trs.setRowFilter(filter);
+
     }
 }

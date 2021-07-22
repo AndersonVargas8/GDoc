@@ -118,7 +118,7 @@ public class ArbolBinario<T>{
             return elementos;
         if(raiz.getHijoIzquierdo() != null)
             inOrden(raiz.getHijoIzquierdo(), elementos);
-        elementos.insertarAlFinal((T) raiz.getDato());
+        elementos.insertarAlInicio((T) raiz.getDato());
         if(raiz.getHijoDerecho() != null)
             inOrden(raiz.getHijoDerecho(), elementos);
         return elementos;

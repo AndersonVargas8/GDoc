@@ -72,6 +72,7 @@ public class VistaPrincipalComponent implements ActionListener {
                 vistaPrincipalTemplate.getpPrincipal().add(
                         registrosComponent.getRegistrosTemplate()
                 );
+                registrosComponent.getRegistrosTemplate().revalidate();
                 break;
             case "Movimientos":
                 if(movimientosComponent == null)
@@ -79,6 +80,7 @@ public class VistaPrincipalComponent implements ActionListener {
                 vistaPrincipalTemplate.getpPrincipal().add(
                         movimientosComponent.getMovimientosTemplate()
                 );
+                movimientosComponent.getMovimientosTemplate().revalidate();
                 break;
             case "Cerrar Sesión":
                 this.loginComponent.restaurarValores();
@@ -100,7 +102,8 @@ public class VistaPrincipalComponent implements ActionListener {
 
     public void actualizarValores(){
         this.navegacionUsuarioComponent.actualizarValores();
-        this.movimientosComponent.actualizarValores();
+        if(this.movimientosComponent != null)
+            this.movimientosComponent.actualizarValores();
     }
 
     public void moverVentana(int posicionX, int posicionY){

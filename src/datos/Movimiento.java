@@ -5,6 +5,7 @@ public class Movimiento {
     private String usuario;
     private String tipoMovimiento;
     private Fecha fecha;
+    private Documento documentoEliminado;
 
     public Movimiento(){
 
@@ -47,5 +48,13 @@ public class Movimiento {
 
     public void setFecha(Fecha fecha) {
         this.fecha = fecha;
+    }
+
+    public Documento getDocumentoEliminado() {
+        return documentoEliminado;
+    }
+
+    public void setDocumentoEliminado(Documento documentoEliminado) {
+        this.documentoEliminado = documentoEliminado;
     }
 }

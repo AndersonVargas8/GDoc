@@ -2,10 +2,13 @@ package gui.cliente.componentes.registros;
 
 import datos.Documento;
 import datos.Fecha;
+import datos.Movimiento;
 import gui.cliente.vistaPrincipal.VistaPrincipalComponent;
 import gui.servicios.serviciosGraficos.RecursosService;
 import gui.servicios.serviciosLogicos.DocumentosService;
 import gui.servicios.serviciosLogicos.FechaService;
+import gui.servicios.serviciosLogicos.MovimientosService;
+import gui.servicios.serviciosLogicos.UsuarioService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,17 +17,20 @@ import java.awt.event.*;
 public class RegistrosComponent implements ActionListener, MouseListener, FocusListener {
     private RegistrosTemplate registrosTemplate;
     private DocumentosService sDocumentos;
+    private MovimientosService sMovimientos;
     private FechaService sFecha;
     private VistaPrincipalComponent vistaPrincipalComponent;
 
     //Objetos de apoyo
     private Documento documento;
+    private Movimiento movimiento;
     private String[] placeholders = {"Tipo", "Nombre", "Estante", "Carpeta", "Filtrar..."};
 
     public RegistrosComponent(VistaPrincipalComponent vistaPrincipalComponent){
         this.vistaPrincipalComponent = vistaPrincipalComponent;
         this.registrosTemplate = new RegistrosTemplate(this);
         this.sDocumentos = DocumentosService.getServicio();
+        this.sMovimientos = MovimientosService.getServicio();
         this.sFecha = FechaService.getServicio();
 
         this.mostrarRegistrosTabla();
@@ -149,12 +155,11 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         documento.setCarpeta(registrosTemplate.gettCarpeta().getText());
         documento.setIngreso(new Fecha(registrosTemplate.getlIngresoValor().getText().split("/")));
         documento.setExpiracion(new Fecha(registrosTemplate.getlExpiracionValor().getText().split("/")));
-
-
         sDocumentos.agregarDocumento(documento);
+
+        registrarMovimiento((idUltimoDoc + 1), "Inserción");
         mostrarRegistrosTabla();
         restaurarValores();
-        actualizarValores();
     }
 
     public void modificarRegistroTabla(){
@@ -172,8 +177,8 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
 
             eliminarRegistros();
             agregarRegistros(sDocumentos.getImpresion());
+            registrarMovimiento(id,"Modificación");
             restaurarValores();
-            actualizarValores();
         }
         else{
             JOptionPane.showMessageDialog(null,"seleccione una fila", "Error" , JOptionPane.ERROR_MESSAGE);
@@ -184,13 +189,13 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         int fSeleccionada = registrosTemplate.getTabla().getSelectedRow();
         if(fSeleccionada != -1){
             int id = (Integer) registrosTemplate.getModelo().getValueAt(fSeleccionada,0);
+            registrarMovimiento(id,"Eliminación");
             documento = new Documento();
             documento.setId(id);
             sDocumentos.eliminarDocumento(documento);
             sDocumentos.getImpresion().eliminar(fSeleccionada);
             eliminarRegistros();
             agregarRegistros(sDocumentos.getImpresion());
-            actualizarValores();
         }else
             JOptionPane.showMessageDialog(null,"seleccione una fila","Error",JOptionPane.ERROR_MESSAGE);
 
@@ -306,5 +311,22 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
     public String cambiarVencimiento(){
         int anniosVencimiento = (registrosTemplate.getCbTipo().getSelectedIndex()) +1;
         return sFecha.getFechaPlus(registrosTemplate.getlIngresoValor().getText(),anniosVencimiento);
+    }
+
+    public void registrarMovimiento(int id, String tipo){
+        movimiento = new Movimiento();
+        movimiento.setIdDocumento(id);
+        movimiento.setUsuario(UsuarioService.getServicio().getUsuarioConectado().getNombreUsuario());
+        movimiento.setTipoMovimiento(tipo);
+        movimiento.setFecha(new Fecha(sFecha.getFechaCompleta().split("/")));
+
+        if(tipo == "Eliminación"){
+            documento = sDocumentos.getDocumento(id);
+            movimiento.setDocumentoEliminado(documento);
+        }
+
+        sMovimientos.agregarMovimiento(movimiento);
+
+        actualizarValores();
     }
 }

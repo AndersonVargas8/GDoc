@@ -80,6 +80,7 @@ public class MovimientosTemplate extends JPanel {
                 sRecursos.getColorGris(),sRecursos.getColorGrisOscuro(),"c"
         );
         cbUsuario.addActionListener(movimientosComponent);
+        cbUsuario.transferFocus();
         pOpciones.add(cbUsuario);
 
         // LABEL FECHA--------------------------------------------------------------------
@@ -166,5 +167,33 @@ public class MovimientosTemplate extends JPanel {
 
     public DefaultTableModel getModelo() {
         return modelo;
+    }
+
+    public JTable getTabla() {
+        return tabla;
+    }
+
+    public JButton getbFiltrar(){
+        return bFiltrar;
+    }
+
+    public JTextField gettFecha() {
+        return tFecha;
+    }
+
+    public ObjGraficosService getsObjGraficos() {
+        return sObjGraficos;
+    }
+
+    public JScrollPane getpTabla() {
+        return pTabla;
+    }
+
+    public JComboBox getCbUsuario() {
+        return cbUsuario;
+    }
+
+    public JComboBox getCbTipo() {
+        return cbTipo;
     }
 }
