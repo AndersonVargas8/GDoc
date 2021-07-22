@@ -2,18 +2,20 @@ package gui.servicios.serviciosLogicos;
 
 import datos.Documento;
 import estructuras.arboles.AVL;
-import estructuras.arreglos.ArregloDinamico;
+import estructuras.listas.ListaEncadenadaSimple;
 import logica.ControlDocumentos;
 
 public class DocumentosService {
     private static DocumentosService servicio;
     private ControlDocumentos cDocumentos;
     private AVL<Documento> documentos;
-    private ArregloDinamico<Documento> arreglo;
+    private ListaEncadenadaSimple<Documento> elementos;
+    private ListaEncadenadaSimple<Documento> impresion;
+    private Documento documento;
     public DocumentosService(){
         cDocumentos = new ControlDocumentos();
         documentos = cDocumentos.getDocumentos();
-        arreglo = documentos.inOrden();
+        elementos = documentos.inOrden();
     }
 
     public static DocumentosService getServicio(){
@@ -24,12 +26,23 @@ public class DocumentosService {
     }
 
     public Documento devolverDocumento(int id){
-        return arreglo.get(id);
+        return (Documento)elementos.leerDato(id);
+    }
+
+    public Documento getDocumento(int id){
+        if(documento == null)
+            this.documento = new Documento();
+        documento.setId(id);
+        return documentos.buscar(documento);
+    }
+
+    public Documento devolverMayorDocumento(){
+        return documentos.buscarMax();
     }
 
     public void agregarDocumento(Documento documento){
         this.documentos.insertar(documento);
-        this.arreglo = documentos.inOrden();
+        this.elementos = documentos.inOrden();
     }
 
     public int devolverCantidadDocumentos(){
@@ -38,6 +51,25 @@ public class DocumentosService {
 
     public void eliminarDocumento(Documento documento){
         this.documentos.eliminar(documento);
-        this.arreglo = documentos.inOrden();
+    }
+
+    public ListaEncadenadaSimple imprimirTodo(){
+        impresion = documentos.inOrden();
+        return impresion;
+    }
+
+    public void nuevoFiltro(){
+        if(this.impresion == null)
+            this.impresion = new ListaEncadenadaSimple<>();
+        elementos = documentos.inOrden();
+        impresion.vaciar();
+    }
+
+    public void agregarAImpresion(Documento documento){
+        this.impresion.insertarAlFinal(documento);
+    }
+
+    public ListaEncadenadaSimple<Documento> getImpresion(){
+        return this.impresion;
     }
 }

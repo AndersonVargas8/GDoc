@@ -63,6 +63,18 @@ public class Documento implements Comparable<Documento>{
 
     @Override
     public int compareTo(Documento documento) {
+        /*if(this.expiracion.getAnnio() == -1 || documento.expiracion.getAnnio() == -1)
+            return this.id - documento.id;
+
+        if(this.expiracion.getAnnio() - documento.expiracion.getAnnio() != 0)
+            return this.expiracion.getAnnio() - documento.ingreso.getAnnio();
+
+        if(this.expiracion.getMes() - documento.expiracion.getMes() != 0)
+            return this.expiracion.getMes() - documento.expiracion.getMes();
+
+        if(this.expiracion.getDia() - documento.expiracion.getDia() != 0)
+            return this.expiracion.getDia() - documento.expiracion.getDia();*/
+
         return this.id - documento.id;
     }
 }

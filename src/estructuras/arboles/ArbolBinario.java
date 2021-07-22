@@ -1,6 +1,9 @@
 package estructuras.arboles;
 import estructuras.arreglos.ArregloDinamico;
 import estructuras.colas.Queue;
+import estructuras.listas.ListaEncadenada;
+import estructuras.listas.ListaEncadenadaSimple;
+
 /**
  * Esta clase permite almacenar datos jerarquicamente.
  * @author Anderson
@@ -104,17 +107,17 @@ public class ArbolBinario<T>{
 
     }
 
-    public ArregloDinamico<T> inOrden(){
-        ArregloDinamico<T> elementos = new ArregloDinamico<>();
+    public ListaEncadenadaSimple<T> inOrden(){
+        ListaEncadenadaSimple<T> elementos = new ListaEncadenadaSimple<>();
         return this.inOrden(this.raiz,elementos);
     }
 
-    private ArregloDinamico<T> inOrden(NodoArbolBinario raiz, ArregloDinamico<T> elementos){
+    private ListaEncadenadaSimple<T> inOrden(NodoArbolBinario raiz, ListaEncadenadaSimple<T> elementos){
         if(raiz == null)
             return elementos;
         if(raiz.getHijoIzquierdo() != null)
             inOrden(raiz.getHijoIzquierdo(), elementos);
-        elementos.pushBack((T) raiz.getDato());
+        elementos.insertarAlFinal((T) raiz.getDato());
         if(raiz.getHijoDerecho() != null)
             inOrden(raiz.getHijoDerecho(), elementos);
         return elementos;

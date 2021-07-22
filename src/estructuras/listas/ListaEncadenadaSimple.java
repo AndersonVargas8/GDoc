@@ -1,5 +1,7 @@
 package estructuras.listas;
 
+import java.util.Iterator;
+
 /**
  * Esta clase hereda la clase ListaEncadenada, encadena todos sus nodos con un
  * solo enlace, usando el atributo siguiente de la clase Nodo, contiene una
@@ -200,5 +202,6 @@ public class ListaEncadenadaSimple<T> extends ListaEncadenada<T> {
         this.eliminar(indice);
         this.insertar(indice,dato);
     }
-    
+
+
 }

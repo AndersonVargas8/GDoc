@@ -18,6 +18,7 @@ public class ObjGraficosService {
     private JButton button;
     private JScrollPane panelScroll;
     private JComboBox comboBox;
+    private JCheckBox check;
 
     private static ObjGraficosService servicio;
             
@@ -202,5 +203,19 @@ public class ObjGraficosService {
                 break;
         }
         return comboBox;
+    }
+
+    public JCheckBox construirJCheckBox(
+            String texto, int x, int y, int ancho, int alto, Cursor cursor, Font fuente, Color colorFuente
+    ) {
+        check = new JCheckBox(texto);
+        check.setLocation(x, y);
+        check.setSize(ancho, alto);
+        check.setFocusable(false);
+        check.setBackground(null);
+        check.setCursor(cursor);
+        check.setFont(fuente);
+        check.setForeground(colorFuente);
+        return check;
     }
 }

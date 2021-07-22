@@ -1,13 +1,16 @@
 package estructuras.listas;
+
+import java.util.Iterator;
+
 /**
  * Esta clase provee la estrucutura para los diferentes tipos de listas encadenadas.
  * @author Anderson Vargas - anvargasa
  * @param <T> Tipo de elementos que va a contener la lista
  */
-public abstract class ListaEncadenada<T>{
+public abstract class ListaEncadenada<T> implements Iterable<T>{
     protected Nodo<T> primero;
     protected Integer contador;
-    
+
     /**
      * Constructor para una lista vacía
      */
@@ -15,7 +18,7 @@ public abstract class ListaEncadenada<T>{
         this.contador = 0;
         this.primero = null;
     }
-    
+
     /**
      * Retorna el primer nodo de la lista.
      * @return El primer nodo de la lista.
@@ -195,5 +198,32 @@ public abstract class ListaEncadenada<T>{
      */
     public void imprimir(){
         System.out.println(this.toString());
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        Iterator iterator = new MiIterator();
+        return iterator;
+    }
+
+    protected class MiIterator implements Iterator<T>{
+        private int posicion;
+
+        public MiIterator(){
+            this.posicion = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if(this.posicion < cantidadDeElementos()){
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public T next() {
+            return leerDato(posicion++);
+        }
     }
 }

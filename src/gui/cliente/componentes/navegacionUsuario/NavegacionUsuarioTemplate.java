@@ -82,7 +82,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
                 new Color(4, 28, 62),
                 new Color(28, 86, 139));
         bDifuminado = GraficosAvanzadosService.getServicio().devolverBordeDifuminado(
-                new Color(4, 28, 62),2
+                new Color(4, 28, 62),1
         );
     }
 

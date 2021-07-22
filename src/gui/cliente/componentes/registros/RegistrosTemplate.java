@@ -24,6 +24,7 @@ public class RegistrosTemplate extends JPanel {
     private JTextField tNombre, tEstante, tCarpeta;
     private JComboBox cbTipo;
     private ImageIcon iLimpiar,iDimAux;
+    private JCheckBox checkId, checkTipo, checkNombre, checkUbicacion, checkIngreso, checkExpiracion;
     //servicios graficos
     private ObjGraficosService sObjGraficos;
     private RecursosService sRecursos;
@@ -124,6 +125,61 @@ public class RegistrosTemplate extends JPanel {
         bEliminar.addMouseListener(registrosComponent);
         bEliminar.addActionListener(registrosComponent);
         pOpciones.add(bEliminar);
+
+        //CHECK ID----------------------------
+        checkId = sObjGraficos.construirJCheckBox(
+                "Id",
+                30,100,40,40,
+                sRecursos.getcMano(),
+                sRecursos.getFuenteTextFields(),null
+        );
+        checkId.setSelected(true);
+        pOpciones.add(checkId);
+
+        //CHECK TIPO----------------------------
+        checkTipo = sObjGraficos.construirJCheckBox(
+                "Tipo",
+                80,100,50,40,
+                sRecursos.getcMano(),
+                sRecursos.getFuenteTextFields(),null
+        );
+        pOpciones.add(checkTipo);
+
+        //CHECK NOMBRE----------------------------
+        checkNombre = sObjGraficos.construirJCheckBox(
+                "Nombre",
+                140,100,70,40,
+                sRecursos.getcMano(),
+                sRecursos.getFuenteTextFields(),null
+        );
+        pOpciones.add(checkNombre);
+
+        //CHECK UBICACIÓN----------------------------
+        checkUbicacion = sObjGraficos.construirJCheckBox(
+                "Ubicación",
+                220,100,80,40,
+                sRecursos.getcMano(),
+                sRecursos.getFuenteTextFields(),null
+        );
+        pOpciones.add(checkUbicacion);
+
+        //CHECK INGRESO----------------------------
+        checkIngreso = sObjGraficos.construirJCheckBox(
+                "F.Ingreso",
+                310,100,80,40,
+                sRecursos.getcMano(),
+                sRecursos.getFuenteTextFields(),null
+        );
+        pOpciones.add(checkIngreso);
+
+        //CHECK EXPIRACIÓN----------------------------
+        checkExpiracion = sObjGraficos.construirJCheckBox(
+                "F.Expiración",
+                400,100,100,40,
+                sRecursos.getcMano(),
+                sRecursos.getFuenteTextFields(),null
+        );
+        pOpciones.add(checkExpiracion);
     }
 
     public void crearContenidoPDatos(){
@@ -330,6 +386,34 @@ public class RegistrosTemplate extends JPanel {
 
     public JTextField gettConsulta() {
         return tConsulta;
+    }
+
+    public JPanel getpOpciones() {
+        return pOpciones;
+    }
+
+    public JCheckBox getCheckId() {
+        return checkId;
+    }
+
+    public JCheckBox getCheckTipo() {
+        return checkTipo;
+    }
+
+    public JCheckBox getCheckNombre() {
+        return checkNombre;
+    }
+
+    public JCheckBox getCheckIngreso() {
+        return checkIngreso;
+    }
+
+    public JCheckBox getCheckExpiracion() {
+        return checkExpiracion;
+    }
+
+    public JCheckBox getCheckUbicacion() {
+        return checkUbicacion;
     }
 
     public JButton getbLimpiar() {

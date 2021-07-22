@@ -2,8 +2,6 @@ package gui.cliente.componentes.registros;
 
 import datos.Documento;
 import datos.Fecha;
-import estructuras.arreglos.ArregloDinamico;
-import gui.cliente.componentes.navegacionUsuario.NavegacionUsuarioComponent;
 import gui.cliente.vistaPrincipal.VistaPrincipalComponent;
 import gui.servicios.serviciosGraficos.RecursosService;
 import gui.servicios.serviciosLogicos.DocumentosService;
@@ -11,11 +9,7 @@ import gui.servicios.serviciosLogicos.FechaService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import java.awt.event.*;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class RegistrosComponent implements ActionListener, MouseListener, FocusListener {
     private RegistrosTemplate registrosTemplate;
@@ -84,7 +78,8 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() instanceof JTable){
             int fSeleccionada = registrosTemplate.getTabla().getSelectedRow();
-            documento = sDocumentos.devolverDocumento(fSeleccionada);
+            int id = (Integer)registrosTemplate.getModelo().getValueAt(fSeleccionada,0);
+            documento = sDocumentos.getDocumento(id);
             registrosTemplate.getlIdValor().setText(documento.getId()+"");
             registrosTemplate.getCbTipo().setSelectedItem(documento.getTipo());
             registrosTemplate.gettNombre().setText(documento.getNombre());
@@ -123,8 +118,8 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
 
     //MÉTODOS PARA EL CONTROL DE DOCUMENTOS EN LA TABLA
     public void restaurarValores(){
-        int cantidadDocumentos = sDocumentos.devolverCantidadDocumentos();
-        int idUltimoDocumento = sDocumentos.devolverDocumento(cantidadDocumentos-1).getId();
+        documento = sDocumentos.devolverMayorDocumento();
+        int idUltimoDocumento = documento.getId();
         registrosTemplate.getlIdValor().setText((idUltimoDocumento + 1)+"");
         registrosTemplate.getCbTipo().setSelectedIndex(0);
         registrosTemplate.gettNombre().setText(placeholders[1]);
@@ -135,22 +130,18 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
     }
 
     public void mostrarRegistrosTabla(){
-        int cantidadDocumentos = sDocumentos.devolverCantidadDocumentos();
-        for(int i = 0; i < cantidadDocumentos; i++){
-            documento = sDocumentos.devolverDocumento(i);
-            this.agregarRegistro(documento);
-        }
-        int idUltimoDocumento = sDocumentos.devolverDocumento(cantidadDocumentos-1).getId();
-        registrosTemplate.getlIdValor().setText((idUltimoDocumento + 1)+"");
+        eliminarRegistros();
+        agregarRegistros(sDocumentos.imprimirTodo());
+        restaurarValores();
         registrosTemplate.getbMostrar().setEnabled(false);
     }
 
     public void insertarRegistroTabla(){
-        documento = new Documento();
-        int cantidadDocumentos = sDocumentos.devolverCantidadDocumentos();
+        documento = sDocumentos.devolverMayorDocumento();
         int idUltimoDoc = 0;
-        if (cantidadDocumentos != 0)
-            idUltimoDoc = sDocumentos.devolverDocumento(cantidadDocumentos-1).getId();
+        if (documento != null)
+            idUltimoDoc = documento.getId();
+        documento = new Documento();
         documento.setId(idUltimoDoc+1);
         documento.setTipo((String)registrosTemplate.getCbTipo().getSelectedItem());
         documento.setNombre(registrosTemplate.gettNombre().getText());
@@ -159,37 +150,28 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         documento.setIngreso(new Fecha(registrosTemplate.getlIngresoValor().getText().split("/")));
         documento.setExpiracion(new Fecha(registrosTemplate.getlExpiracionValor().getText().split("/")));
 
-        this.agregarRegistro(documento);
+
         sDocumentos.agregarDocumento(documento);
+        mostrarRegistrosTabla();
         restaurarValores();
         actualizarValores();
     }
 
     public void modificarRegistroTabla(){
         int fSeleccionada = registrosTemplate.getTabla().getSelectedRow();
-        if(fSeleccionada != -1){
-            registrosTemplate.getModelo().setValueAt(
-                    (String)registrosTemplate.getCbTipo().getSelectedItem(), fSeleccionada,1
-            );
-            registrosTemplate.getModelo().setValueAt(
-                    registrosTemplate.gettNombre().getText(), fSeleccionada,2
-            );
-            registrosTemplate.getModelo().setValueAt(
-                    registrosTemplate.gettEstante().getText().concat(
-                            registrosTemplate.gettCarpeta().getText()
-                    ), fSeleccionada,3
-            );
-            registrosTemplate.getModelo().setValueAt(
-                    registrosTemplate.getlExpiracionValor().getText(),fSeleccionada,5
-            );
-            documento = sDocumentos.devolverDocumento(fSeleccionada);
-            documento.setTipo((String)registrosTemplate.getCbTipo().getSelectedItem());
+        if(fSeleccionada != -1) {
+            int id = (Integer) registrosTemplate.getModelo().getValueAt(fSeleccionada,0);
+            documento = sDocumentos.getDocumento(id);
+            documento.setTipo((String) registrosTemplate.getCbTipo().getSelectedItem());
             documento.setNombre(registrosTemplate.gettNombre().getText());
             documento.setEstante(registrosTemplate.gettEstante().getText());
             documento.setCarpeta(registrosTemplate.gettCarpeta().getText());
             int annioIngreso = documento.getIngreso().getAnnio();
             int annioVencimiento = annioIngreso + registrosTemplate.getCbTipo().getSelectedIndex() + 1;
             documento.getExpiracion().setAnnio(annioVencimiento);
+
+            eliminarRegistros();
+            agregarRegistros(sDocumentos.getImpresion());
             restaurarValores();
         }
         else{
@@ -200,9 +182,13 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
     public void eliminarRegistroTabla(){
         int fSeleccionada = registrosTemplate.getTabla().getSelectedRow();
         if(fSeleccionada != -1){
-            registrosTemplate.getModelo().removeRow(fSeleccionada);
-            documento = sDocumentos.devolverDocumento(fSeleccionada);
+            int id = (Integer) registrosTemplate.getModelo().getValueAt(fSeleccionada,0);
+            documento = new Documento();
+            documento.setId(id);
             sDocumentos.eliminarDocumento(documento);
+            sDocumentos.getImpresion().eliminar(fSeleccionada);
+            eliminarRegistros();
+            agregarRegistros(sDocumentos.getImpresion());
             actualizarValores();
         }else
             JOptionPane.showMessageDialog(null,"seleccione una fila","Error",JOptionPane.ERROR_MESSAGE);
@@ -210,12 +196,94 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
     }
 
     public void filtrarRegistrosTabla(){
-        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<>(registrosTemplate.getModelo());
-        registrosTemplate.getTabla().setRowSorter(trs);
-        trs.setRowFilter(RowFilter.regexFilter(registrosTemplate.gettConsulta().getText()));
+        if(registrosTemplate.gettConsulta().getText().isEmpty() ||
+                (!getRegistrosTemplate().getCheckId().isSelected() &&
+                        !getRegistrosTemplate().getCheckTipo().isSelected() &&
+                        !getRegistrosTemplate().getCheckNombre().isSelected() &&
+                        !getRegistrosTemplate().getCheckUbicacion().isSelected() &&
+                        !getRegistrosTemplate().getCheckIngreso().isSelected() &&
+                        !getRegistrosTemplate().getCheckExpiracion().isSelected()
+                )
+        ) {
+            if(registrosTemplate.getModelo().getRowCount() == 0)
+                mostrarRegistrosTabla();
+            return;
+        }
+        //Habilita el boton mostrar
+        registrosTemplate.getbMostrar().setEnabled(true);
 
+        //limpia la tabla
+        eliminarRegistros();
+
+        sDocumentos.nuevoFiltro();
+
+        int cantDocs = sDocumentos.devolverCantidadDocumentos();
+
+        for(int i = 0; i < cantDocs; i++){
+            Documento doc = sDocumentos.devolverDocumento(i);
+            String valor;
+            if(registrosTemplate.getCheckId().isSelected()) {
+                valor = String.valueOf(doc.getId());
+                if(valor.contains(registrosTemplate.gettConsulta().getText())) {
+                    sDocumentos.agregarAImpresion(doc);
+                    continue;
+                }
+            }
+
+            if(registrosTemplate.getCheckTipo().isSelected()) {
+                valor = doc.getTipo();
+                if(valor.contains(registrosTemplate.gettConsulta().getText())) {
+                    sDocumentos.agregarAImpresion(doc);
+                    continue;
+                }
+            }
+
+            if(registrosTemplate.getCheckNombre().isSelected()) {
+                valor = doc.getNombre();
+                if(valor.contains(registrosTemplate.gettConsulta().getText())) {
+                    sDocumentos.agregarAImpresion(doc);
+                    continue;
+                }
+            }
+
+            if(registrosTemplate.getCheckUbicacion().isSelected()) {
+                valor = doc.getCarpeta().concat(doc.getEstante());
+                if(valor.contains(registrosTemplate.gettConsulta().getText())) {
+                    sDocumentos.agregarAImpresion(doc);
+                    continue;
+                }
+            }
+
+            if(registrosTemplate.getCheckIngreso().isSelected()) {
+                valor = doc.getIngreso().toString();
+                if(valor.contains(registrosTemplate.gettConsulta().getText())) {
+                    sDocumentos.agregarAImpresion(doc);
+                    continue;
+                }
+            }
+
+            if(registrosTemplate.getCheckExpiracion().isSelected()) {
+                valor = doc.getExpiracion().toString();
+                if(valor.contains(registrosTemplate.gettConsulta().getText())) {
+                    sDocumentos.agregarAImpresion(doc);
+                    continue;
+                }
+            }
+        }
+        agregarRegistros(sDocumentos.getImpresion());
     }
 
+    public void agregarRegistros(Iterable<Documento> datos){
+        for(Documento doc: datos)
+            agregarRegistro(doc);
+    }
+    public void eliminarRegistros(){
+        DefaultTableModel dm = registrosTemplate.getModelo();
+        int c = dm.getRowCount();
+
+        for (int i = c -1 ; i >= 0; i--)
+            dm.removeRow(i);
+    }
     public void agregarRegistro(Documento documento){
         registrosTemplate.getModelo().addRow(
                 new Object[]{
