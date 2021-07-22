@@ -194,6 +194,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
             documento.setId(id);
             sDocumentos.eliminarDocumento(documento);
             sDocumentos.getImpresion().eliminar(fSeleccionada);
+            actualizarValores();
             eliminarRegistros();
             agregarRegistros(sDocumentos.getImpresion());
         }else

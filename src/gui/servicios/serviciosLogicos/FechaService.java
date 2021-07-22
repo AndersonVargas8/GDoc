@@ -1,6 +1,9 @@
 package gui.servicios.serviciosLogicos;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class FechaService {
     private static FechaService servicio;
@@ -15,9 +18,9 @@ public class FechaService {
     private void obtenerFecha(){
         calendario = Calendar.getInstance();
         dia = completar(Integer.toString(calendario.get(Calendar.DATE)));
-        mes = completar(Integer.toString(calendario.get(Calendar.MONTH)+1));
+        mes = completar(Integer.toString(calendario.get(Calendar.MONTH) % 12 + 1));
         annio = Integer.toString(calendario.get(Calendar.YEAR));
-        hora = Integer.toString(calendario.get(Calendar.HOUR));
+        hora = Integer.toString(calendario.get(Calendar.HOUR) + 12*calendario.get(Calendar.AM_PM));
         minuto = completar(Integer.toString(calendario.get(Calendar.MINUTE)));
         segundo = completar(Integer.toString(calendario.get(Calendar.SECOND)));
         fecha = dia.concat("/" + mes + "/" + annio);

@@ -147,14 +147,15 @@ public abstract class ListaEncadenada<T> implements Iterable<T>{
      * @return la cantidad de elementos que contiene la lista.
      */
     public int cantidadDeElementos(){
-        Nodo aux = this.primero;
+        return contador;
+        /*Nodo aux = this.primero;
         int cont = 0;
         while(aux != null){
             cont++;
             aux = aux.getSiguiente();
         }
         
-        return cont;
+        return cont;*/
     }
     
     /**
