@@ -35,12 +35,12 @@ public class LoginComponent implements ActionListener, MouseListener{
     }
 
     public void enviarDatos(){
-        //String nombreUsuario = loginTemplate.gettNombreUsuario().getText();
-        //String claveUsuario = new String(loginTemplate.gettClaveUsuario().getPassword());
+        String nombreUsuario = loginTemplate.gettNombreUsuario().getText();
+        String claveUsuario = new String(loginTemplate.gettClaveUsuario().getPassword());
 
         //----------------------------------------
-        String nombreUsuario = "Anderson";
-        String claveUsuario = "1234";
+        //String nombreUsuario = "Anderson";
+        //String claveUsuario = "1234";
         // ----------------------
         if(!nombreUsuario.isEmpty() && !claveUsuario.isEmpty()){
             if(sUsuario.verificarDatosUsuario(nombreUsuario,claveUsuario))

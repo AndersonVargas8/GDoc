@@ -46,7 +46,7 @@ public class NavegacionUsuarioComponent implements ActionListener, MouseListener
         this.navegacionUsuarioTemplate.getpMedio().removeAll();
         this.navegacionUsuarioTemplate.getpSuperior().add(navegacionUsuarioTemplate.getpMedio());
         this.navegacionUsuarioTemplate.crearJLabels();
-        this.navegacionUsuarioTemplate.repaint();
+        this.navegacionUsuarioTemplate.revalidate();
     }
 
     @Override
