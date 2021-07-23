@@ -31,7 +31,8 @@ public class MovimientosTemplate extends JPanel {
     private JTable tabla;
     private JTableHeader header;
     private DefaultTableModel modelo;
-    private String [] cabecera={"Id documento", "Tipo Documento", "Nombre documento", "Usuario", "Movimiento", "Fecha","Hora"};
+    private String [] cabecera={"Id documento", "Tipo Documento", "Nombre documento", "Ubicación documento",
+            "Movimiento", "Fecha", "Hora", "Usuario"};
 
     public MovimientosTemplate(MovimientosComponent movimientosComponent){
         this.movimientosComponent = movimientosComponent;
@@ -146,7 +147,6 @@ public class MovimientosTemplate extends JPanel {
                 Color.white,sRecursos.getColorGrisClaro(), sRecursos.getColorPrincipalOscuro(),
                 sRecursos.getColorGrisOscuro(),sRecursos.getFuentePrincipal()
         ));
-
         pTabla = sObjGraficos.construirPanelBarra(tabla, 10, 170, 930, 470, Color.WHITE, null);
 
         pTabla.getVerticalScrollBar().setUI(

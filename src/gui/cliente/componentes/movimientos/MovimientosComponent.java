@@ -103,20 +103,16 @@ public class MovimientosComponent implements MouseListener, ActionListener, Focu
             dm.removeRow(i);
     }
     public void agregarRegistro(Movimiento movimiento){
-        int id = movimiento.getIdDocumento();
-        Documento doc;
-        doc = movimiento.getDocumento();
-
-
         movimientosTemplate.getModelo().addRow(
                 new Object[]{
-                        id,
-                        doc.getTipo(),
-                        doc.getNombre(),
-                        movimiento.getUsuario(),
+                        movimiento.getIdDocumento(),
+                        movimiento.getTipoDocumento(),
+                        movimiento.getNombreDocumento(),
+                        movimiento.getUbicacionDocumento(),
                         movimiento.getTipoMovimiento(),
                         movimiento.getFecha().toString(),
-                        movimiento.getFecha().getHoraCompleta()
+                        movimiento.getFecha().getHoraCompleta(),
+                        movimiento.getUsuario()
                 }
         );
 
@@ -133,7 +129,7 @@ public class MovimientosComponent implements MouseListener, ActionListener, Focu
 
         if(movimientosTemplate.getCbUsuario().getSelectedIndex() != 0)
             lista.insertarAlInicio(RowFilter.regexFilter(
-                    movimientosTemplate.getCbUsuario().getSelectedItem().toString(),3)
+                    movimientosTemplate.getCbUsuario().getSelectedItem().toString(),7)
             );
 
         if(movimientosTemplate.getCbTipo().getSelectedIndex() != 0)

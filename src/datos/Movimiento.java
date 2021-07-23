@@ -2,8 +2,7 @@ package datos;
 
 public class Movimiento {
     private int idDocumento;
-    private String usuario;
-    private String tipoMovimiento;
+    private String tipoDocumento,nombreDocumento,ubicacionDocumento,usuario,tipoMovimiento;
     private Fecha fecha;
     private Documento documento;
 
@@ -53,6 +52,30 @@ public class Movimiento {
 
     public Documento getDocumento() {
         return documento;
+    }
+
+    public String getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    public String getNombreDocumento() {
+        return nombreDocumento;
+    }
+
+    public void setNombreDocumento(String nombreDocumento) {
+        this.nombreDocumento = nombreDocumento;
+    }
+
+    public String getUbicacionDocumento() {
+        return ubicacionDocumento;
+    }
+
+    public void setUbicacionDocumento(String ubicacionDocumento) {
+        this.ubicacionDocumento = ubicacionDocumento;
     }
 
     public void setDocumento(Documento documento) {

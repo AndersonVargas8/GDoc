@@ -163,7 +163,6 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         int fSeleccionada = registrosTemplate.getTabla().getSelectedRow();
         if(fSeleccionada != -1) {
             int id = (Integer) registrosTemplate.getModelo().getValueAt(fSeleccionada,0);
-            registrarMovimiento(id,"Modificación");
             documento = sDocumentos.getDocumento(id);
             documento.setTipo((String) registrosTemplate.getCbTipo().getSelectedItem());
             documento.setNombre(registrosTemplate.gettNombre().getText());
@@ -173,6 +172,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
             int annioVencimiento = annioIngreso + registrosTemplate.getCbTipo().getSelectedIndex() + 1;
             documento.getExpiracion().setAnnio(annioVencimiento);
 
+            registrarMovimiento(id,"Modificación");
             eliminarRegistros();
             agregarRegistros(sDocumentos.getImpresion());
             actualizarValores();
@@ -314,13 +314,15 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
     }
 
     public void registrarMovimiento(int id, String tipo){
+        documento = sDocumentos.getDocumento(id);
         movimiento = new Movimiento();
         movimiento.setIdDocumento(id);
+        movimiento.setTipoDocumento(documento.getTipo());
+        movimiento.setNombreDocumento(documento.getNombre());
+        movimiento.setUbicacionDocumento(documento.getEstante().concat("-"+documento.getCarpeta()));
         movimiento.setUsuario(UsuarioService.getServicio().getUsuarioConectado().getNombreUsuario());
         movimiento.setTipoMovimiento(tipo);
         movimiento.setFecha(new Fecha(sFecha.getFechaCompleta().split("/")));
-        documento = sDocumentos.getDocumento(id);
-        movimiento.setDocumento(documento);
         sMovimientos.agregarMovimiento(movimiento);
     }
 }
