@@ -124,9 +124,8 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
 
     //MÉTODOS PARA EL CONTROL DE DOCUMENTOS EN LA TABLA
     public void restaurarValores(){
-        documento = sDocumentos.devolverMayorDocumento();
-        int idUltimoDocumento = documento.getId();
-        registrosTemplate.getlIdValor().setText((idUltimoDocumento + 1)+"");
+        int idUltimoDocumento = sDocumentos.getSiguienteId();
+        registrosTemplate.getlIdValor().setText(idUltimoDocumento +"");
         registrosTemplate.getCbTipo().setSelectedIndex(0);
         registrosTemplate.gettNombre().setText(placeholders[1]);
         registrosTemplate.gettEstante().setText(placeholders[2]);
@@ -143,12 +142,9 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
     }
 
     public void insertarRegistroTabla(){
-        documento = sDocumentos.devolverMayorDocumento();
-        int idUltimoDoc = 0;
-        if (documento != null)
-            idUltimoDoc = documento.getId();
+        int idUltimoDoc = sDocumentos.getSiguienteId();
         documento = new Documento();
-        documento.setId(idUltimoDoc+1);
+        documento.setId(idUltimoDoc);
         documento.setTipo((String)registrosTemplate.getCbTipo().getSelectedItem());
         documento.setNombre(registrosTemplate.gettNombre().getText());
         documento.setEstante(registrosTemplate.gettEstante().getText());
@@ -157,7 +153,8 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         documento.setExpiracion(new Fecha(registrosTemplate.getlExpiracionValor().getText().split("/")));
         sDocumentos.agregarDocumento(documento);
 
-        registrarMovimiento((idUltimoDoc + 1), "Inserción");
+        registrarMovimiento((idUltimoDoc), "Inserción");
+        actualizarValores();
         mostrarRegistrosTabla();
         restaurarValores();
     }
@@ -166,6 +163,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         int fSeleccionada = registrosTemplate.getTabla().getSelectedRow();
         if(fSeleccionada != -1) {
             int id = (Integer) registrosTemplate.getModelo().getValueAt(fSeleccionada,0);
+            registrarMovimiento(id,"Modificación");
             documento = sDocumentos.getDocumento(id);
             documento.setTipo((String) registrosTemplate.getCbTipo().getSelectedItem());
             documento.setNombre(registrosTemplate.gettNombre().getText());
@@ -177,7 +175,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
 
             eliminarRegistros();
             agregarRegistros(sDocumentos.getImpresion());
-            registrarMovimiento(id,"Modificación");
+            actualizarValores();
             restaurarValores();
         }
         else{
@@ -195,6 +193,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
             sDocumentos.eliminarDocumento(documento);
             sDocumentos.getImpresion().eliminar(fSeleccionada);
             actualizarValores();
+            restaurarValores();
             eliminarRegistros();
             agregarRegistros(sDocumentos.getImpresion());
         }else
@@ -306,7 +305,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
     }
 
     public void actualizarValores(){
-        vistaPrincipalComponent.actualizarValores();
+        vistaPrincipalComponent.restaurarValores();
     }
 
     public String cambiarVencimiento(){
@@ -320,14 +319,8 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         movimiento.setUsuario(UsuarioService.getServicio().getUsuarioConectado().getNombreUsuario());
         movimiento.setTipoMovimiento(tipo);
         movimiento.setFecha(new Fecha(sFecha.getFechaCompleta().split("/")));
-
-        if(tipo == "Eliminación"){
-            documento = sDocumentos.getDocumento(id);
-            movimiento.setDocumentoEliminado(documento);
-        }
-
+        documento = sDocumentos.getDocumento(id);
+        movimiento.setDocumento(documento);
         sMovimientos.agregarMovimiento(movimiento);
-
-        actualizarValores();
     }
 }

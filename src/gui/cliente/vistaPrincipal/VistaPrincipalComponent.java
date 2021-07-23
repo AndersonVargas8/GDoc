@@ -97,7 +97,7 @@ public class VistaPrincipalComponent implements ActionListener {
 
     public void restaurarValores(){
         this.vistaPrincipalTemplate.getpPrincipal().add(revisionComponent.getRevisionTemplate());
-        
+        actualizarValores();
     }
 
     public void actualizarValores(){

@@ -5,17 +5,18 @@ public class Movimiento {
     private String usuario;
     private String tipoMovimiento;
     private Fecha fecha;
-    private Documento documentoEliminado;
+    private Documento documento;
 
     public Movimiento(){
 
     }
 
-    public Movimiento(int idDocumento, String usuario, String tipoMovimiento, Fecha fecha) {
+    public Movimiento(int idDocumento, String usuario, String tipoMovimiento, Fecha fecha, Documento documento) {
         this.idDocumento = idDocumento;
         this.usuario = usuario;
         this.tipoMovimiento = tipoMovimiento;
         this.fecha = fecha;
+        this.documento = documento;
     }
 
     public int getIdDocumento() {
@@ -50,11 +51,11 @@ public class Movimiento {
         this.fecha = fecha;
     }
 
-    public Documento getDocumentoEliminado() {
-        return documentoEliminado;
+    public Documento getDocumento() {
+        return documento;
     }
 
-    public void setDocumentoEliminado(Documento documentoEliminado) {
-        this.documentoEliminado = documentoEliminado;
+    public void setDocumento(Documento documento) {
+        this.documento = documento;
     }
 }

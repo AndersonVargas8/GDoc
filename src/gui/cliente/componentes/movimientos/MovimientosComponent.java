@@ -2,9 +2,7 @@ package gui.cliente.componentes.movimientos;
 
 import datos.Documento;
 import datos.Movimiento;
-import estructuras.listas.ListaEncadenada;
 import estructuras.listas.ListaEncadenadaSimple;
-import gui.cliente.vistaPrincipal.VistaPrincipalComponent;
 import gui.servicios.serviciosGraficos.RecursosService;
 import gui.servicios.serviciosLogicos.DocumentosService;
 import gui.servicios.serviciosLogicos.MovimientosService;
@@ -107,11 +105,8 @@ public class MovimientosComponent implements MouseListener, ActionListener, Focu
     public void agregarRegistro(Movimiento movimiento){
         int id = movimiento.getIdDocumento();
         Documento doc;
-        if(movimiento.getDocumentoEliminado() == null)
-            doc = DocumentosService.getServicio().getDocumento(id);
-        else{
-            doc = movimiento.getDocumentoEliminado();
-        }
+        doc = movimiento.getDocumento();
+
 
         movimientosTemplate.getModelo().addRow(
                 new Object[]{

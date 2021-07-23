@@ -12,10 +12,13 @@ public class DocumentosService {
     private ListaEncadenadaDoble<Documento> elementos;
     private ListaEncadenadaDoble<Documento> impresion;
     private Documento documento;
+    private int numeroRegistro;
+
     public DocumentosService(){
         cDocumentos = new ControlDocumentos();
         documentos = cDocumentos.getDocumentos();
         elementos = documentos.inOrden();
+        numeroRegistro = documentos.buscarMax().getId() + 1;
     }
 
     public static DocumentosService getServicio(){
@@ -43,6 +46,7 @@ public class DocumentosService {
     public void agregarDocumento(Documento documento){
         this.documentos.insertar(documento);
         this.elementos = documentos.inOrden();
+        this.numeroRegistro++;
     }
 
     public int devolverCantidadDocumentos(){
@@ -71,5 +75,9 @@ public class DocumentosService {
 
     public ListaEncadenadaDoble<Documento> getImpresion(){
         return this.impresion;
+    }
+
+    public int getSiguienteId(){
+        return numeroRegistro;
     }
 }
