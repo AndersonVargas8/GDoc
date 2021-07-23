@@ -302,7 +302,7 @@ public class RegistrosTemplate extends JPanel {
 
         // LABEL VALOR INGRESO----------------------------------------------------------------
         lIngresoValor = sObjGraficos.construirJLabel(
-                FechaService.getServicio().getFecha(), 30, 475, 160, 30, null, null,
+                FechaService.getServicio().getFechaCorta(), 30, 475, 160, 30, null, null,
                 sRecursos.getFuentePrincipal(), null,sRecursos.getColorGrisOscuro() ,null, "l"
         );
         pDatos.add(lIngresoValor);

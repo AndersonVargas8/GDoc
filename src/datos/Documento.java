@@ -1,5 +1,7 @@
 package datos;
 
+import gui.servicios.serviciosLogicos.FechaService;
+
 public class Documento implements Comparable<Documento>{
     private int id;
     private String tipo, nombre, estante, carpeta;
@@ -63,18 +65,17 @@ public class Documento implements Comparable<Documento>{
 
     @Override
     public int compareTo(Documento documento) {
-        /*if(this.expiracion.getAnnio() == -1 || documento.expiracion.getAnnio() == -1)
-            return this.id - documento.id;
-
-        if(this.expiracion.getAnnio() - documento.expiracion.getAnnio() != 0)
-            return this.expiracion.getAnnio() - documento.ingreso.getAnnio();
-
-        if(this.expiracion.getMes() - documento.expiracion.getMes() != 0)
-            return this.expiracion.getMes() - documento.expiracion.getMes();
-
-        if(this.expiracion.getDia() - documento.expiracion.getDia() != 0)
-            return this.expiracion.getDia() - documento.expiracion.getDia();*/
-
         return this.id - documento.id;
+    }
+
+    public boolean estaVencido(){
+        Fecha fechaActual = FechaService.getServicio().getFecha();
+
+        if(this.expiracion.getAnnio() <= fechaActual.getAnnio())
+            if(this.expiracion.getMes() <= fechaActual.getMes())
+                if(this.expiracion.getDia() <= fechaActual.getDia())
+                    return true;
+
+        return false;
     }
 }

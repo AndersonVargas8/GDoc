@@ -4,6 +4,7 @@ import gui.servicios.serviciosGraficos.GraficosAvanzadosService;
 import gui.servicios.serviciosGraficos.ObjGraficosService;
 import gui.servicios.serviciosGraficos.RecursosService;
 import gui.servicios.serviciosLogicos.DocumentosService;
+import gui.servicios.serviciosLogicos.RevisionService;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -26,6 +27,8 @@ public class NavegacionUsuarioTemplate extends JPanel {
     ObjGraficosService sObjGraficos;
     RecursosService sRecursos;
     DocumentosService sDocumentos;
+    RevisionService sRevision;
+
     private NavegacionUsuarioComponent navegacionUsuarioComponent;
 
     public NavegacionUsuarioTemplate(NavegacionUsuarioComponent navegacionUsuarioComponent){
@@ -35,6 +38,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
         sObjGraficos = ObjGraficosService.getServicio();
         sRecursos = RecursosService.getServicio();
         sDocumentos = DocumentosService.getServicio();
+        sRevision = RevisionService.getServicio();
 
         //Creación de objetos graficos
         this.crearObjetosDecoradores();
@@ -162,7 +166,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
         pMedio.add(lVencidos);
 
         lNumVencidos = sObjGraficos.construirJLabel(
-                "2000",
+                String.valueOf(sRevision.cantidadVencidos()),
                 190,80,50,30,
                 null,null,
                 sRecursos.getFuenteMediana(),

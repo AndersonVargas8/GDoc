@@ -68,9 +68,14 @@ public class ColaPrioritaria<T extends Comparable <? super T>>{
     public int cantidadElementos(){
         return this.arreglo.getSize();
     }
+
     public T minimo(){
         if(this.arreglo.getSize() == 0)
             return null;
         return this.arreglo.get(0);
+    }
+
+    public void vaciar(){
+        this.arreglo.vaciar();
     }
 }

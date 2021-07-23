@@ -128,4 +128,10 @@ public class ArregloDinamico<T>{
         this.arreglo = array;
         this.capacity *= FACTOR_AUMENTO;
     }
+
+    public void vaciar(){
+        this.arreglo = (T[]) new Object[2];
+        this.capacity = 2;
+        this.size = 0;
+    }
 }

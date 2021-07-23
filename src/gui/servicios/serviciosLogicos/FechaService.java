@@ -1,14 +1,13 @@
 package gui.servicios.serviciosLogicos;
 
+import datos.Fecha;
+
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 public class FechaService {
     private static FechaService servicio;
     private Calendar calendario;
-    private String dia,mes,annio,hora,minuto,segundo,fecha,fechaCompleta;
+    private String dia,mes,annio,hora,minuto,segundo, fechaCorta,fechaCompleta;
 
 
     public FechaService(){
@@ -23,8 +22,8 @@ public class FechaService {
         hora = Integer.toString(calendario.get(Calendar.HOUR) + 12*calendario.get(Calendar.AM_PM));
         minuto = completar(Integer.toString(calendario.get(Calendar.MINUTE)));
         segundo = completar(Integer.toString(calendario.get(Calendar.SECOND)));
-        fecha = dia.concat("/" + mes + "/" + annio);
-        fechaCompleta = fecha.concat("/" + hora + ":" + minuto + ":" + segundo);
+        fechaCorta = dia.concat("/" + mes + "/" + annio);
+        fechaCompleta = fechaCorta.concat("/" + hora + ":" + minuto + ":" + segundo);
     }
     private String completar(String dato){
         if(dato.length() == 1)
@@ -38,6 +37,10 @@ public class FechaService {
         return servicio;
     }
 
+    public Fecha getFecha(){
+        obtenerFecha();
+        return new Fecha(Integer.parseInt(this.dia),Integer.parseInt(this.mes),Integer.parseInt(this.annio));
+    }
     public String getDia() {
         return dia;
     }
@@ -50,9 +53,9 @@ public class FechaService {
         return annio;
     }
 
-    public String getFecha() {
+    public String getFechaCorta() {
         obtenerFecha();
-        return fecha;
+        return fechaCorta;
     }
 
     public String getFechaCompleta(){

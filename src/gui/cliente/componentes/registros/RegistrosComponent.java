@@ -130,7 +130,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         registrosTemplate.gettNombre().setText(placeholders[1]);
         registrosTemplate.gettEstante().setText(placeholders[2]);
         registrosTemplate.gettCarpeta().setText(placeholders[3]);
-        registrosTemplate.getlIngresoValor().setText(sFecha.getFecha());
+        registrosTemplate.getlIngresoValor().setText(sFecha.getFechaCorta());
         registrosTemplate.getlExpiracionValor().setText(cambiarVencimiento());
     }
 
@@ -305,7 +305,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
     }
 
     public void actualizarValores(){
-        vistaPrincipalComponent.restaurarValores();
+        vistaPrincipalComponent.actualizarValores();
     }
 
     public String cambiarVencimiento(){
