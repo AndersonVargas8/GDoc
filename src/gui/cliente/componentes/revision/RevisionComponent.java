@@ -9,6 +9,7 @@ import gui.servicios.serviciosGraficos.RecursosService;
 import gui.servicios.serviciosLogicos.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class RevisionComponent implements ActionListener, MouseListener{
@@ -26,6 +27,13 @@ public class RevisionComponent implements ActionListener, MouseListener{
         this.sRevision = RevisionService.getServicio();
         this.sDocumentos = DocumentosService.getServicio();
 
+        //Hace que el componente pendientes se muestre de inicio
+        /*this.revisionComponent = new RevisionComponent(this);
+        vistaPrincipalTemplate.getpPrincipal().add(
+                revisionComponent.getRevisionTemplate()
+        );*/
+        revisionTemplate.getpInferior().setBackground(Color.blue);
+
         agregarRegistro();
     }
 
@@ -37,6 +45,16 @@ public class RevisionComponent implements ActionListener, MouseListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == revisionTemplate.getbEliminar())
             actualizarPrioridad();
+        if(e.getSource() == revisionTemplate.getbPendientes()) {
+            revisionTemplate.getbPendientes().setBackground(RecursosService.getServicio().getColorGrisBotonOscuro1());
+            revisionTemplate.getbProximos().setBackground(RecursosService.getServicio().getColorGrisBoton1());
+            mostrarComponentes(e.getActionCommand());
+        }
+        if(e.getSource() == revisionTemplate.getbProximos()) {
+            revisionTemplate.getbProximos().setBackground(RecursosService.getServicio().getColorGrisBotonOscuro1());
+            revisionTemplate.getbPendientes().setBackground(RecursosService.getServicio().getColorGrisBoton1());
+            mostrarComponentes(e.getActionCommand());
+        }
     }
 
     @Override
@@ -56,18 +74,49 @@ public class RevisionComponent implements ActionListener, MouseListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        if(e.getSource() instanceof JButton){
+        if(e.getSource() == revisionTemplate.getbEliminar()){
             JButton boton = ((JButton) e.getSource());
             boton.setBackground(RecursosService.getServicio().getColorPrincipalOscuro());
+        }
+        else if(e.getSource() instanceof JButton){
+            JButton boton = ((JButton) e.getSource());
+            if(boton.getBackground() == RecursosService.getServicio().getColorGrisBotonOscuro1())
+                boton.setBackground(RecursosService.getServicio().getColorGrisBotonOscuro2());
+            else if(boton.getBackground() == RecursosService.getServicio().getColorGrisBoton1()){
+                boton.setBackground(RecursosService.getServicio().getColorGrisBoton2());
+            }
         }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        if(e.getSource() instanceof JButton){
+        if(e.getSource() == revisionTemplate.getbEliminar()){
             JButton boton = ((JButton) e.getSource());
             boton.setBackground(RecursosService.getServicio().getColorPrincipal());
         }
+        else if(e.getSource() instanceof JButton){
+            JButton boton = ((JButton) e.getSource());
+            if(boton.getBackground() == RecursosService.getServicio().getColorGrisBotonOscuro2())
+                boton.setBackground(RecursosService.getServicio().getColorGrisBotonOscuro1());
+            else if(boton.getBackground() == RecursosService.getServicio().getColorGrisBoton2()){
+                boton.setBackground(RecursosService.getServicio().getColorGrisBoton1());
+            }
+        }
+    }
+
+    public void mostrarComponentes(String comando){
+        revisionTemplate.getpInferior().removeAll();
+
+        switch (comando){
+            case "Pendientes":
+                revisionTemplate.getpInferior().setBackground(Color.blue);
+                break;
+
+            case "Próximos a vencer":
+                revisionTemplate.getpInferior().setBackground(Color.yellow);
+                break;
+        }
+        revisionTemplate.repaint();
     }
 
     //METODOS PARA MANEJAR LA INFO DE LA TABLA

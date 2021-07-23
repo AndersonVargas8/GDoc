@@ -8,7 +8,8 @@ import java.io.IOException;
 
 public class RecursosService {
     private Color colorPrincipal, colorPrincipalOscuro, colorSecundario,
-            colorGrisOscuro, colorGris, colorGrisClaro;
+            colorGrisOscuro, colorGris, colorGrisClaro, colorGrisBoton1,colorGrisBotonOscuro1,
+    colorGrisBoton2,colorGrisBotonOscuro2;
     private Font fuentePrincipal, fuenteCerrar, fuenteBotones, fuenteMediana,
             fuenteTextFields,fuenteNombre, fuenteTitulo;
     private Cursor cMano;
@@ -61,6 +62,22 @@ public class RecursosService {
         return colorGris;
     }
 
+    public Color getColorGrisBoton1() {
+        return colorGrisBoton1;
+    }
+
+    public Color getColorGrisBotonOscuro1() {
+        return colorGrisBotonOscuro1;
+    }
+
+    public Color getColorGrisBoton2() {
+        return colorGrisBoton2;
+    }
+
+    public Color getColorGrisBotonOscuro2() {
+        return colorGrisBotonOscuro2;
+    }
+
     public Font getFuentePrincipal() {
         return fuentePrincipal;
     }
@@ -108,6 +125,10 @@ public class RecursosService {
         colorGrisOscuro = new Color(80, 80, 80);
         colorGrisClaro = new Color(249, 246, 249);
         colorGris = new Color(235,235,235);
+        colorGrisBoton1 = new Color(132, 135, 147);
+        colorGrisBotonOscuro1 = new Color(93, 94, 99);
+        colorGrisBoton2 = new Color(117, 119, 128);
+        colorGrisBotonOscuro2 = new Color(78, 79, 82);
     }
 
     private void crearFuentes(){

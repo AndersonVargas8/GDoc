@@ -17,9 +17,9 @@ public class  RevisionTemplate extends JPanel {
     private GraficosAvanzadosService sGraficosAvanzados;
 
     //Objetos gráficos
-    private JPanel pVencidos;
+    private JPanel pVencidos,pInferior;
     private JLabel lTitulo;
-    private JButton bEliminar;
+    private JButton bEliminar,bPendientes,bProximos;
 
     //Objetos para JTable
     private JScrollPane pTabla;
@@ -38,8 +38,10 @@ public class  RevisionTemplate extends JPanel {
 
         //Creación de objetos gráficos
         crearJPanels();
+        crearJButtons();
         crearContenidopVencidos();
         crearJTable();
+
         //Configuración del componente
         setSize(950,650);
         setBackground(sRecursos.getColorGrisClaro());
@@ -51,8 +53,28 @@ public class  RevisionTemplate extends JPanel {
         pVencidos = sObjGraficos.construirJPanel(10,10, 930,150, Color.white,
                 BorderFactory.createLineBorder(new Color(255, 136, 136),2));
         this.add(pVencidos);
+
+        pInferior = sObjGraficos.construirJPanel(10,200,930,440,Color.white,null);
+        this.add(pInferior);
     }
 
+    private void crearJButtons(){
+        //BOTÓN PENDIENTES
+        bPendientes = sObjGraficos.construirJButton(
+                "Pendientes", 20, 170, 120, 30, sRecursos.getcMano(), null, sRecursos.getFuenteBotones(),
+                sRecursos.getColorGrisBotonOscuro1(), Color.WHITE, null, "c", true);
+        bPendientes.addMouseListener(revisionComponent);
+        bPendientes.addActionListener(revisionComponent);
+        this.add(bPendientes);
+
+        //BOTÓN PROXIMOS
+        bProximos = sObjGraficos.construirJButton(
+                "Próximos a vencer", 140, 170, 160, 30, sRecursos.getcMano(), null, sRecursos.getFuenteBotones(),
+                sRecursos.getColorGrisBoton1(), Color.WHITE, null, "c", true);
+        bProximos.addMouseListener(revisionComponent);
+        bProximos.addActionListener(revisionComponent);
+        this.add(bProximos);
+    }
     public void crearContenidopVencidos() {
         // LABEL TITULO--------------------------------------------------------------------
         lTitulo = sObjGraficos.construirJLabel(
@@ -116,5 +138,25 @@ public class  RevisionTemplate extends JPanel {
 
     public DefaultTableModel getModelo() {
         return modelo;
+    }
+
+    public RevisionComponent getRevisionComponent() {
+        return revisionComponent;
+    }
+
+    public ObjGraficosService getsObjGraficos() {
+        return sObjGraficos;
+    }
+
+    public JPanel getpInferior() {
+        return pInferior;
+    }
+
+    public JButton getbPendientes() {
+        return bPendientes;
+    }
+
+    public JButton getbProximos() {
+        return bProximos;
     }
 }
