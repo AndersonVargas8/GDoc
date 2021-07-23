@@ -5,10 +5,7 @@ import datos.Fecha;
 import datos.Movimiento;
 import gui.cliente.vistaPrincipal.VistaPrincipalComponent;
 import gui.servicios.serviciosGraficos.RecursosService;
-import gui.servicios.serviciosLogicos.DocumentosService;
-import gui.servicios.serviciosLogicos.FechaService;
-import gui.servicios.serviciosLogicos.MovimientosService;
-import gui.servicios.serviciosLogicos.UsuarioService;
+import gui.servicios.serviciosLogicos.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -155,8 +152,8 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
 
         registrarMovimiento((idUltimoDoc), "Inserción");
         actualizarValores();
-        mostrarRegistrosTabla();
         restaurarValores();
+        mostrarRegistrosTabla();
     }
 
     public void modificarRegistroTabla(){
@@ -305,6 +302,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
     }
 
     public void actualizarValores(){
+        RevisionService.getServicio().actualizarDatos();
         vistaPrincipalComponent.actualizarValores();
     }
 

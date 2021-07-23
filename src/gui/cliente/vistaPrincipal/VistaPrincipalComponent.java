@@ -31,7 +31,7 @@ public class VistaPrincipalComponent implements ActionListener {
         this.loginComponent = loginComponent;
 
         //Hace que el componente revisión se muestre de inicio
-        this.revisionComponent = new RevisionComponent();
+        this.revisionComponent = new RevisionComponent(this);
         vistaPrincipalTemplate.getpPrincipal().add(
                 revisionComponent.getRevisionTemplate()
         );
@@ -65,6 +65,7 @@ public class VistaPrincipalComponent implements ActionListener {
                 vistaPrincipalTemplate.getpPrincipal().add(
                         revisionComponent.getRevisionTemplate()
                 );
+                this.revisionComponent.getRevisionTemplate().revalidate();
                 break;
             case "Registros":
                 if(registrosComponent == null)
@@ -102,8 +103,11 @@ public class VistaPrincipalComponent implements ActionListener {
 
     public void actualizarValores(){
         this.navegacionUsuarioComponent.actualizarValores();
+        this.revisionComponent.restarurarValores();
         if(this.movimientosComponent != null)
             this.movimientosComponent.actualizarValores();
+        if(this.registrosComponent != null)
+            this.registrosComponent.mostrarRegistrosTabla();
     }
 
     public void moverVentana(int posicionX, int posicionY){

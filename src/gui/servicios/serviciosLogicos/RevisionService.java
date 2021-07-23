@@ -42,4 +42,13 @@ public class RevisionService {
     public int cantidadVencidos(){
         return documentosVencidos.cantidadElementos();
     }
+
+    public void eliminarVencido(){
+        sDocumentos.eliminarDocumento(sDocumentos.getDocumento(documentosVencidos.minimo().getIdDocumento()));
+        documentosVencidos.eliminarMinimo();
+    }
+
+    public void actualizarDatos(){
+        encontrarVencidos();
+    }
 }
