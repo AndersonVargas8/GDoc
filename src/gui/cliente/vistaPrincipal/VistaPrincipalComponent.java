@@ -102,8 +102,8 @@ public class VistaPrincipalComponent implements ActionListener {
     }
 
     public void actualizarValores(){
-        this.navegacionUsuarioComponent.actualizarValores();
         this.revisionComponent.restarurarValores();
+        this.navegacionUsuarioComponent.actualizarValores();
         if(this.movimientosComponent != null)
             this.movimientosComponent.actualizarValores();
         if(this.registrosComponent != null)

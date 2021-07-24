@@ -150,7 +150,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         documento.setExpiracion(new Fecha(registrosTemplate.getlExpiracionValor().getText().split("/")));
         sDocumentos.agregarDocumento(documento);
 
-        registrarMovimiento((idUltimoDoc), "Inserción");
+        sMovimientos.registrarMovimiento(idUltimoDoc,"Inserción");
         actualizarValores();
         restaurarValores();
         mostrarRegistrosTabla();
@@ -169,7 +169,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
             int annioVencimiento = annioIngreso + registrosTemplate.getCbTipo().getSelectedIndex() + 1;
             documento.getExpiracion().setAnnio(annioVencimiento);
 
-            registrarMovimiento(id,"Modificación");
+            sMovimientos.registrarMovimiento(id,"Modificación");
             eliminarRegistros();
             agregarRegistros(sDocumentos.getImpresion());
             actualizarValores();
@@ -184,7 +184,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         int fSeleccionada = registrosTemplate.getTabla().getSelectedRow();
         if(fSeleccionada != -1){
             int id = (Integer) registrosTemplate.getModelo().getValueAt(fSeleccionada,0);
-            registrarMovimiento(id,"Eliminación");
+            sMovimientos.registrarMovimiento(id,"Eliminación");
             documento = new Documento();
             documento.setId(id);
             sDocumentos.eliminarDocumento(documento);
@@ -311,16 +311,4 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         return sFecha.getFechaPlus(registrosTemplate.getlIngresoValor().getText(),anniosVencimiento);
     }
 
-    public void registrarMovimiento(int id, String tipo){
-        documento = sDocumentos.getDocumento(id);
-        movimiento = new Movimiento();
-        movimiento.setIdDocumento(id);
-        movimiento.setTipoDocumento(documento.getTipo());
-        movimiento.setNombreDocumento(documento.getNombre());
-        movimiento.setUbicacionDocumento(documento.getEstante().concat("-"+documento.getCarpeta()));
-        movimiento.setUsuario(UsuarioService.getServicio().getUsuarioConectado().getNombreUsuario());
-        movimiento.setTipoMovimiento(tipo);
-        movimiento.setFecha(new Fecha(sFecha.getFechaCompleta().split("/")));
-        sMovimientos.agregarMovimiento(movimiento);
-    }
 }

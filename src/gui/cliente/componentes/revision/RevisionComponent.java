@@ -16,7 +16,12 @@ public class RevisionComponent implements ActionListener, MouseListener{
     private RevisionTemplate revisionTemplate;
     private RevisionService sRevision;
     private DocumentosService sDocumentos;
+
+    //Componentes
     private VistaPrincipalComponent vistaPrincipalComponent;
+    private PendientesComponent pendientesComponent;
+    private ProximosComponent proximosComponent;
+
 
     //Objetos de apoyo
     private Documento documento;
@@ -28,11 +33,10 @@ public class RevisionComponent implements ActionListener, MouseListener{
         this.sDocumentos = DocumentosService.getServicio();
 
         //Hace que el componente pendientes se muestre de inicio
-        /*this.revisionComponent = new RevisionComponent(this);
-        vistaPrincipalTemplate.getpPrincipal().add(
-                revisionComponent.getRevisionTemplate()
-        );*/
-        revisionTemplate.getpInferior().setBackground(Color.blue);
+        this.pendientesComponent = new PendientesComponent(this);
+        revisionTemplate.getpInferior().add(
+                pendientesComponent.getPendientesTemplete()
+        );
 
         agregarRegistro();
     }
@@ -109,11 +113,20 @@ public class RevisionComponent implements ActionListener, MouseListener{
 
         switch (comando){
             case "Pendientes":
-                revisionTemplate.getpInferior().setBackground(Color.blue);
+                revisionTemplate.getpInferior().add(
+                        pendientesComponent.getPendientesTemplete()
+                );
+                this.pendientesComponent.getPendientesTemplete().revalidate();
                 break;
 
             case "Próximos a vencer":
-                revisionTemplate.getpInferior().setBackground(Color.yellow);
+                if(proximosComponent == null)
+                    proximosComponent = new ProximosComponent(this);
+
+                revisionTemplate.getpInferior().add(
+                        proximosComponent.getProximosTemplate()
+                );
+                this.proximosComponent.getProximosTemplate().revalidate();
                 break;
         }
         revisionTemplate.repaint();
@@ -122,6 +135,8 @@ public class RevisionComponent implements ActionListener, MouseListener{
     //METODOS PARA MANEJAR LA INFO DE LA TABLA
     public void agregarRegistro(){
         if(sRevision.cantidadVencidos() == 0){
+            if(revisionTemplate.getModelo().getRowCount() > 0)
+                revisionTemplate.getModelo().removeRow(0);
             revisionTemplate.getbEliminar().setEnabled(false);
             return;
         }
@@ -141,7 +156,9 @@ public class RevisionComponent implements ActionListener, MouseListener{
 
     }
     public void actualizarPrioridad(){
-        registrarMovimiento(sRevision.getSiguienteVencido().getIdDocumento(),"Eliminación");
+        MovimientosService.getServicio().registrarMovimiento(
+                sRevision.getSiguienteVencido().getIdDocumento(),"Eliminación"
+        );
         if(revisionTemplate.getModelo().getRowCount() > 0)
             revisionTemplate.getModelo().removeRow(0);
 
@@ -151,24 +168,13 @@ public class RevisionComponent implements ActionListener, MouseListener{
     }
 
     public void actualizarValores(){
-        vistaPrincipalComponent.actualizarValores();
         restarurarValores();
+        vistaPrincipalComponent.actualizarValores();
     }
 
     public void restarurarValores(){
         sRevision.actualizarDatos();
+        pendientesComponent.restarurarValores();
         agregarRegistro();
-    }
-    public void registrarMovimiento(int id, String tipo){
-        documento = sDocumentos.getDocumento(id);
-        Movimiento movimiento = new Movimiento();
-        movimiento.setIdDocumento(id);
-        movimiento.setTipoDocumento(documento.getTipo());
-        movimiento.setNombreDocumento(documento.getNombre());
-        movimiento.setUbicacionDocumento(documento.getEstante().concat("-"+documento.getCarpeta()));
-        movimiento.setUsuario(UsuarioService.getServicio().getUsuarioConectado().getNombreUsuario());
-        movimiento.setTipoMovimiento(tipo);
-        movimiento.setFecha(new Fecha(FechaService.getServicio().getFechaCompleta().split("/")));
-        MovimientosService.getServicio().agregarMovimiento(movimiento);
     }
 }

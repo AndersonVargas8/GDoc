@@ -4,6 +4,7 @@ import gui.servicios.serviciosGraficos.GraficosAvanzadosService;
 import gui.servicios.serviciosGraficos.ObjGraficosService;
 import gui.servicios.serviciosGraficos.RecursosService;
 import gui.servicios.serviciosLogicos.DocumentosService;
+import gui.servicios.serviciosLogicos.PendientesService;
 import gui.servicios.serviciosLogicos.RevisionService;
 
 import javax.swing.*;
@@ -27,7 +28,6 @@ public class NavegacionUsuarioTemplate extends JPanel {
     ObjGraficosService sObjGraficos;
     RecursosService sRecursos;
     DocumentosService sDocumentos;
-    RevisionService sRevision;
 
     private NavegacionUsuarioComponent navegacionUsuarioComponent;
 
@@ -38,7 +38,6 @@ public class NavegacionUsuarioTemplate extends JPanel {
         sObjGraficos = ObjGraficosService.getServicio();
         sRecursos = RecursosService.getServicio();
         sDocumentos = DocumentosService.getServicio();
-        sRevision = RevisionService.getServicio();
 
         //Creación de objetos graficos
         this.crearObjetosDecoradores();
@@ -166,7 +165,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
         pMedio.add(lVencidos);
 
         lNumVencidos = sObjGraficos.construirJLabel(
-                String.valueOf(sRevision.cantidadVencidos()),
+                String.valueOf(RevisionService.getServicio().cantidadVencidos()),
                 190,80,50,30,
                 null,null,
                 sRecursos.getFuenteMediana(),
@@ -190,7 +189,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
         pMedio.add(lPendientes);
 
         lNumPendientes = sObjGraficos.construirJLabel(
-                "9999",
+                String.valueOf(PendientesService.getServicio().cantidadPendientes()),
                 190,120,50,30,
                 null,null,
                 sRecursos.getFuenteMediana(),
