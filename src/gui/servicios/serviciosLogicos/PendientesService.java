@@ -6,9 +6,11 @@ import estructuras.arboles.AVL;
 import estructuras.colas.ColaPrioritaria;
 import estructuras.listas.ListaEncadenada;
 import estructuras.listas.ListaEncadenadaDoble;
+import logica.ControlPendientes;
 
 public class PendientesService {
     private static PendientesService servicio;
+    private ControlPendientes cPendientes;
     private DocumentosService sDocumentos;
     private AVL<Integer> documentosPendientes;
     private ColaPrioritaria<DocumentoPriorizado> documentosAVencer;
@@ -16,12 +18,11 @@ public class PendientesService {
     Documento documento;
 
     public PendientesService(){
+        cPendientes = new ControlPendientes();
         sDocumentos = DocumentosService.getServicio();
-        documentosPendientes = new AVL<>();
+
+        documentosPendientes = cPendientes.getPendientes();
         encontrarAVencer();
-        documentosPendientes.insertar(2);
-        documentosPendientes.insertar(4);
-        documentosPendientes.insertar(6);
     }
 
     public static PendientesService getServicio(){

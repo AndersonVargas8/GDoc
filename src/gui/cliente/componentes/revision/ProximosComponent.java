@@ -73,6 +73,7 @@ public class ProximosComponent implements ActionListener, MouseListener {
 
             sPendientes.agregarPendiente(id);
             revisionComponent.actualizarValores();
+            JOptionPane.showMessageDialog(null,"Agregado a pendientes","Mensaje",JOptionPane.INFORMATION_MESSAGE);
         }else
             JOptionPane.showMessageDialog(null,"seleccione una fila","Error",JOptionPane.ERROR_MESSAGE);
 

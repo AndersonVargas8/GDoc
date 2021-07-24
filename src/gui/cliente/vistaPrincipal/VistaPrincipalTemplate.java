@@ -24,6 +24,7 @@ public class VistaPrincipalTemplate extends JFrame{
         this.crearJPanels();
 
         //Configuración de la página
+        this.addWindowListener(vistaPrincipalComponent);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setUndecorated(true);
         setSize(1200,700);

@@ -18,7 +18,7 @@ public class DocumentosService {
         cDocumentos = new ControlDocumentos();
         documentos = cDocumentos.getDocumentos();
         elementos = documentos.inOrden();
-        numeroRegistro = documentos.buscarMax().getId() + 1;
+        numeroRegistro = cDocumentos.getNumeroRegistro();
     }
 
     public static DocumentosService getServicio(){

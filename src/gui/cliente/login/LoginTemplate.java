@@ -44,6 +44,7 @@ public class LoginTemplate extends JFrame{
 
         //Configuración de la pantalla
         setLayout(null);
+        this.addWindowListener(loginComponent);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(870,500);
         setLocationRelativeTo(this);

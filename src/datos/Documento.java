@@ -71,10 +71,18 @@ public class Documento implements Comparable<Documento>{
     public boolean estaVencido(){
         Fecha fechaActual = FechaService.getServicio().getFecha();
 
-        if(this.expiracion.getAnnio() <= fechaActual.getAnnio())
-            if(this.expiracion.getMes() <= fechaActual.getMes())
-                if(this.expiracion.getDia() <= fechaActual.getDia())
-                    return true;
+        if(this.expiracion.getAnnio() < fechaActual.getAnnio())
+            return true;
+        if(this.expiracion.getAnnio() > fechaActual.getAnnio())
+            return false;
+
+        if(this.expiracion.getMes() < fechaActual.getMes())
+            return true;
+        if(this.expiracion.getMes() > fechaActual.getMes())
+            return false;
+
+        if(this.expiracion.getDia() <= fechaActual.getDia())
+            return true;
 
         return false;
     }

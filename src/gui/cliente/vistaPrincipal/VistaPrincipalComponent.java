@@ -6,12 +6,15 @@ import gui.cliente.componentes.navegacionUsuario.NavegacionUsuarioComponent;
 import gui.cliente.componentes.registros.RegistrosComponent;
 import gui.cliente.componentes.revision.RevisionComponent;
 import gui.cliente.login.LoginComponent;
+import logica.Archivo;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
-public class VistaPrincipalComponent implements ActionListener {
+public class VistaPrincipalComponent implements ActionListener, WindowListener {
     //componentes gráficos generales
     private VistaPrincipalTemplate vistaPrincipalTemplate;
     private BarraTituloComponent barraTituloComponent;
@@ -51,6 +54,7 @@ public class VistaPrincipalComponent implements ActionListener {
     }
 
     public void cerrar(){
+        windowClosing(new java.awt.event.WindowEvent(vistaPrincipalTemplate,WindowEvent.WINDOW_CLOSING));
         System.exit(0);
     }
 
@@ -112,5 +116,41 @@ public class VistaPrincipalComponent implements ActionListener {
 
     public void moverVentana(int posicionX, int posicionY){
         this.vistaPrincipalTemplate.setLocation(posicionX,posicionY);
+    }
+
+    //MÉTODOS DE WINDOWSLISTENER
+    @Override
+    public void windowOpened(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent windowEvent) {
+        Archivo.guardarDatos();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent windowEvent) {
+
     }
 }

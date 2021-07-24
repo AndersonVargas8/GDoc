@@ -4,6 +4,8 @@ package logica;
 import datos.*;
 import estructuras.listas.ListaEncadenadaDoble;
 import estructuras.colas.Cola;
+import gui.servicios.serviciosLogicos.DocumentosService;
+
 import java.io.*;
 import java.time.ZonedDateTime;
 /**
@@ -12,104 +14,12 @@ import java.time.ZonedDateTime;
  */
 public class Archivo{
     /**
-     * Eporta elementos de Documento guardados como una lista doblemente encadenada
-     * @param publicaciones
+     * Guarda todos los elementos necesarios para que la información persista
      */
-    public static void ExportarTXT(ListaEncadenadaDoble<Documento1> publicaciones){
-        File archivo = new File("src/logica/documentos.txt").getAbsoluteFile();
-        FileOutputStream escritor = null;
-        ObjectOutputStream encriptador = null;
-        try {
-            archivo.createNewFile();
-            escritor = new FileOutputStream(archivo);
-            encriptador = new ObjectOutputStream(escritor);
-            encriptador.writeObject(publicaciones);
-        } catch (IOException ex) {
-            System.err.println(ex.getMessage());
-        }
-        finally{
-            if(escritor != null){
-                try {
-                    escritor.close();
-                    if(escritor != null){
-                        escritor.close();
-                    }
-                } catch (IOException ex) {
-                    System.err.println(ex.getMessage());
-                }
-            }
-        }
+    public static void guardarDatos(){
+        ControlDocumentos.guardarDatos();
+        ControlMovimientos.guardarDatos();
+        ControlPendientes.guardarDatos();
     }
 
-    /**
-     * Retorna los elementos de Documento gurdados en una lista
-     * @return
-     */
-    public static ListaEncadenadaDoble<Documento1> ImportarTXT(){
-        File archivo = new File ("src/logica/documentos.txt").getAbsoluteFile();
-        FileInputStream lector = null;
-        ObjectInputStream decodificador = null;
-        ListaEncadenadaDoble<Documento1> publicaciones = new ListaEncadenadaDoble<>();
-        try {
-            lector = new FileInputStream(archivo);
-            decodificador = new ObjectInputStream(lector);
-            publicaciones = (ListaEncadenadaDoble<Documento1>) decodificador.readObject();
-        } catch (FileNotFoundException ex) {
-            System.err.println(ex.getMessage());
-        } catch (IOException | ClassNotFoundException ex) {
-            System.err.println(ex.getMessage());
-        }
-        return publicaciones;
-    }
-
-    /**
-     * Inicializa el docuemento docs.cvs
-     * @return
-     * @throws IOException
-     */
-    public static ListaEncadenadaDoble<Documento1> cargarDocumentos()throws IOException{
-        return  cargarDocumentos("src/logica/docs.csv");
-    }
-
-    /**
-     * Inicializa y ordena la información respectiva a cada elemento subido por Ubicacón, Historial, Id, Fecha, etc y lo guarda en documento
-     * @param ruta
-     * @return
-     * @throws IOException
-     */
-    private static ListaEncadenadaDoble<Documento1> cargarDocumentos(String ruta)throws IOException{
-        ListaEncadenadaDoble<Documento1> documentos = new ListaEncadenadaDoble<>();
-        String SEPARATOR=";";
-        String QUOTE="\"";
-        Cola<String> nom = new Cola<>();
-        BufferedReader br = null;
-        try {
-            br =new BufferedReader(new FileReader(ruta));
-            String line = br.readLine();
-             while (null!=line) {
-                String [] fields = line.split(SEPARATOR);
-                Ubicacion ub = new Ubicacion(fields[3], fields[4]);
-                Historial hi = new Historial(fields[0], fields[6],fields[7]);
-                Integer id = Integer.parseInt(fields[1]);
-                String nomdoc = fields[2];
-                ZonedDateTime fecha_ingreso = ZonedDateTime.now();
-                ZonedDateTime fecha_expiracion = fecha_ingreso.plusYears(Integer.parseInt(fields[5]));
-
-                Documento1 doc = new Documento1(id, nomdoc, ub, fecha_ingreso, fecha_expiracion, new ListaEncadenadaDoble<Historial>(hi));
-                documentos.insertarAlFinal(doc);
-
-                line = br.readLine();
-             }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-         if (null!=br) {
-            br.close();
-         }
-        }
-
-        documentos.eliminarDuplicados();
-      return documentos;
-    }
 }

@@ -1,6 +1,8 @@
 package gui;
 
 import gui.cliente.login.LoginComponent;
+import logica.Archivo;
+
 import javax.swing.SwingUtilities;
 
 /**

@@ -3,12 +3,13 @@ package gui.cliente.login;
 import gui.cliente.vistaPrincipal.VistaPrincipalComponent;
 import gui.servicios.serviciosGraficos.RecursosService;
 import gui.servicios.serviciosLogicos.UsuarioService;
+import logica.Archivo;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class LoginComponent implements ActionListener, MouseListener{
+public class LoginComponent implements ActionListener, MouseListener,WindowListener{
     private LoginTemplate loginTemplate;
     private VistaPrincipalComponent vistaPrincipal;
     private UsuarioService sUsuario;
@@ -21,6 +22,7 @@ public class LoginComponent implements ActionListener, MouseListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == loginTemplate.getbCerrar()){
+            windowClosing(new java.awt.event.WindowEvent(loginTemplate,WindowEvent.WINDOW_CLOSING));
             System.exit(0);
         }
 
@@ -113,4 +115,41 @@ public class LoginComponent implements ActionListener, MouseListener{
     }
 
 
+
+    //MÉTODOS DE WINDOWSlISTENER
+    @Override
+    public void windowOpened(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent windowEvent) {
+        if(vistaPrincipal != null)
+            Archivo.guardarDatos();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent windowEvent) {
+
+    }
 }
