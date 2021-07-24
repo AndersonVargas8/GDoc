@@ -21,7 +21,7 @@ public class LoginTemplate extends JFrame{
     private JButton bEntrar,bCerrar;
     
     //Objetos decoradores
-    private ImageIcon iFondo,iLogo,iDimAux;
+    private ImageIcon iFondo,iLogo,iLogoP,iDimAux;
     
     //Servicios
     ObjGraficosService sObjGraficos;
@@ -43,6 +43,8 @@ public class LoginTemplate extends JFrame{
         this.crearJButtons();
 
         //Configuración de la pantalla
+        iDimAux = new ImageIcon(iLogoP.getImage().getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING));
+        this.setIconImage(iDimAux.getImage());
         setLayout(null);
         this.addWindowListener(loginComponent);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -55,6 +57,7 @@ public class LoginTemplate extends JFrame{
     private void crearObjetosDecoradores(){
         iFondo = new ImageIcon("recursos/imagenes/fondo.jpg");
         iLogo = new ImageIcon("recursos/imagenes/logo.png");
+        iLogoP = new ImageIcon("recursos/imagenes/GDoc.png");
     }
     
     private void crearJPanels(){

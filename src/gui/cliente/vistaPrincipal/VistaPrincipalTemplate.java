@@ -2,6 +2,7 @@ package gui.cliente.vistaPrincipal;
 
 import gui.servicios.serviciosGraficos.ObjGraficosService;
 import javax.swing.*;
+import java.awt.*;
 
 /**
  *
@@ -24,6 +25,9 @@ public class VistaPrincipalTemplate extends JFrame{
         this.crearJPanels();
 
         //Configuración de la página
+        ImageIcon iLogoP = new ImageIcon("recursos/imagenes/GDoc.png");
+        ImageIcon iDimAux = new ImageIcon(iLogoP.getImage().getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING));
+        this.setIconImage(iDimAux.getImage());
         this.addWindowListener(vistaPrincipalComponent);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setUndecorated(true);
