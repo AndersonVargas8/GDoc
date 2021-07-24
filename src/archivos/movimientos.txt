@@ -1,1 +1,3 @@
+3,Hoja de vida,Autenticación,Estante-Carpeta,Modificación,24/07/2021/16:11:57,Anderson
+3,Hoja de vida,Nombre,Estante-Carpeta,Inserción,24/07/2021/16:09:00,Anderson
 2,Hoja de vida,Nombre,Estante-Carpeta,InserciÃ³n,24/07/2021/14:28:37,Anderson
