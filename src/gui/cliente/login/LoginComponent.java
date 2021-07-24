@@ -39,8 +39,8 @@ public class LoginComponent implements ActionListener, MouseListener{
         String claveUsuario = new String(loginTemplate.gettClaveUsuario().getPassword());
 
         //----------------------------------------
-       nombreUsuario = "Anderson";
-        claveUsuario = "1234";
+       //nombreUsuario = "Anderson";
+        //claveUsuario = "1234";
         // ----------------------
         if(!nombreUsuario.isEmpty() && !claveUsuario.isEmpty()){
             if(sUsuario.verificarDatosUsuario(nombreUsuario,claveUsuario))

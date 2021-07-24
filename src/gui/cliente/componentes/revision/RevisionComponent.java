@@ -1,21 +1,18 @@
 package gui.cliente.componentes.revision;
 
 import datos.Documento;
-import datos.DocumentoPriorizado;
-import datos.Fecha;
-import datos.Movimiento;
 import gui.cliente.vistaPrincipal.VistaPrincipalComponent;
 import gui.servicios.serviciosGraficos.RecursosService;
 import gui.servicios.serviciosLogicos.*;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class RevisionComponent implements ActionListener, MouseListener{
     private RevisionTemplate revisionTemplate;
     private RevisionService sRevision;
     private DocumentosService sDocumentos;
+    private RecursosService sRecursos;
 
     //Componentes
     private VistaPrincipalComponent vistaPrincipalComponent;
@@ -31,6 +28,7 @@ public class RevisionComponent implements ActionListener, MouseListener{
         this.revisionTemplate = new RevisionTemplate(this);
         this.sRevision = RevisionService.getServicio();
         this.sDocumentos = DocumentosService.getServicio();
+        this.sRecursos = RecursosService.getServicio();
 
         //Hace que el componente pendientes se muestre de inicio
         this.pendientesComponent = new PendientesComponent(this);
@@ -50,13 +48,13 @@ public class RevisionComponent implements ActionListener, MouseListener{
         if(e.getSource() == revisionTemplate.getbEliminar())
             actualizarPrioridad();
         if(e.getSource() == revisionTemplate.getbPendientes()) {
-            revisionTemplate.getbPendientes().setBackground(RecursosService.getServicio().getColorGrisBotonOscuro1());
-            revisionTemplate.getbProximos().setBackground(RecursosService.getServicio().getColorGrisBoton1());
+            revisionTemplate.getbPendientes().setBackground(sRecursos.getColorGrisBotonOscuro1());
+            revisionTemplate.getbProximos().setBackground(sRecursos.getColorGrisBoton1());
             mostrarComponentes(e.getActionCommand());
         }
         if(e.getSource() == revisionTemplate.getbProximos()) {
-            revisionTemplate.getbProximos().setBackground(RecursosService.getServicio().getColorGrisBotonOscuro1());
-            revisionTemplate.getbPendientes().setBackground(RecursosService.getServicio().getColorGrisBoton1());
+            revisionTemplate.getbProximos().setBackground(sRecursos.getColorGrisBotonOscuro1());
+            revisionTemplate.getbPendientes().setBackground(sRecursos.getColorGrisBoton1());
             mostrarComponentes(e.getActionCommand());
         }
     }
@@ -168,13 +166,15 @@ public class RevisionComponent implements ActionListener, MouseListener{
     }
 
     public void actualizarValores(){
-        restarurarValores();
+        restaurarValores();
         vistaPrincipalComponent.actualizarValores();
     }
 
-    public void restarurarValores(){
+    public void restaurarValores(){
         sRevision.actualizarDatos();
-        pendientesComponent.restarurarValores();
+        pendientesComponent.restaurarValores();
+        if(proximosComponent != null)
+            proximosComponent.restaurarValores();
         agregarRegistro();
     }
 }

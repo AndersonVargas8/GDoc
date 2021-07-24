@@ -93,7 +93,7 @@ public class PendientesComponent implements ActionListener, MouseListener {
             JOptionPane.showMessageDialog(null,"seleccione una fila","Error",JOptionPane.ERROR_MESSAGE);
 
     }
-    public void restarurarValores(){
+    public void restaurarValores(){
         mostrarRegistros(sPendientes.getPendientes());
     }
     //ACCIONES DEL MOUSE
