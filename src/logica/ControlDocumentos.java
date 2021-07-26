@@ -7,6 +7,7 @@ import estructuras.listas.ListaEncadenadaDoble;
 import gui.servicios.serviciosLogicos.DocumentosService;
 
 import java.io.*;
+import java.nio.charset.Charset;
 
 public class ControlDocumentos {
     private AVL<Documento> documentos;
@@ -18,13 +19,14 @@ public class ControlDocumentos {
     }
 
     public void cargarDatos() {
-        File archivo = null;
-        FileReader fr = null;
+        FileInputStream archivo = null;
         BufferedReader br = null;
         try {
-            archivo = new File("src/archivos/documentos.txt");
-            fr = new FileReader(archivo);
-            br = new BufferedReader(fr);
+            archivo = new FileInputStream("src/archivos/documentos.txt");
+            br = new BufferedReader(
+                    new InputStreamReader(archivo,Charset.forName("UTF-8").newDecoder())
+            );
+
             String linea = br.readLine();
             numeroRegistro = Integer.parseInt(linea);
 
@@ -42,7 +44,7 @@ public class ControlDocumentos {
 
                 documentos.insertar(documento);
             }
-            fr.close();
+            archivo.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,10 +52,12 @@ public class ControlDocumentos {
 
     public static void guardarDatos(){
         ListaEncadenadaDoble<Documento> documentos = DocumentosService.getServicio().imprimirTodo();
-        FileWriter fw = null;
+        FileOutputStream archivo = null;
         try{
-            fw = new FileWriter("src/archivos/documentos.txt");
-            BufferedWriter bw = new BufferedWriter(fw);
+            archivo = new FileOutputStream("src/archivos/documentos.txt");
+            BufferedWriter bw = new BufferedWriter(
+                    new OutputStreamWriter(archivo, Charset.forName("UTF-8").newEncoder())
+            );
             bw.write(DocumentosService.getServicio().getSiguienteId() + "\n");
             for(Documento doc: documentos)
                 bw.write(doc.getId() + ","
@@ -68,9 +72,9 @@ public class ControlDocumentos {
         }catch(IOException e){
             e.printStackTrace();
         }finally {
-            if(fw != null){
+            if(archivo != null){
                 try {
-                    fw.close();
+                    archivo.close();
                 }catch(IOException e){
                     e.printStackTrace();
                 }

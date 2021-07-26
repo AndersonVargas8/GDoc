@@ -1,3 +1,46 @@
-3,Hoja de vida,Autenticaci�n,Estante-Carpeta,Modificaci�n,24/07/2021/16:11:57,Anderson
-3,Hoja de vida,Nombre,Estante-Carpeta,Inserci�n,24/07/2021/16:09:00,Anderson
-2,Hoja de vida,Nombre,Estante-Carpeta,Inserción,24/07/2021/14:28:37,Anderson
+27,Hoja de vida,Nombre,Estante-Carpeta,Inserción,26/07/2021/22:40:34,Omar
+26,Hoja de vida,Nombre,Estante-Carpeta,Inserción,26/07/2021/22:40:34,Omar
+25,Hoja de vida,Nombre,Estante-Carpeta,Inserción,26/07/2021/22:40:33,Omar
+24,Hoja de vida,Nombre,Estante-Carpeta,Inserción,26/07/2021/22:40:33,Omar
+23,Hoja de vida,Nombre,Estante-Carpeta,Inserción,26/07/2021/22:40:33,Omar
+22,Hoja de vida,Nombre,Estante-Carpeta,Inserción,26/07/2021/22:40:33,Omar
+17,Memorando,Andres Pérez,J-15,Eliminación,26/07/2021/22:40:02,Anderson
+21,Hoja de vida,Nombre,Estante-Carpeta,Eliminación,26/07/2021/22:39:59,Anderson
+20,Memorando,Jennifer mi love,H-77,Eliminación,26/07/2021/22:39:57,Anderson
+3,Liquidación,Leonardo Castillo,M-21,Eliminación,26/07/2021/22:38:54,Anderson
+18,Afiliación Pensión,Natalia Valencia,M-14,Eliminación,26/07/2021/22:38:18,Anderson
+6,Afiliación Salud,Rocío Durán,P-45,Eliminación,26/07/2021/22:38:13,Anderson
+21,Hoja de vida,Nombre,Estante-Carpeta,Inserción,26/07/2021/22:36:56,Anderson
+13,Contrato,Angie Cárdenas,C-50,Eliminación,26/07/2021/22:32:36,Anderson
+10,Contrato,Alejandra Rodriguez,L-24,Eliminación,26/07/2021/22:31:48,Anderson
+19,Incapacidad,Michael Álvarez,D-43,Modificación,26/07/2021/22:31:06,Anderson
+20,Memorando,Jennifer mi love,H-77,Inserción,26/07/2021/22:30:40,Anderson
+19,Incapacidad,Michael Álvarez,H-43,Inserción,04/08/2016/12:57:59,Omar
+18,Afiliación Pensión,Natalia Valencia,M-14,Inserción,26/07/2012/8:34:20,Anderson
+16,Hoja de vida,Nombre,Estante-Carpeta,Eliminación,26/07/2021/11:56:50,Andres
+17,Memorando,Andres Pérez,J-15,Inserción,17/06/2015/11:56:41,Andres
+15,Contrato,Johan Ramirez,J-11,Inserción,20/01/2018/7:24:02,Omar
+14,Liquidación,Daniela Álvarez,J-13,Inserción,26/07/2021/11:55:34,Omar
+13,Contrato,Angie Cárdenas,C-50,Inserción,26/07/2021/11:55:10,Anderson
+5,Incapacidad,Daniela Álvarez,J-13,Modificación,26/07/2021/11:54:24,Anderson
+11,Incapacidad,Rocío Durán,P-45,Modificación,26/07/2021/11:54:10,Anderson
+12,Afiliación Salud,Camilo Cortés,B-5,Inserción,09/05/2019/13:23:44,Omar
+11,Incapacidad,Rocío Durán,N-3,Inserción,26/07/2021/11:53:06,Omar
+10,Contrato,Alejandra Rodriguez,L-24,Inserción,25/07/2020/9:42:35,Omar
+9,Otro si,Juliette Ibarra,H-8,Eliminación,26/07/2021/1:21:12,Anderson
+8,Hoja de vida,Dilan Serrato,B-5,Eliminación,26/07/2021/11:52:11,Andres
+3,Liquidación,Leonardo Castillo,M-21,Modificación,26/07/2021/11:51:58,Anderson
+6,Afiliación Salud,Rocío Durán,P-45,Modificación,26/07/2021/11:51:52,Andres
+9,Otro si,Juliette Ibarra,H-8,Inserción,26/07/2021/11:51:43,Andres
+8,Hoja de vida,Dilan Serrato,B-5,Inserción,26/07/2021/11:51:08,Andres
+7,Memorando,Jorge Salinas,H-43,Inserción,26/07/2021/13:45:47,Anderson
+6,Afiliación Salud,Rocío Durán,M-45,Inserción,03/11/2015/16:10:21,Anderson
+1,Liquidación,Cancelación Contrato María,F-14,Eliminación,26/07/2021/11:35:38,Omar
+5,Incapacidad,Daniela Álvarez,M-4,Inserción,26/07/2021/17:38:16,Omar
+3,Contrato,Leonardo Castillo,M-21,Modificación,26/07/2021/11:32:41,Omar
+4,Memorando,Crhistian Terán,D-34,Eliminación,26/07/2021/11:32:24,Anderson
+4,Memorando,Crhistian Terán,D-34,Inserción,26/07/2021/11:31:51,Andres
+3,Contrato,Leonardo Castillo,Y-21,Inserción,11/12/2017/11:31:27,Andres
+2,Hoja de vida,Daniela Álvarez,J-13,Inserción,26/07/2021/11:31:09,Andres
+1,Liquidación,Cancelación Contrato María,F-3,Inserción,26/07/2021/11:31:09,Andres
+1,Liquidación,Contrato María,F-14,Inserción,26/07/2021/0:15:58,Omar
