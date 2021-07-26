@@ -1,3 +1,2 @@
-3,Hoja de vida,Autenticaci髇,Estante-Carpeta,Modificaci髇,24/07/2021/16:11:57,Anderson
-3,Hoja de vida,Nombre,Estante-Carpeta,Inserci髇,24/07/2021/16:09:00,Anderson
-2,Hoja de vida,Nombre,Estante-Carpeta,Inserci贸n,24/07/2021/14:28:37,Anderson
+1,Liquidaci贸n,Cancelaci贸n Contrato Mar铆a,F-14,Modificaci贸n,26/07/2021/0:15:58,Anderson
+1,Liquidaci贸n,Contrato Mar铆a,F-14,Inserci贸n,26/07/2021/0:15:58,Omar

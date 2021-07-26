@@ -9,6 +9,8 @@ import gui.servicios.serviciosLogicos.DocumentosService;
 import gui.servicios.serviciosLogicos.MovimientosService;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class ControlMovimientos {
     private ListaEncadenadaSimple<Movimiento> movimientos;
@@ -19,14 +21,15 @@ public class ControlMovimientos {
     }
 
     public void cargarDatos(){
-        File archivo;
+        FileInputStream archivo;
         FileReader fr;
         BufferedReader br;
 
         try{
-            archivo = new File("src/archivos/movimientos.txt");
-            fr = new FileReader(archivo);
-            br = new BufferedReader(fr);
+            archivo = new FileInputStream("src/archivos/movimientos.txt");
+            br = new BufferedReader(
+                    new InputStreamReader(archivo,Charset.forName("UTF-8").newDecoder())
+            );
 
             String linea;
 
@@ -44,7 +47,7 @@ public class ControlMovimientos {
 
                 movimientos.insertarAlFinal(movimiento);
             }
-            fr.close();
+            archivo.close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -52,10 +55,12 @@ public class ControlMovimientos {
 
     public static void guardarDatos(){
         ListaEncadenadaSimple<Movimiento> movimientos = MovimientosService.getServicio().imprimirTodo();
-        FileWriter fw = null;
+        FileOutputStream archivo = null;
         try{
-            fw = new FileWriter("src/archivos/movimientos.txt");
-            BufferedWriter bw = new BufferedWriter(fw);
+            archivo = new FileOutputStream("src/archivos/movimientos.txt");
+            BufferedWriter bw = new BufferedWriter(
+                    new OutputStreamWriter(archivo, Charset.forName("UTF-8").newEncoder())
+            );
             for(Movimiento mov: movimientos)
                 bw.write(mov.getIdDocumento() + ","
                         + mov.getTipoDocumento() + ","
@@ -69,9 +74,9 @@ public class ControlMovimientos {
         }catch(IOException e){
             e.printStackTrace();
         }finally {
-            if(fw != null){
+            if(archivo != null){
                 try {
-                    fw.close();
+                    archivo.close();
                 }catch(IOException e){
                     e.printStackTrace();
                 }

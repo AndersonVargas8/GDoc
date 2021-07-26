@@ -1,4 +1,2 @@
-4
-3,Hoja de vida,Autenticaci�n,Estante,Carpeta,24/07/2021,24/07/2022
-2,Hoja de vida,Nombre,Estante,Carpeta,24/07/2021,24/07/2022
-1,Hoja de vida,1000782062,H,3,08/04/2019,08/04/2020
+2
+1,Liquidación,Cancelación Contrato María,F,14,18/05/2016,18/05/2020
