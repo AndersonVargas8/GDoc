@@ -5,6 +5,7 @@ import gui.cliente.componentes.movimientos.MovimientosComponent;
 import gui.cliente.componentes.navegacionUsuario.NavegacionUsuarioComponent;
 import gui.cliente.componentes.registros.RegistrosComponent;
 import gui.cliente.componentes.revision.RevisionComponent;
+import gui.cliente.login.IniciarSesionComponent;
 import gui.cliente.login.LoginComponent;
 import logica.Archivo;
 
