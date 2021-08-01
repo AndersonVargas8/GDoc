@@ -1,6 +1,8 @@
 package estructuras.tablasHash;
 
-public class NodoHash<T,V>{
+import java.io.Serializable;
+
+public class NodoHash<T,V> implements Serializable {
     private T clave;
     private V valor;
 

@@ -2,6 +2,7 @@ package gui.cliente.login;
 
 import gui.cliente.componentes.revision.RevisionComponent;
 import gui.cliente.vistaPrincipal.VistaPrincipalComponent;
+import gui.servicios.serviciosGraficos.RecursosService;
 import logica.Archivo;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ public class LoginComponent implements ActionListener, MouseListener, WindowList
     private LoginTemplate loginTemplate;
     private VistaPrincipalComponent vistaPrincipal;
     private IniciarSesionComponent iniciarSesionComponent;
+    private RegistrarComponent registrarComponent;
 
     public LoginComponent(){
         loginTemplate = new LoginTemplate(this);
@@ -38,6 +40,32 @@ public class LoginComponent implements ActionListener, MouseListener, WindowList
 
     public void restaurarValores(){
         iniciarSesionComponent.restaurarValores();
+        if(registrarComponent != null)
+            registrarComponent.restaurarValores();
+    }
+
+    public void mostrarComponentes(String comando){
+        loginTemplate.getpContenido().removeAll();
+
+        switch (comando){
+            case "Iniciar Sesión":
+                loginTemplate.getpContenido().add(
+                        iniciarSesionComponent.getIniciarSesionTemplate()
+                );
+                iniciarSesionComponent.getIniciarSesionTemplate().revalidate();
+                break;
+
+            case "NUEVO USUARIO":
+                if(registrarComponent == null)
+                    this.registrarComponent = new RegistrarComponent(this);
+                loginTemplate.getpContenido().add(
+                        registrarComponent.getRegistrarTemplate()
+                );
+                loginTemplate.getbAtras().setVisible(true);
+                registrarComponent.getRegistrarTemplate().revalidate();
+                break;
+        }
+        loginTemplate.repaint();
     }
 
     @Override
@@ -45,6 +73,11 @@ public class LoginComponent implements ActionListener, MouseListener, WindowList
         if(e.getSource() == loginTemplate.getbCerrar()){
             windowClosing(new java.awt.event.WindowEvent(loginTemplate,WindowEvent.WINDOW_CLOSING));
             System.exit(0);
+        }
+
+        if(e.getSource() == loginTemplate.getbAtras()){
+            loginTemplate.getbAtras().setVisible(false);
+            mostrarComponentes("Iniciar Sesión");
         }
     }
 
@@ -70,6 +103,11 @@ public class LoginComponent implements ActionListener, MouseListener, WindowList
             boton.setForeground(Color.white);
             boton.setBackground(new Color(252, 34, 34));
         }
+        if(e.getSource() == loginTemplate.getbAtras()){
+            JButton boton = ((JButton) e.getSource());
+            boton.setForeground(Color.white);
+            boton.setBackground(RecursosService.getServicio().getColorGris());
+        }
     }
 
     @Override
@@ -79,7 +117,11 @@ public class LoginComponent implements ActionListener, MouseListener, WindowList
             boton.setForeground(Color.black);
             boton.setBackground(null);
         }
-
+        if(e.getSource() == loginTemplate.getbAtras()){
+            JButton boton = ((JButton) e.getSource());
+            boton.setForeground(Color.black);
+            boton.setBackground(null);
+        }
     }
 
     @Override
@@ -89,7 +131,7 @@ public class LoginComponent implements ActionListener, MouseListener, WindowList
 
     @Override
     public void windowClosing(WindowEvent windowEvent) {
-        if(vistaPrincipal != null)
+        if(vistaPrincipal != null || registrarComponent != null)
             Archivo.guardarDatos();
     }
 

@@ -26,6 +26,13 @@ public class UsuarioService {
         return false;
     }
 
+    public boolean verificarUsuarioExistente(String nombreUsuario){
+        return cUsuario.verificarUsuario(nombreUsuario);
+    }
+
+    public void crearUsuario(String nombreUsuario, String claveUsuario){
+        cUsuario.agregarUsuario(new Usuario(nombreUsuario, claveUsuario));
+    }
     public Usuario getUsuarioConectado() {
         return this.usuarioConectado;
     }

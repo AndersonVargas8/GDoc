@@ -16,7 +16,7 @@ public class LoginTemplate extends JFrame{
     private JPanel pDerecha, pTitulo,pContenido;
     private JLabel lNombreEmpresa,lNombreProyecto;
     private JLabel lFondo,lLogo,lFavicon;
-    private JButton bCerrar;
+    private JButton bCerrar,bAtras;
     
     //Objetos decoradores
     private ImageIcon iFondo,iLogo,iLogoP,iDimAux;
@@ -132,9 +132,6 @@ public class LoginTemplate extends JFrame{
     }
 
     private void crearJButtons(){
-
-
-        
         bCerrar = sObjGraficos.construirJButton(
                 "X",
                 0, 0, 45, 40,
@@ -147,11 +144,29 @@ public class LoginTemplate extends JFrame{
               bCerrar.addActionListener(loginComponent);
               bCerrar.addMouseListener(loginComponent);
               pTitulo.add(bCerrar);
+
+        bAtras = sObjGraficos.construirJButton(
+                "←",
+                45, 0, 45, 40,
+                sRecursos.getcMano(),
+                null,
+                sRecursos.getFuenteCerrar(), null, null, null,
+                "c",
+                true
+        );
+        bAtras.addActionListener(loginComponent);
+        bAtras.addMouseListener(loginComponent);
+        pTitulo.add(bAtras);
+        bAtras.setVisible(false);
     }
 
 
     public JButton getbCerrar() {
         return bCerrar;
+    }
+
+    public JButton getbAtras(){
+        return bAtras;
     }
 
     public JPanel getpContenido() {

@@ -6,7 +6,7 @@ import gui.servicios.serviciosGraficos.RecursosService;
 import javax.swing.*;
 import java.awt.*;
 
-public class IniciarSesionTemplate extends JPanel{
+public class RegistrarTemplate extends JPanel {
     //Objetos gráficos
     private JLabel lTitulo,lUsuario,lClave;
     private JTextField tNombreUsuario;
@@ -16,12 +16,12 @@ public class IniciarSesionTemplate extends JPanel{
     //Servicios
     ObjGraficosService sObjGraficos;
     RecursosService sRecursos;
-    IniciarSesionComponent iniciarSesionComponent;
+    RegistrarComponent registrarComponent;
 
-    public IniciarSesionTemplate(IniciarSesionComponent iniciarSesionComponent){
+    public RegistrarTemplate(RegistrarComponent registrarComponent){
 
         //Obtención de servicios
-        this.iniciarSesionComponent = iniciarSesionComponent;
+        this.registrarComponent = registrarComponent;
         sObjGraficos = ObjGraficosService.getServicio();
         sRecursos = RecursosService.getServicio();
 
@@ -32,15 +32,15 @@ public class IniciarSesionTemplate extends JPanel{
 
         //Configuración de la pantalla
         setSize(550,390);
-        setLayout(null);
         setBackground(Color.white);
+        setLayout(null);
         setVisible(true);
     }
 
     private void crearJLabels(){
         lTitulo = sObjGraficos.construirJLabel(
-                "INICIAR SESIÓN",
-                50, 30, 190,40,
+                "REGISTRAR NUEVO USUARIO",
+                50, 30, 340,40,
                 null,
                 null,
                 new Font("Roboto",Font.BOLD,24),
@@ -51,8 +51,8 @@ public class IniciarSesionTemplate extends JPanel{
         this.add(lTitulo);
 
         lUsuario = sObjGraficos.construirJLabel(
-                "USUARIO",
-                50,100, 90,20,
+                "NUEVO USUARIO",
+                50,100, 120,20,
                 null,
                 null,
                 sRecursos.getFuenteMediana(),
@@ -63,8 +63,8 @@ public class IniciarSesionTemplate extends JPanel{
         this.add(lUsuario);
 
         lClave = sObjGraficos.construirJLabel(
-                "CONTRASEÑA",
-                50,180, 100,20,
+                "NUEVA CONTRASEÑA",
+                50,180, 160,20,
                 null,
                 null,
                 sRecursos.getFuenteMediana(),
@@ -78,7 +78,7 @@ public class IniciarSesionTemplate extends JPanel{
     private void crearJTextFields(){
 
         tNombreUsuario = sObjGraficos.construirJTextField(
-                "Ingrese su nombre de usuario",
+                "Ingrese un nuevo usuario",
                 50,130,400,40,
                 sRecursos.getFuenteTextFields(),
                 Color.WHITE,
@@ -86,7 +86,7 @@ public class IniciarSesionTemplate extends JPanel{
                 Color.black,
                 sRecursos.getBordeTextField(),
                 "l");
-        tNombreUsuario.addMouseListener(iniciarSesionComponent);
+        tNombreUsuario.addMouseListener(registrarComponent);
         this.add(tNombreUsuario);
 
         tClaveUsuario = sObjGraficos.construirJPasswordField(
@@ -98,13 +98,13 @@ public class IniciarSesionTemplate extends JPanel{
                 Color.BLACK,
                 sRecursos.getBordeTextField(),
                 "l");
-        tClaveUsuario.addMouseListener(iniciarSesionComponent);
+        tClaveUsuario.addMouseListener(registrarComponent);
         this.add(tClaveUsuario);
     }
 
     private void crearJButtons(){
-        bEntrar = sObjGraficos.construirJButton(
-                "ENTRAR",
+        bRegistrar= sObjGraficos.construirJButton(
+                "REGISTRAR",
                 50,280,140,40,
                 sRecursos.getcMano(),
                 null,
@@ -115,24 +115,8 @@ public class IniciarSesionTemplate extends JPanel{
                 "c",
                 true);
 
-        bEntrar.addActionListener(iniciarSesionComponent);
-        bEntrar.addMouseListener(iniciarSesionComponent);
-        this.add(bEntrar);
-
-        bRegistrar = sObjGraficos.construirJButton(
-                "NUEVO USUARIO",
-                200,280,140,40,
-                sRecursos.getcMano(),
-                null,
-                sRecursos.getFuenteBotones(),
-                new Color(0,134,190),
-                Color.white,
-                null,
-                "c",
-                true);
-
-        bRegistrar.addActionListener(iniciarSesionComponent);
-        bRegistrar.addMouseListener(iniciarSesionComponent);
+        bRegistrar.addActionListener(registrarComponent);
+        bRegistrar.addMouseListener(registrarComponent);
         this.add(bRegistrar);
 
     }
@@ -146,12 +130,7 @@ public class IniciarSesionTemplate extends JPanel{
         return tClaveUsuario;
     }
 
-    public JButton getbEntrar() {
-        return bEntrar;
-    }
-
     public JButton getbRegistrar(){
         return bRegistrar;
     }
-
 }

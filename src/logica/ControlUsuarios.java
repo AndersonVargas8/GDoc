@@ -2,56 +2,82 @@ package logica;
 
 import datos.Usuario;
 import estructuras.listas.ListaEncadenadaSimple;
+import estructuras.tablasHash.TablaHash;
 
 import java.io.*;
 
 public class ControlUsuarios {
-    private ListaEncadenadaSimple<Usuario> usuarios;
+    private static TablaHash<String,Usuario> usuarios;
 
     public ControlUsuarios(){
-        this.usuarios = new ListaEncadenadaSimple<>();
-        cargarDatos();
+        if(usuarios == null){
+            this.usuarios = new TablaHash<>();
+            cargarDatos();
+        }
     }
 
+
+
     public void cargarDatos(){
-        File archivo = null;
-        FileReader fr = null;
-        BufferedReader br = null;
+        File archivo = new File ("src/archivos/usuarios.txt").getAbsoluteFile();
+        FileInputStream lector = null;
+        ObjectInputStream decodificador = null;
+        try {
+            lector = new FileInputStream(archivo);
+            decodificador = new ObjectInputStream(lector);
+            usuarios = (TablaHash<String, Usuario>) decodificador.readObject();
+        } catch (FileNotFoundException ex) {
+            System.err.println(ex.getMessage());
+        } catch (IOException | ClassNotFoundException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
 
-        try{
-            archivo =  new File("src/archivos/usuarios.txt");
-            fr = new FileReader(archivo);
-            br = new BufferedReader(fr);
-
-            String linea;
-            while((linea = br.readLine()) != null){
-                String[] atributos = linea.split(",");
-
-                Usuario usuario = new Usuario(atributos[0],atributos[1]);
-                usuarios.insertarAlFinal(usuario);
+    public static void guardarDatos(){
+        File archivo = new File("src/archivos/usuarios.txt").getAbsoluteFile();
+        FileOutputStream escritor = null;
+        ObjectOutputStream encriptador = null;
+        try {
+            archivo.createNewFile();
+            escritor = new FileOutputStream(archivo);
+            encriptador = new ObjectOutputStream(escritor);
+            encriptador.writeObject(usuarios);
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+        finally{
+            if(escritor != null){
+                try {
+                    escritor.close();
+                    if(escritor != null){
+                        escritor.close();
+                    }
+                } catch (IOException ex) {
+                    System.err.println(ex.getMessage());
+                }
             }
-            fr.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
     public Usuario devolverUsuario(String nombreUsuario){
-        for(int i = 0; i < usuarios.cantidadDeElementos(); i++){
-            Usuario aux = usuarios.leerDato(i);
-            if(aux.getNombreUsuario().equals(nombreUsuario))
-                return aux;
-        }
+        if(usuarios.contiene(nombreUsuario))
+            return usuarios.leer(nombreUsuario);
         return null;
     }
 
     public boolean verificarUsuario(String nombreUsuario, String claveUsuario){
-        for(int i = 0; i < usuarios.cantidadDeElementos(); i++){
-            Usuario aux = usuarios.leerDato(i);
-            if(aux.getNombreUsuario().equals(nombreUsuario))
-                if(aux.getClaveUsuario().equals(claveUsuario))
-                    return true;
+        if(usuarios.contiene(nombreUsuario)){
+            if(usuarios.leer(nombreUsuario).getClaveUsuario().equals(claveUsuario))
+                return true;
         }
         return false;
+    }
+
+    public boolean verificarUsuario(String nombreUsuario){
+        return usuarios.contiene(nombreUsuario);
+    }
+
+    public void agregarUsuario(Usuario usuario){
+        usuarios.insertar(usuario.getNombreUsuario(),usuario);
     }
 }

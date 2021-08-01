@@ -1,58 +1,57 @@
 package gui.cliente.login;
 
-import gui.cliente.vistaPrincipal.VistaPrincipalComponent;
 import gui.servicios.serviciosLogicos.UsuarioService;
-import logica.Archivo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class IniciarSesionComponent implements ActionListener, MouseListener{
-    private IniciarSesionTemplate iniciarSesionTemplate;
+public class RegistrarComponent implements ActionListener, MouseListener {
+    private RegistrarTemplate registrarTemplate;
     private LoginComponent loginComponent;
     private UsuarioService sUsuario;
-    private String[] placeholders = { "Ingrese su nombre de usuario", "Contraseña" };
+    private String[] placeholders = { "Ingrese un nuevo usuario", "Contraseña" };
 
-    public IniciarSesionComponent(LoginComponent loginComponent){
+    public RegistrarComponent(LoginComponent loginComponent){
         sUsuario = UsuarioService.getServicio();
         this.loginComponent = loginComponent;
-        this.iniciarSesionTemplate = new IniciarSesionTemplate(this);
+        this.registrarTemplate = new RegistrarTemplate(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == iniciarSesionTemplate.getbEntrar()){
+        if(e.getSource() == registrarTemplate.getbRegistrar()){
             this.enviarDatos();
-        }
-        if(e.getSource() == iniciarSesionTemplate.getbRegistrar()){
-            loginComponent.mostrarComponentes(e.getActionCommand());
         }
     }
 
-    public IniciarSesionTemplate getIniciarSesionTemplate(){
-        return this.iniciarSesionTemplate;
+    public RegistrarTemplate getRegistrarTemplate(){
+        return this.registrarTemplate;
     }
 
     public void enviarDatos(){
-        String nombreUsuario = iniciarSesionTemplate.gettNombreUsuario().getText();
-        String claveUsuario = new String(iniciarSesionTemplate.gettClaveUsuario().getPassword());
+        String nombreUsuario = registrarTemplate.gettNombreUsuario().getText();
+        String claveUsuario = new String(registrarTemplate.gettClaveUsuario().getPassword());
 
         //----------------------------------------
-       //nombreUsuario = "Anderson";
+        //nombreUsuario = "Anderson";
         //claveUsuario = "1234";
         // ----------------------
         if(!nombreUsuario.isEmpty() && !claveUsuario.isEmpty() && !nombreUsuario.equals(placeholders[0]) && !claveUsuario.equals(placeholders[1])){
-            if(sUsuario.verificarDatosUsuario(nombreUsuario,claveUsuario))
-                entrar();
+            if(!sUsuario.verificarUsuarioExistente(nombreUsuario)) {
+                sUsuario.crearUsuario(nombreUsuario, claveUsuario);
+
+                JOptionPane.showMessageDialog(null, "Usuario creado exitosamente", "Mensaje", 1);
+                restaurarValores();
+            }
             else
-                JOptionPane.showMessageDialog(null,"Usuario o contraseña inválidos", "Error", 2);
+                JOptionPane.showMessageDialog(null,"El usuario ya existe", "Error", 2);
         }else{
             JOptionPane.showMessageDialog(null,"Ingrese todos los datos", "Error", 2);
         }
-    }
-    public void entrar(){
-        loginComponent.entrar();
     }
 
     @Override
@@ -93,7 +92,7 @@ public class IniciarSesionComponent implements ActionListener, MouseListener{
     }
 
     public void restaurarValores(){
-        this.getIniciarSesionTemplate().gettNombreUsuario().setText("Ingrese su nombre de usuario");
-        this.getIniciarSesionTemplate().gettClaveUsuario().setText("Contraseña");
+        this.getRegistrarTemplate().gettNombreUsuario().setText("Ingrese un nuevo usuario");
+        this.getRegistrarTemplate().gettClaveUsuario().setText("Contraseña");
     }
 }
