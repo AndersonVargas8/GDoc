@@ -10,6 +10,7 @@ import gui.servicios.serviciosLogicos.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
+import java.util.concurrent.TimeUnit;
 
 public class RegistrosComponent implements ActionListener, MouseListener, FocusListener {
     private RegistrosTemplate registrosTemplate;
@@ -44,10 +45,17 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
             mostrarRegistrosTabla();
         if(e.getSource() == registrosTemplate.getbInsertar())
             insertarRegistroTabla();
-        if(e.getSource() == registrosTemplate.getbModificar())
-            modificarRegistroTabla();
+        if(e.getSource() == registrosTemplate.getbModificar()) {
+            try {
+                modificarRegistroTabla();
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+        }
         if(e.getSource() == registrosTemplate.getbEliminar())
             eliminarRegistroTabla();
+        if(e.getSource() == registrosTemplate.getbSolicitar())
+            solicitarDocumento();
         if(e.getSource() == registrosTemplate.getbFiltrar())
             filtrarRegistrosTabla();
         if(e.getSource() == registrosTemplate.getbLimpiar())
@@ -148,6 +156,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         documento.setCarpeta(registrosTemplate.gettCarpeta().getText());
         documento.setIngreso(new Fecha(registrosTemplate.getlIngresoValor().getText().split("/")));
         documento.setExpiracion(new Fecha(registrosTemplate.getlExpiracionValor().getText().split("/")));
+        documento.setDisponible(true);
         sDocumentos.agregarDocumento(documento);
 
         sMovimientos.registrarMovimiento(idUltimoDoc,"Inserción");
@@ -156,11 +165,30 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         mostrarRegistrosTabla();
     }
 
-    public void modificarRegistroTabla(){
+    public void modificarRegistroTabla() throws InterruptedException {
         int fSeleccionada = registrosTemplate.getTabla().getSelectedRow();
         if(fSeleccionada != -1) {
             int id = (Integer) registrosTemplate.getModelo().getValueAt(fSeleccionada,0);
-            documento = sDocumentos.getDocumento(id);
+
+
+            System.out.println(registrosTemplate.getModelo().getValueAt(fSeleccionada,1));
+            //for(int i = 0; i < 10; i++){
+                registrosTemplate.getModelo().setValueAt(
+                        1,fSeleccionada,1
+                );
+                registrosTemplate.getTabla().repaint();
+
+
+            registrosTemplate.getModelo().setValueAt(
+                    2,fSeleccionada,1
+            );
+            registrosTemplate.getTabla().repaint();
+            registrosTemplate.getModelo().setValueAt(
+                    3,fSeleccionada,1
+            );
+            registrosTemplate.getTabla().repaint();
+            //}
+            /*documento = sDocumentos.getDocumento(id);
             documento.setTipo((String) registrosTemplate.getCbTipo().getSelectedItem());
             documento.setNombre(registrosTemplate.gettNombre().getText());
             documento.setEstante(registrosTemplate.gettEstante().getText());
@@ -173,7 +201,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
             eliminarRegistros();
             agregarRegistros(sDocumentos.getImpresion());
             actualizarValores();
-            restaurarValores();
+            restaurarValores();*/
         }
         else{
             JOptionPane.showMessageDialog(null,"seleccione una fila", "Error" , JOptionPane.ERROR_MESSAGE);
@@ -193,6 +221,18 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
             restaurarValores();
             eliminarRegistros();
             agregarRegistros(sDocumentos.getImpresion());
+        }else
+            JOptionPane.showMessageDialog(null,"seleccione una fila","Error",JOptionPane.ERROR_MESSAGE);
+
+    }
+
+    public void solicitarDocumento(){
+        int fSeleccionada = registrosTemplate.getTabla().getSelectedRow();
+        if(fSeleccionada != -1){
+            int id = (Integer) registrosTemplate.getModelo().getValueAt(fSeleccionada,0);
+            documento = sDocumentos.getDocumento(id);
+
+            JOptionPane.showMessageDialog(null,"Mantekito va a buscar " + documento.getNombre());
         }else
             JOptionPane.showMessageDialog(null,"seleccione una fila","Error",JOptionPane.ERROR_MESSAGE);
 
@@ -287,13 +327,17 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         for (int i = c -1 ; i >= 0; i--)
             dm.removeRow(i);
     }
+
+
+
     public void agregarRegistro(Documento documento){
         registrosTemplate.getModelo().addRow(
                 new Object[]{
                         documento.getId(),
                         documento.getTipo(),
                         documento.getNombre(),
-                        documento.getEstante().concat("-" + documento.getCarpeta()),
+                        "Bod." + sDocumentos.retornarBodega(documento.getTipo()) + " / " +
+                                documento.getEstante().concat("-" + documento.getCarpeta()),
                         documento.getIngreso().toString(),
                         documento.getExpiracion().toString()
                 }
@@ -310,5 +354,6 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         int anniosVencimiento = (registrosTemplate.getCbTipo().getSelectedIndex()) +1;
         return sFecha.getFechaPlus(registrosTemplate.getlIngresoValor().getText(),anniosVencimiento);
     }
+
 
 }

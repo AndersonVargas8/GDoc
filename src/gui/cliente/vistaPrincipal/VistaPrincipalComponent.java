@@ -88,6 +88,9 @@ public class VistaPrincipalComponent implements ActionListener, WindowListener {
                 );
                 movimientosComponent.getMovimientosTemplate().revalidate();
                 break;
+            case "Solicitudes":
+
+                break;
             case "Cerrar Sesión":
                 this.loginComponent.restaurarValores();
                 this.vistaPrincipalTemplate.setVisible(false);

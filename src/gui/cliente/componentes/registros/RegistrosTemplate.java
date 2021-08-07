@@ -17,7 +17,7 @@ public class RegistrosTemplate extends JPanel {
 
     //Componentes gráficos
     private JPanel pOpciones, pDatos, pLimpiar;
-    private JButton bMostrar, bInsertar, bFiltrar, bModificar, bEliminar,bLimpiar;
+    private JButton bMostrar, bInsertar, bFiltrar, bModificar, bEliminar,bLimpiar, bSolicitar;
     private JTextField tConsulta;
     private JLabel lTitulo, lDatos, lId,lIdValor, lTipo, lNombre, lEstante, lCarpeta,
             lIngreso, lIngresoValor, lExpiracion, lExpiracionValor;
@@ -92,7 +92,7 @@ public class RegistrosTemplate extends JPanel {
 
         // BOTÓN MOSTRAR--------------------------------------------------------------------
         bMostrar = sObjGraficos.construirJButton(
-                "Mostrar todo", 50, 145, 120, 35, sRecursos.getcMano(), null, sRecursos.getFuenteBotones(),
+                "Mostrar todo", 50, 145, 100, 35, sRecursos.getcMano(), null, sRecursos.getFuenteBotones(),
                 sRecursos.getColorPrincipal(), Color.WHITE, null, "c", true
         );
         bMostrar.addMouseListener(registrosComponent);
@@ -101,7 +101,7 @@ public class RegistrosTemplate extends JPanel {
 
         // BOTÓN INSERTAR--------------------------------------------------------------------
         bInsertar = sObjGraficos.construirJButton(
-                "Insertar", 200, 145, 120, 35, sRecursos.getcMano(), null, sRecursos.getFuenteBotones(),
+                "Insertar", 170, 145, 100, 35, sRecursos.getcMano(), null, sRecursos.getFuenteBotones(),
                 sRecursos.getColorPrincipal(), Color.WHITE, null, "c", true
         );
         bInsertar.addMouseListener(registrosComponent);
@@ -110,7 +110,7 @@ public class RegistrosTemplate extends JPanel {
 
         // BOTÓN MODIFICAR--------------------------------------------------------------------
         bModificar = sObjGraficos.construirJButton(
-                "Modificar", 350, 145, 120, 35, sRecursos.getcMano(), null, sRecursos.getFuenteBotones(),
+                "Modificar", 290, 145, 100, 35, sRecursos.getcMano(), null, sRecursos.getFuenteBotones(),
                 sRecursos.getColorPrincipal(), Color.WHITE, null, "c", true
         );
         bModificar.addMouseListener(registrosComponent);
@@ -119,12 +119,21 @@ public class RegistrosTemplate extends JPanel {
 
         // BOTÓN ELIMINAR--------------------------------------------------------------------
         bEliminar= sObjGraficos.construirJButton(
-                "Eliminar", 500, 145, 120, 35, sRecursos.getcMano(), null, sRecursos.getFuenteBotones(),
+                "Eliminar", 410, 145, 100, 35, sRecursos.getcMano(), null, sRecursos.getFuenteBotones(),
                 sRecursos.getColorPrincipal(), Color.WHITE, null, "c", true
         );
         bEliminar.addMouseListener(registrosComponent);
         bEliminar.addActionListener(registrosComponent);
         pOpciones.add(bEliminar);
+
+        // BOTÓN SOLICITAR--------------------------------------------------------------------
+        bSolicitar= sObjGraficos.construirJButton(
+                "Solicitar", 530, 145, 100, 35, sRecursos.getcMano(), null, sRecursos.getFuenteBotones(),
+                sRecursos.getColorPrincipal(), Color.WHITE, null, "c", true
+        );
+        bSolicitar.addMouseListener(registrosComponent);
+        bSolicitar.addActionListener(registrosComponent);
+        pOpciones.add(bSolicitar);
 
         //CHECK ID----------------------------
         checkId = sObjGraficos.construirJCheckBox(
@@ -382,6 +391,10 @@ public class RegistrosTemplate extends JPanel {
 
     public JButton getbEliminar() {
         return bEliminar;
+    }
+
+    public JButton getbSolicitar(){
+        return bSolicitar;
     }
 
     public JTextField gettConsulta() {

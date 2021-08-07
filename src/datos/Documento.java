@@ -6,6 +6,7 @@ public class Documento implements Comparable<Documento>{
     private int id;
     private String tipo, nombre, estante, carpeta;
     private Fecha ingreso,expiracion;
+    private boolean disponible;
 
     public int getId() {
         return id;
@@ -61,6 +62,14 @@ public class Documento implements Comparable<Documento>{
 
     public void setExpiracion(Fecha expiracion) {
         this.expiracion = expiracion;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 
     @Override

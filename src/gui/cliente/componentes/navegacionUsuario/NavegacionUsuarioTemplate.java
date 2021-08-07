@@ -18,10 +18,10 @@ public class NavegacionUsuarioTemplate extends JPanel {
     private JPanel pSuperior, pMedio, pInferior;
     private JLabel lIconoUsuario,lUsuario,lCantidad, lNumCantidad, lVencidos, lResumen,
             lNumVencidos, lPendientes, lNumPendientes;
-    private JButton bRevision, bRegistros, bMovimientos, bCerrarSesion;
+    private JButton bRevision, bRegistros, bMovimientos, bSolicitudes, bCerrarSesion;
 
     //Objetos decoradores
-    private ImageIcon iUsuario, iRevision, iRegistros, iMovimientos, iCerrarSesion, iDimAux;
+    private ImageIcon iUsuario, iRevision, iRegistros, iMovimientos, iSolicitudes, iCerrarSesion, iDimAux;
     private Border bVacio, bDifuminado;
 
     //Servicios
@@ -79,6 +79,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
         iRevision = new ImageIcon("recursos/imagenes/revision.png");
         iRegistros = new ImageIcon("recursos/imagenes/registros.png");
         iMovimientos = new ImageIcon("recursos/imagenes/movimientos.png");
+        iSolicitudes = new ImageIcon("recursos/imagenes/solicitudes.png");
         iCerrarSesion = new ImageIcon("recursos/imagenes/salir.png");
         bVacio = new EmptyBorder(2,20,2,2);
         bDifuminado = BorderFactory.createEtchedBorder(EtchedBorder.RAISED,
@@ -202,6 +203,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
     }
 
     public void crearJButtons(){
+        //BOTÓN REVISIÓN-----------------------
         iDimAux = new ImageIcon(
                 iRevision.getImage()
                         .getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING)
@@ -222,6 +224,8 @@ public class NavegacionUsuarioTemplate extends JPanel {
         this.bRevision.addMouseListener(navegacionUsuarioComponent);
         this.pInferior.add(bRevision);
 
+
+        //BOTÓN REGISTROS-----------------------------
         iDimAux = new ImageIcon(
                 iRegistros.getImage()
                         .getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING)
@@ -242,6 +246,7 @@ public class NavegacionUsuarioTemplate extends JPanel {
         bRegistros.addMouseListener(navegacionUsuarioComponent);
         this.pInferior.add(bRegistros);
 
+        //BOTÓN MOVIMIENTOS ------------------------------
         iDimAux = new ImageIcon(
                 iMovimientos.getImage()
                         .getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING)
@@ -262,13 +267,36 @@ public class NavegacionUsuarioTemplate extends JPanel {
         this.bMovimientos.addMouseListener(navegacionUsuarioComponent);
         this.pInferior.add(bMovimientos);
 
+        //BOTÓN SOLICITUDES ------------------------------
+        iDimAux = new ImageIcon(
+                iSolicitudes.getImage()
+                        .getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING)
+        );
+        bSolicitudes = sObjGraficos.construirJButton(
+                "      Solicitudes",
+                30, 170, 200, 40,
+                sRecursos.getcMano(),
+                iDimAux,
+                sRecursos.getFuenteBotones(),
+                null,
+                Color.WHITE,
+                bVacio,
+                "l",
+                true
+        );
+        this.bSolicitudes.addActionListener(navegacionUsuarioComponent);
+        this.bSolicitudes.addMouseListener(navegacionUsuarioComponent);
+        this.pInferior.add(bSolicitudes);
+
+
+        //BOTÓN CERRAR SESIÓN---------------------------
         iDimAux = new ImageIcon(
                 iCerrarSesion.getImage()
                         .getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING)
         );
         bCerrarSesion = sObjGraficos.construirJButton(
                 "      Cerrar Sesión",
-                30, 170, 200, 40,
+                30, 220, 200, 40,
                 sRecursos.getcMano(),
                 iDimAux,
                 sRecursos.getFuenteBotones(),

@@ -1,8 +1,9 @@
 package estructuras.colas;
 import estructuras.arreglos.ArregloDinamico;
+import estructuras.pilas.Pila;
 
 public class ColaPrioritaria<T extends Comparable <? super T>>{
-    ArregloDinamico<T> arreglo;
+    private ArregloDinamico<T> arreglo;
 
     public ColaPrioritaria(){
         this.arreglo = new ArregloDinamico<>();
@@ -13,6 +14,16 @@ public class ColaPrioritaria<T extends Comparable <? super T>>{
         heap(dato,arreglo.getSize()-1);
     }
 
+    public void actualizar(){
+        Pila<T> pila = new Pila<>();
+        while(!this.estaVacia()){
+            pila.push(this.eliminarMinimo());
+        }
+
+        while(!pila.estaVacia()){
+            this.insertar(pila.pop());
+        }
+    }
     private void heap(T dato, int posicion){
         int pos_padre = (posicion - 1)/2;
         T padre = arreglo.get(pos_padre);
@@ -76,6 +87,6 @@ public class ColaPrioritaria<T extends Comparable <? super T>>{
     }
 
     public void vaciar(){
-        this.arreglo.vaciar();
+        arreglo.vaciar();
     }
 }

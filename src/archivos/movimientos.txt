@@ -1,3 +1,43 @@
+4,Hoja de vida,jelou,H-4,Modificación,06/08/2021/21:17:01,Anderson
+4,Hoja de vida,jelou,H-4,Modificación,06/08/2021/21:15:32,Anderson
+4,Hoja de vida,jelou,H-4,Modificación,06/08/2021/21:15:28,Anderson
+3,Afiliación Salud,Nombre,Estante-Carpeta,Modificación,06/08/2021/20:46:29,Anderson
+3,Hoja de vida,Nombre,Estante-Carpeta,Modificación,06/08/2021/20:46:26,Anderson
+3,Afiliación Salud,Nombre,Estante-Carpeta,Modificación,06/08/2021/20:46:22,Anderson
+3,Afiliación Pensión,Nombre,Estante-Carpeta,Modificación,06/08/2021/20:46:19,Anderson
+3,Contrato,Nombre,Estante-Carpeta,Modificación,06/08/2021/20:46:15,Anderson
+3,Liquidación,Nombre,Estante-Carpeta,Modificación,06/08/2021/20:46:10,Anderson
+3,Liquidación,Nombre,Estante-Carpeta,Modificación,06/08/2021/20:46:06,Anderson
+3,Otro si,Nombre,Estante-Carpeta,Modificación,06/08/2021/20:45:58,Anderson
+3,Memorando,Mantekita,A-23,Modificación,06/08/2021/20:45:52,Anderson
+3,Incapacidad,Mantekita,A-23,Modificación,06/08/2021/20:45:45,Anderson
+3,Otro si,Mantekita,A-23,Modificación,06/08/2021/20:45:36,Anderson
+3,Hoja de vida,Mantekita,Estante-Carpeta,Modificación,06/08/2021/20:23:27,Anderson
+4,Hoja de vida,jelou,H-4,Modificación,06/08/2021/20:11:37,Anderson
+4,Hoja de vida,,H-4,Modificación,06/08/2021/20:10:53,Anderson
+5,Contrato,Nombre,J-2,Modificación,06/08/2021/20:09:54,Anderson
+5,Afiliación Pensión,Nombre,J-2,Modificación,06/08/2021/20:09:43,Anderson
+5,Hoja de vida,Nombre,J-2,Modificación,06/08/2021/20:09:29,Anderson
+5,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:59:45,Anderson
+4,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:59:45,Anderson
+3,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:59:45,Anderson
+2,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:59:45,Anderson
+1,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:59:44,Anderson
+7,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:58:12,Anderson
+6,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:58:12,Anderson
+5,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:58:11,Anderson
+4,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:58:11,Anderson
+3,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:58:11,Anderson
+2,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:58:10,Anderson
+1,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:58:10,Anderson
+3,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:54:02,Anderson
+2,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:54:02,Anderson
+1,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:54:00,Anderson
+3,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:52:04,Anderson
+2,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:52:04,Anderson
+1,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:52:03,Anderson
+0,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:51:56,Anderson
+28,Hoja de vida,Nombre,Estante-Carpeta,Inserción,06/08/2021/19:46:32,Anderson
 27,Hoja de vida,Nombre,Estante-Carpeta,Inserción,26/07/2021/22:40:34,Omar
 26,Hoja de vida,Nombre,Estante-Carpeta,Inserción,26/07/2021/22:40:34,Omar
 25,Hoja de vida,Nombre,Estante-Carpeta,Inserción,26/07/2021/22:40:33,Omar
