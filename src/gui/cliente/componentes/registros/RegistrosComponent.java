@@ -10,7 +10,8 @@ import gui.servicios.serviciosLogicos.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
-import java.util.concurrent.TimeUnit;
+import java.util.TimerTask;
+import java.util.Timer;
 
 public class RegistrosComponent implements ActionListener, MouseListener, FocusListener {
     private RegistrosTemplate registrosTemplate;
@@ -178,6 +179,36 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
                 );
                 registrosTemplate.getTabla().repaint();
 
+            ;
+            Timer timer = new Timer();
+            final int[] i = {10};
+            TimerTask tarea = new TimerTask() {
+                @Override
+                public void run() {
+                    registrosTemplate.getModelo().setValueAt(
+                            i[0]--,fSeleccionada,1
+                    );
+                    registrosTemplate.getTabla().repaint();
+                }
+            };
+            timer.schedule(tarea,0,1000);
+            final int[] j = {14};
+            TimerTask tarea2 = new TimerTask() {
+                @Override
+                public void run() {
+                    registrosTemplate.getModelo().setValueAt(
+                            j[0]--,fSeleccionada+1,1
+                    );
+                    registrosTemplate.getTabla().repaint();
+
+                    if(i[0] == 0) {
+                        timer.cancel();
+                        timer.purge();
+                    }
+
+                }
+            };
+            timer.schedule(tarea2,0,1000);
 
             registrosTemplate.getModelo().setValueAt(
                     2,fSeleccionada,1
@@ -187,7 +218,6 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
                     3,fSeleccionada,1
             );
             registrosTemplate.getTabla().repaint();
-            //}
             /*documento = sDocumentos.getDocumento(id);
             documento.setTipo((String) registrosTemplate.getCbTipo().getSelectedItem());
             documento.setNombre(registrosTemplate.gettNombre().getText());
@@ -232,9 +262,12 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
             int id = (Integer) registrosTemplate.getModelo().getValueAt(fSeleccionada,0);
             documento = sDocumentos.getDocumento(id);
 
-            JOptionPane.showMessageDialog(null,"Mantekito va a buscar " + documento.getNombre());
-        }else
-            JOptionPane.showMessageDialog(null,"seleccione una fila","Error",JOptionPane.ERROR_MESSAGE);
+            if(documento.isDisponible())
+                vistaPrincipalComponent.nuevaSolicitud(id);
+            else
+                JOptionPane.showMessageDialog(null, "El documento está ocupado", "Mensaje", JOptionPane.WARNING_MESSAGE);
+          }else
+            JOptionPane.showMessageDialog(null,"Seleccione una fila","Error",JOptionPane.ERROR_MESSAGE);
 
     }
 

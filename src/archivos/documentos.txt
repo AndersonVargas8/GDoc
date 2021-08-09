@@ -1,6 +1,8 @@
-6
-5,Contrato,Nombre,J,2,06/08/2021,06/08/2026,true
-4,Hoja de vida,jelou,H,4,06/08/2021,06/08/2022,true
-3,Afiliación Salud,Nombre,Estante,Carpeta,06/08/2021,06/08/2023,true
-2,Hoja de vida,Nombre,Estante,Carpeta,06/08/2021,06/08/2022,true
-1,Hoja de vida,Nombre,Estante,Carpeta,06/08/2021,06/08/2022,true
+8
+7,Hoja de vida,jojos,Estante,Carpeta,08/08/2021,08/08/2022,false
+6,Hoja de vida,Nombre,Estante,Carpeta,08/08/2021,08/08/2022,true
+5,Memorando,Nombre,Estante,Carpeta,08/08/2021,08/08/2025,true
+4,Hoja de vida,jajas,Estante,Carpeta,08/08/2021,08/08/2022,false
+3,Contrato,Andy,Estante,Carpeta,08/08/2021,08/08/2026,true
+2,Hoja de vida,Nombre,Estante,Carpeta,08/08/2021,08/08/2022,true
+1,Hoja de vida,Nombre,Estante,Carpeta,08/08/2021,08/08/2022,true
