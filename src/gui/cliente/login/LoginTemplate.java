@@ -13,12 +13,10 @@ import javax.swing.*;
 public class LoginTemplate extends JFrame{
     
     //Objetos gráficos
-    private JPanel pDerecha,pIzquierda;
-    private JLabel lNombreEmpresa,lNombreProyecto, lTitulo,lUsuario,lClave;
+    private JPanel pDerecha, pTitulo,pContenido;
+    private JLabel lNombreEmpresa,lNombreProyecto;
     private JLabel lFondo,lLogo,lFavicon;
-    private JTextField tNombreUsuario;
-    private JPasswordField tClaveUsuario;
-    private JButton bEntrar,bCerrar;
+    private JButton bCerrar,bAtras;
     
     //Objetos decoradores
     private ImageIcon iFondo,iLogo,iLogoP,iDimAux;
@@ -39,7 +37,6 @@ public class LoginTemplate extends JFrame{
         this.crearObjetosDecoradores();
         this.crearJPanels();
         this.crearJLabels();
-        this.crearJTextFields();
         this.crearJButtons();
 
         //Configuración de la pantalla
@@ -61,11 +58,14 @@ public class LoginTemplate extends JFrame{
     }
     
     private void crearJPanels(){
-        pIzquierda = sObjGraficos.construirJPanel(0, 0, 550, 500, Color.WHITE, null);
-        this.add(pIzquierda);
+        pTitulo = sObjGraficos.construirJPanel(0, 0, 550, 110, Color.WHITE, null);
+        this.add(pTitulo);
         
         pDerecha = sObjGraficos.construirJPanel(550,0,320,500,Color.GRAY,null);
         this.add(pDerecha);
+
+        pContenido = sObjGraficos.construirJPanel(0,110,550,390,Color.WHITE,null);
+        this.add(pContenido);
     }
     
     private void crearJLabels(){
@@ -115,7 +115,7 @@ public class LoginTemplate extends JFrame{
                 iDimAux,
                 null, null, null, null,
                 "c");
-        pIzquierda.add(lFavicon);
+        pTitulo.add(lFavicon);
         
         lNombreProyecto = sObjGraficos.construirJLabel(
                 "GDoc",
@@ -127,90 +127,11 @@ public class LoginTemplate extends JFrame{
                 Color.BLACK
                 ,null,
                 "c");
-        pIzquierda.add(lNombreProyecto);
-        
-        lTitulo = sObjGraficos.construirJLabel(
-                "INICIAR SESIÓN",
-                50, 130, 190,40,
-                null,
-                null,
-                new Font("Roboto",Font.BOLD,24),
-                null,
-                Color.BLACK
-                ,null,
-                "l");
-        pIzquierda.add(lTitulo);
-        
-        lUsuario = sObjGraficos.construirJLabel(
-                "USUARIO",
-                50,200, 90,20,
-                null,
-                null,
-                sRecursos.getFuenteMediana(),
-                null,
-                Color.BLACK
-                ,null,
-                "l");
-        pIzquierda.add(lUsuario);
-        
-        lClave = sObjGraficos.construirJLabel(
-                "CONTRASEÑA",
-                50,280, 100,20,
-                null,
-                null,
-                sRecursos.getFuenteMediana(),
-                null,
-                Color.BLACK
-                ,null,
-                "l");
-        pIzquierda.add(lClave);
+        pTitulo.add(lNombreProyecto);
+
     }
-    
-    private void crearJTextFields(){
-        
-        tNombreUsuario = sObjGraficos.construirJTextField(
-                "Ingrese su nombre de usuario",
-                50,230,400,40,
-                sRecursos.getFuenteTextFields(),
-                Color.WHITE,
-                sRecursos.getColorGrisOscuro(),
-                Color.black,
-                sRecursos.getBordeTextField(),
-                "l");
-        tNombreUsuario.addMouseListener(loginComponent);
-        pIzquierda.add(tNombreUsuario);
-        
-        tClaveUsuario = sObjGraficos.construirJPasswordField(
-                "Contraseña",
-                50,310,400,40,
-                sRecursos.getFuenteTextFields(),
-                Color.WHITE,
-                sRecursos.getColorGrisOscuro(),
-                Color.BLACK,
-                sRecursos.getBordeTextField(),
-                "l");
-        tClaveUsuario.addMouseListener(loginComponent);
-        pIzquierda.add(tClaveUsuario);
-    }
-    
+
     private void crearJButtons(){
-        bEntrar = sObjGraficos.construirJButton(
-                "ENTRAR",
-                50,380,140,40,
-                sRecursos.getcMano(),
-                null,
-                sRecursos.getFuenteBotones(),
-                new Color(0,134,190),
-                Color.white,
-                null,
-                "c",
-                true);
-
-        bEntrar.addActionListener(loginComponent);
-        bEntrar.addMouseListener(loginComponent);
-        pIzquierda.add(bEntrar);
-
-        
         bCerrar = sObjGraficos.construirJButton(
                 "X",
                 0, 0, 45, 40,
@@ -222,23 +143,33 @@ public class LoginTemplate extends JFrame{
               );
               bCerrar.addActionListener(loginComponent);
               bCerrar.addMouseListener(loginComponent);
-              pIzquierda.add(bCerrar);
+              pTitulo.add(bCerrar);
+
+        bAtras = sObjGraficos.construirJButton(
+                "←",
+                45, 0, 45, 40,
+                sRecursos.getcMano(),
+                null,
+                sRecursos.getFuenteCerrar(), null, null, null,
+                "c",
+                true
+        );
+        bAtras.addActionListener(loginComponent);
+        bAtras.addMouseListener(loginComponent);
+        pTitulo.add(bAtras);
+        bAtras.setVisible(false);
     }
 
-
-    public JTextField gettNombreUsuario() {
-        return tNombreUsuario;
-    }
-
-    public JPasswordField gettClaveUsuario() {
-        return tClaveUsuario;
-    }
-
-    public JButton getbEntrar() {
-        return bEntrar;
-    }
 
     public JButton getbCerrar() {
         return bCerrar;
+    }
+
+    public JButton getbAtras(){
+        return bAtras;
+    }
+
+    public JPanel getpContenido() {
+        return pContenido;
     }
 }

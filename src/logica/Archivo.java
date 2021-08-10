@@ -20,6 +20,7 @@ public class Archivo{
         ControlDocumentos.guardarDatos();
         ControlMovimientos.guardarDatos();
         ControlPendientes.guardarDatos();
+        ControlUsuarios.guardarDatos();
     }
 
 }

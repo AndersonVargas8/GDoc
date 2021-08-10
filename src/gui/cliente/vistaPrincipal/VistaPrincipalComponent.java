@@ -5,6 +5,8 @@ import gui.cliente.componentes.movimientos.MovimientosComponent;
 import gui.cliente.componentes.navegacionUsuario.NavegacionUsuarioComponent;
 import gui.cliente.componentes.registros.RegistrosComponent;
 import gui.cliente.componentes.revision.RevisionComponent;
+import gui.cliente.componentes.solicitudes.SolicitudesComponent;
+import gui.cliente.login.IniciarSesionComponent;
 import gui.cliente.login.LoginComponent;
 import logica.Archivo;
 
@@ -25,6 +27,7 @@ public class VistaPrincipalComponent implements ActionListener, WindowListener {
     private RevisionComponent revisionComponent;
     private RegistrosComponent registrosComponent;
     private MovimientosComponent movimientosComponent;
+    private SolicitudesComponent solicitudesComponent;
 
     public VistaPrincipalComponent(LoginComponent loginComponent){
         //componentes generales
@@ -87,6 +90,14 @@ public class VistaPrincipalComponent implements ActionListener, WindowListener {
                 );
                 movimientosComponent.getMovimientosTemplate().revalidate();
                 break;
+            case "Solicitudes":
+                if(solicitudesComponent == null)
+                    this.solicitudesComponent = new SolicitudesComponent();
+                vistaPrincipalTemplate.getpPrincipal().add(
+                        solicitudesComponent.getSolicitudesTemplate()
+                );
+                solicitudesComponent.getSolicitudesTemplate().revalidate();
+                break;
             case "Cerrar Sesión":
                 this.loginComponent.restaurarValores();
                 this.vistaPrincipalTemplate.setVisible(false);
@@ -114,6 +125,13 @@ public class VistaPrincipalComponent implements ActionListener, WindowListener {
             this.registrosComponent.mostrarRegistrosTabla();
     }
 
+    public void nuevaSolicitud(int id){
+        if(solicitudesComponent == null)
+            solicitudesComponent = new SolicitudesComponent();
+
+        solicitudesComponent.nuevaSolicitud(id);
+        this.mostrarComponente("Solicitudes");
+    }
     public void moverVentana(int posicionX, int posicionY){
         this.vistaPrincipalTemplate.setLocation(posicionX,posicionY);
     }

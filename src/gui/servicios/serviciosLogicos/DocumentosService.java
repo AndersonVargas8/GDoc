@@ -3,6 +3,7 @@ package gui.servicios.serviciosLogicos;
 import datos.Documento;
 import estructuras.arboles.AVL;
 import estructuras.listas.ListaEncadenadaDoble;
+import estructuras.tablasHash.TablaHash;
 import logica.ControlDocumentos;
 
 public class DocumentosService {
@@ -11,11 +12,13 @@ public class DocumentosService {
     private AVL<Documento> documentos;
     private ListaEncadenadaDoble<Documento> elementos;
     private ListaEncadenadaDoble<Documento> impresion;
+    private TablaHash<String,Integer> bodegas;
     private Documento documento;
     private int numeroRegistro;
 
     public DocumentosService(){
         cDocumentos = new ControlDocumentos();
+        crearBodegas();
         documentos = cDocumentos.getDocumentos();
         elementos = documentos.inOrden();
         numeroRegistro = cDocumentos.getNumeroRegistro();
@@ -79,5 +82,21 @@ public class DocumentosService {
 
     public int getSiguienteId(){
         return numeroRegistro;
+    }
+
+    private void crearBodegas(){
+        this.bodegas = new TablaHash<>();
+        bodegas.insertar("Hoja de vida",1);
+        bodegas.insertar("Incapacidad",1);
+        bodegas.insertar("Liquidación",1);
+        bodegas.insertar("Afiliación Pensión",2);
+        bodegas.insertar("Afiliación Salud",2);
+        bodegas.insertar("Memorando",2);
+        bodegas.insertar("Contrato",3);
+        bodegas.insertar("Otro si",3);
+    }
+
+    public int retornarBodega(String tipoDoc){
+        return bodegas.leer(tipoDoc);
     }
 }
