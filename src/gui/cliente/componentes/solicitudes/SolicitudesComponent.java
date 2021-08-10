@@ -60,7 +60,7 @@ public class SolicitudesComponent implements MouseListener, ActionListener {
             Documento doc = sDocumentos.getDocumento(id);
             int tiempo = sSolicitudes.getTiempoSolicitud(doc.getDependencia(),doc);
 
-            crearTiempo(fSeleccionada,tiempo,doc);
+            crearTiempo(sId,tiempo,doc);
           }else
             JOptionPane.showMessageDialog(null,"Seleccione una fila","Error",JOptionPane.ERROR_MESSAGE);
 
@@ -88,7 +88,8 @@ public class SolicitudesComponent implements MouseListener, ActionListener {
         solicitudesTemplate.getModeloOcu().addRow(
                 new Object[]{
                         infoDoc,
-                        doc.getDependencia()
+                        doc.getDependencia(),
+                        "-"
                 }
         );
     }
@@ -119,7 +120,7 @@ public class SolicitudesComponent implements MouseListener, ActionListener {
         TimerTask tarea = new TimerTask() {
             @Override
             public void run() {
-                ultimaFila[0] = buscarFila(infoDoc);
+                ultimaFila[0] = buscarFilsSol(infoDoc);
                 solicitudesTemplate.getModeloSol().setValueAt(
                         i[0]--, ultimaFila[0],1
                 );
@@ -136,21 +137,22 @@ public class SolicitudesComponent implements MouseListener, ActionListener {
 
     }
 
-    public void crearTiempo(int fila, int tiempo, Documento doc){
-
+    public void crearTiempo(String infoDoc, int tiempo, Documento doc){
+        int[] fila = {solicitudesTemplate.getTablaOcu().getSelectedRow()};
         java.util.Timer timer = new Timer();
         final int[] i = {tiempo};
         TimerTask tarea = new TimerTask() {
             @Override
             public void run() {
+                fila[0] = buscarFilsOcu(infoDoc);
                 solicitudesTemplate.getModeloOcu().setValueAt(
-                        i[0]--, fila,2
+                        i[0]--, fila[0],2
                 );
                 solicitudesTemplate.getTablaOcu().repaint();
                 if(i[0] == -1) {
                     timer.cancel();
                     timer.purge();
-                    solicitudesTemplate.getModeloOcu().removeRow(fila);
+                    solicitudesTemplate.getModeloOcu().removeRow(fila[0]);
                     doc.setDisponible(true);
                     doc.setDependencia(null);
                 }
@@ -160,11 +162,21 @@ public class SolicitudesComponent implements MouseListener, ActionListener {
 
     }
 
-    public int buscarFila(String infoDoc){
+    public int buscarFilsSol(String infoDoc){
         int n = solicitudesTemplate.getModeloSol().getRowCount();
 
         for(int i = 0; i < n; i++)
             if(solicitudesTemplate.getModeloSol().getValueAt(i,0).equals(infoDoc))
+                return i;
+
+        return 0;
+    }
+
+    public int buscarFilsOcu(String infoDoc){
+        int n = solicitudesTemplate.getModeloOcu().getRowCount();
+
+        for(int i = 0; i < n; i++)
+            if(solicitudesTemplate.getModeloOcu().getValueAt(i,0).equals(infoDoc))
                 return i;
 
         return 0;

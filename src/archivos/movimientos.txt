@@ -1,1 +1,7 @@
+4,Contrato,Raul,Estante-Carpeta,Inserción,09/08/2021/20:45:19,Anderson
+2,Contrato,Daniel,Estante-Carpeta,Eliminación,09/08/2021/20:45:07,Anderson
+3,Afiliación Salud,Lorena,Estante-Carpeta,Modificación,09/08/2021/20:43:44,Anderson
+2,Contrato,Daniel,Estante-Carpeta,Modificación,09/08/2021/20:43:39,Anderson
+3,Liquidación,Lorena,Estante-Carpeta,Inserción,09/08/2021/20:43:21,Anderson
+2,Memorando,Daniel,Estante-Carpeta,Inserción,09/08/2021/20:43:07,Anderson
 1,Hoja de vida,CV_Mantekito,L-51,Inserción,09/08/2021/20:31:33,Anderson
