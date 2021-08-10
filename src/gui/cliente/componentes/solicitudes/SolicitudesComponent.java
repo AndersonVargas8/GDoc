@@ -61,7 +61,6 @@ public class SolicitudesComponent implements MouseListener, ActionListener {
             int id = Integer.valueOf(sId.split("-")[0].trim());
             Documento doc = sDocumentos.getDocumento(id);
             int tiempo = sSolicitudes.getTiempoSolicitud(doc.getDependencia(),doc);
-
             crearTiempo(sId,tiempo,doc);
           }else
             JOptionPane.showMessageDialog(null,"Seleccione una fila","Error",JOptionPane.ERROR_MESSAGE);
