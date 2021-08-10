@@ -55,6 +55,8 @@ public class SolicitudesComponent implements MouseListener, ActionListener {
         int fSeleccionada = solicitudesTemplate.getTablaOcu().getSelectedRow();
 
         if(fSeleccionada != -1){
+            if(!solicitudesTemplate.getModeloOcu().getValueAt(fSeleccionada,2).equals("-"))
+                return;
             String sId = (String) solicitudesTemplate.getModeloOcu().getValueAt(fSeleccionada,0);
             int id = Integer.valueOf(sId.split("-")[0].trim());
             Documento doc = sDocumentos.getDocumento(id);
