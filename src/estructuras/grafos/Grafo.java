@@ -8,10 +8,11 @@ import estructuras.tablasHash.TablaHash;
 public class Grafo {
     private ListaEncadenadaDoble<Vertice> vertices;
     private ListaEncadenadaDoble<Arista> aristas;
-
+    private TablaHash<String,TablaHash<String,NodoDist>> caminosDijkstra;
     public Grafo(){
         aristas = new ListaEncadenadaDoble<>();
         vertices = new ListaEncadenadaDoble<>();
+        caminosDijkstra = new TablaHash<>();
     }
 
     public void agregarVertice(String nombre){
@@ -131,6 +132,9 @@ public class Grafo {
         return null;
     }
     public TablaHash dijkstra(String sOrigen){
+        if(caminosDijkstra.contiene(sOrigen))
+            return caminosDijkstra.leer(sOrigen);
+
         Vertice origen = buscarVertice(sOrigen);
 
         ColaPrioritaria<NodoDist> desconocidos = new ColaPrioritaria<>();
@@ -162,7 +166,7 @@ public class Grafo {
 
         }
 
-
+        caminosDijkstra.insertar(sOrigen,tabla);
         return tabla;
 
     }

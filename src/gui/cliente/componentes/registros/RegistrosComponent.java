@@ -46,13 +46,8 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
             mostrarRegistrosTabla();
         if(e.getSource() == registrosTemplate.getbInsertar())
             insertarRegistroTabla();
-        if(e.getSource() == registrosTemplate.getbModificar()) {
-            try {
-                modificarRegistroTabla();
-            } catch (InterruptedException interruptedException) {
-                interruptedException.printStackTrace();
-            }
-        }
+        if(e.getSource() == registrosTemplate.getbModificar())
+            modificarRegistroTabla();
         if(e.getSource() == registrosTemplate.getbEliminar())
             eliminarRegistroTabla();
         if(e.getSource() == registrosTemplate.getbSolicitar())
@@ -166,59 +161,12 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
         mostrarRegistrosTabla();
     }
 
-    public void modificarRegistroTabla() throws InterruptedException {
+    public void modificarRegistroTabla(){
         int fSeleccionada = registrosTemplate.getTabla().getSelectedRow();
         if(fSeleccionada != -1) {
             int id = (Integer) registrosTemplate.getModelo().getValueAt(fSeleccionada,0);
 
-
-            System.out.println(registrosTemplate.getModelo().getValueAt(fSeleccionada,1));
-            //for(int i = 0; i < 10; i++){
-                registrosTemplate.getModelo().setValueAt(
-                        1,fSeleccionada,1
-                );
-                registrosTemplate.getTabla().repaint();
-
-            ;
-            Timer timer = new Timer();
-            final int[] i = {10};
-            TimerTask tarea = new TimerTask() {
-                @Override
-                public void run() {
-                    registrosTemplate.getModelo().setValueAt(
-                            i[0]--,fSeleccionada,1
-                    );
-                    registrosTemplate.getTabla().repaint();
-                }
-            };
-            timer.schedule(tarea,0,1000);
-            final int[] j = {14};
-            TimerTask tarea2 = new TimerTask() {
-                @Override
-                public void run() {
-                    registrosTemplate.getModelo().setValueAt(
-                            j[0]--,fSeleccionada+1,1
-                    );
-                    registrosTemplate.getTabla().repaint();
-
-                    if(i[0] == 0) {
-                        timer.cancel();
-                        timer.purge();
-                    }
-
-                }
-            };
-            timer.schedule(tarea2,0,1000);
-
-            registrosTemplate.getModelo().setValueAt(
-                    2,fSeleccionada,1
-            );
-            registrosTemplate.getTabla().repaint();
-            registrosTemplate.getModelo().setValueAt(
-                    3,fSeleccionada,1
-            );
-            registrosTemplate.getTabla().repaint();
-            /*documento = sDocumentos.getDocumento(id);
+            documento = sDocumentos.getDocumento(id);
             documento.setTipo((String) registrosTemplate.getCbTipo().getSelectedItem());
             documento.setNombre(registrosTemplate.gettNombre().getText());
             documento.setEstante(registrosTemplate.gettEstante().getText());
@@ -231,7 +179,7 @@ public class RegistrosComponent implements ActionListener, MouseListener, FocusL
             eliminarRegistros();
             agregarRegistros(sDocumentos.getImpresion());
             actualizarValores();
-            restaurarValores();*/
+            restaurarValores();
         }
         else{
             JOptionPane.showMessageDialog(null,"seleccione una fila", "Error" , JOptionPane.ERROR_MESSAGE);

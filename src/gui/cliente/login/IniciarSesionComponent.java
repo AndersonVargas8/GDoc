@@ -39,8 +39,8 @@ public class IniciarSesionComponent implements ActionListener, MouseListener{
         String claveUsuario = new String(iniciarSesionTemplate.gettClaveUsuario().getPassword());
 
         //----------------------------------------
-       nombreUsuario = "Anderson";
-        claveUsuario = "1234";
+       //nombreUsuario = "Anderson";
+        //claveUsuario = "1234";
         // ----------------------
         if(!nombreUsuario.isEmpty() && !claveUsuario.isEmpty() && !nombreUsuario.equals(placeholders[0]) && !claveUsuario.equals(placeholders[1])){
             if(sUsuario.verificarDatosUsuario(nombreUsuario,claveUsuario))

@@ -62,6 +62,8 @@ public class TablaHash<T, V> implements Serializable {
         while(tabla[indice] != null && !clave.equals(tabla[indice].getClave())){
             indice = (hash(clave) + i*i) % capacidad;
             i++;
+            if(i == this.capacidad)
+                return -1;
         }
         return indice;
     }
@@ -89,7 +91,7 @@ public class TablaHash<T, V> implements Serializable {
     public boolean contiene(T clave){
         int indice = buscarIndice(clave);
 
-        if(tabla[indice] != null){
+        if(indice != -1 && tabla[indice] != null){
             if(tabla[indice].getClave().equals(clave))
                 return true;
         }

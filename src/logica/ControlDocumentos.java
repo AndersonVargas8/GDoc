@@ -42,6 +42,7 @@ public class ControlDocumentos {
                 documento.setIngreso(new Fecha(atributos[5].split("/")));
                 documento.setExpiracion(new Fecha(atributos[6].split("/")));
                 documento.setDisponible(atributos[7].equals("true"));
+                documento.setDependencia(atributos[8]);
                 documentos.insertar(documento);
             }
             archivo.close();
@@ -67,7 +68,8 @@ public class ControlDocumentos {
                         + doc.getCarpeta() + ","
                         + doc.getIngreso().toString() + ","
                         + doc.getExpiracion().toString() + ","
-                        + doc.isDisponible()  + "\n"
+                        + doc.isDisponible()  + ","
+                        + doc.getDependencia() + "\n"
                 );
 
             bw.close();

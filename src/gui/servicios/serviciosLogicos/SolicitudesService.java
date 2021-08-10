@@ -52,4 +52,10 @@ public class SolicitudesService {
         rutas.getCaminoMasCorto(sOrigen,dependencia);
         return rutas.getPesoMinimo(sOrigen, dependencia);
     }
+
+    public int getTiempoSolicitud(String dependencia,Documento doc){
+        String sDestino = "Bodega " + DocumentosService.getServicio().retornarBodega(doc.getTipo());
+        rutas.getCaminoMasCorto(dependencia,sDestino);
+        return rutas.getPesoMinimo(dependencia,sDestino);
+    }
 }

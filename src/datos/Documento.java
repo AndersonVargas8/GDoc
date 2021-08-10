@@ -7,6 +7,7 @@ public class Documento implements Comparable<Documento>{
     private String tipo, nombre, estante, carpeta;
     private Fecha ingreso,expiracion;
     private boolean disponible;
+    private String dependencia;
 
     public int getId() {
         return id;
@@ -70,6 +71,14 @@ public class Documento implements Comparable<Documento>{
 
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
+    }
+
+    public String getDependencia() {
+        return dependencia;
+    }
+
+    public void setDependencia(String dependencia) {
+        this.dependencia = dependencia;
     }
 
     @Override
